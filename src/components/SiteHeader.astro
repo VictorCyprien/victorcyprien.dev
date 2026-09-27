@@ -11,11 +11,13 @@ const links = [
 ];
 ---
 
-<header class="mx-auto flex max-w-6xl items-center gap-6 px-6 py-5 md:px-12">
-  <a href="/" class="mr-auto font-semibold">{site.name}</a>
+<header class="mx-auto flex max-w-6xl items-center justify-center gap-6 px-6 py-5 md:grid md:grid-cols-[1fr_auto_1fr] md:px-12">
+  <div class="hidden md:block" aria-hidden="true"></div>
   <nav aria-label="Navigation principale" class="hidden gap-6 text-sm text-muted md:flex">
     {links.map((link) => <a href={link.href} class="hover:text-text">{link.label}</a>)}
   </nav>
-  <ThemeToggle />
-  <a href={site.callHref} class="rounded-[10px] bg-cta px-4 py-2 text-sm font-medium text-cta-text">Réserver un appel</a>
+  <div class="flex items-center gap-6 md:justify-self-end">
+    <ThemeToggle />
+    <a href={site.callHref} class="rounded-[10px] bg-cta px-4 py-2 text-sm font-medium text-cta-text">Réserver un appel</a>
+  </div>
 </header>
