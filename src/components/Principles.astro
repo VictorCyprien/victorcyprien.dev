@@ -1,0 +1,24 @@
+---
+import { getPrinciples, getPublishedCaseStudyIds } from '../lib/content';
+
+const principles = await getPrinciples();
+const published = await getPublishedCaseStudyIds();
+---
+
+<section id="principes" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
+  <h2 class="mb-2 text-3xl font-semibold tracking-tight">Comment je décide</h2>
+  <p class="mb-6 max-w-[40em] text-muted">Cinq principes, chacun appliqué sur un projet réel.</p>
+  <ul>
+    {principles.map(({ data }) => (
+      <li class="grid gap-3 border-t border-line py-5 md:grid-cols-[250px_minmax(0,1fr)_170px] md:gap-7">
+        <h3 class="text-lg font-semibold leading-snug">{data.title}</h3>
+        <p class="leading-relaxed text-muted">{data.text}</p>
+        {data.caseStudy && published.has(data.caseStudy.id) ? (
+          <a href={`/etudes-de-cas/${data.caseStudy.id}/`} class="self-start justify-self-start border-b border-watch text-sm">{data.proof}</a>
+        ) : (
+          <span class="self-start text-sm">{data.proof}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</section>

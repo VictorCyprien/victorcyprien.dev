@@ -1,0 +1,39 @@
+---
+import { getPublishedCaseStudyIds, getPublishedProjects } from '../lib/content';
+import { formatPeriod } from '../lib/format';
+
+const projects = await getPublishedProjects();
+const published = await getPublishedCaseStudyIds();
+const featured = projects.filter((project) => project.data.featured);
+const others = projects.filter((project) => !project.data.featured);
+---
+
+<section id="projets" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
+  <h2 class="mb-8 text-3xl font-semibold tracking-tight">Projets</h2>
+  <div class="grid gap-6 md:grid-cols-2">
+    {featured.map(({ data }) => (
+      <article class="flex flex-col rounded-xl border border-line bg-surface p-6">
+        <h3 class="text-xl font-semibold">{data.name}</h3>
+        {data.period && <p class="mt-1 text-sm text-muted">{formatPeriod(data.period.start, data.period.end)}</p>}
+        <p class="mt-4 leading-relaxed text-muted">{data.summary}</p>
+        <p class="mt-4 text-sm text-muted">{data.stack.join(', ')}</p>
+        {data.caseStudy && published.has(data.caseStudy.id) && (
+          <a href={`/etudes-de-cas/${data.caseStudy.id}/`} class="mt-6 self-start border-b border-watch text-sm">Lire l'étude de cas</a>
+        )}
+      </article>
+    ))}
+  </div>
+  {others.length > 0 && (
+    <>
+      <h3 class="mb-4 mt-12 text-lg font-semibold">Autres projets</h3>
+      <ul>
+        {others.map(({ data }) => (
+          <li class="grid gap-2 border-t border-line py-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-7">
+            <span class="font-medium">{data.name}</span>
+            <span class="text-muted">{data.summary} <span class="text-sm">{data.stack.join(', ')}</span></span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</section>

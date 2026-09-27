@@ -1,0 +1,17 @@
+---
+import { getStackTiers } from '../lib/content';
+
+const tiers = await getStackTiers();
+---
+
+<section id="stack" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
+  <h2 class="mb-8 text-3xl font-semibold tracking-tight">Stack</h2>
+  <dl class="grid gap-6 md:grid-cols-3">
+    {tiers.map(({ data }) => (
+      <div>
+        <dt class="mb-2 font-semibold">{data.name}</dt>
+        <dd class="leading-relaxed text-muted">{data.items.join(', ')}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

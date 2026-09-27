@@ -1,0 +1,57 @@
+---
+interface Props {
+  caption: string;
+}
+const { caption } = Astro.props;
+---
+
+<figure>
+  <svg viewBox="0 0 380 300" role="img" aria-labelledby="schema-title schema-desc" class="block h-auto w-full">
+    <title id="schema-title">Le montage type d'un projet</title>
+    <desc id="schema-desc">Vos utilisateurs accèdent à une interface en Next.js ou React. Elle appelle une API en Python avec FastAPI. L'interface, l'API et un cache Redis sont hébergés sur Railway. La base de données PostgreSQL, chez Supabase, et la surveillance, avec Sentry et Grafana, restent hors de cet hébergement.</desc>
+
+    <rect class="node" x="26" y="10" width="188" height="44" rx="10" />
+    <text class="role" x="40" y="29">Vos utilisateurs</text>
+    <text class="tech" x="40" y="45">web, mobile</text>
+    <path class="wire" d="M120 54 V86" />
+
+    <rect class="frame" x="10" y="70" width="360" height="146" rx="14" />
+    <text class="role" x="354" y="98" text-anchor="end">Hébergement</text>
+    <text class="tech" x="354" y="114" text-anchor="end">Railway</text>
+
+    <rect class="node" x="26" y="86" width="188" height="44" rx="10" />
+    <text class="role" x="40" y="105">Interface</text>
+    <text class="tech" x="40" y="121">Next.js, React</text>
+    <path class="wire" d="M120 130 V156" />
+
+    <rect class="node" x="26" y="156" width="188" height="44" rx="10" />
+    <text class="role" x="40" y="175">API</text>
+    <text class="tech" x="40" y="191">Python, FastAPI</text>
+    <path class="wire" d="M214 178 H240" />
+
+    <rect class="node" x="240" y="156" width="114" height="44" rx="10" />
+    <text class="role" x="254" y="175">Cache</text>
+    <text class="tech" x="254" y="191">Redis</text>
+
+    <path class="wire" d="M120 200 V240" />
+    <rect class="node" x="26" y="240" width="188" height="44" rx="10" />
+    <text class="role" x="40" y="259">Base de données</text>
+    <text class="tech" x="40" y="275">PostgreSQL, Supabase</text>
+
+    <path class="watch-wire" d="M297 240 V216" />
+    <rect class="watch" x="240" y="240" width="130" height="44" rx="10" />
+    <text class="role" x="254" y="259">Surveillance</text>
+    <text class="tech" x="254" y="275">Sentry, Grafana</text>
+  </svg>
+  <figcaption class="mt-3 text-sm leading-relaxed text-muted">{caption}</figcaption>
+</figure>
+
+<style>
+  .node { fill: var(--surface); stroke: var(--line); }
+  .watch { fill: var(--surface); stroke: var(--watch); }
+  .frame { fill: none; stroke: var(--box); stroke-dasharray: 5 5; }
+  .wire { fill: none; stroke: var(--wire); stroke-width: 1.5; }
+  .watch-wire { fill: none; stroke: var(--watch); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .role { fill: var(--text); font: 500 13px var(--font-sans); }
+  .tech { fill: var(--muted); font: 400 11px var(--font-mono); }
+</style>

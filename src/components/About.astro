@@ -1,0 +1,17 @@
+---
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+---
+
+<section id="a-propos" class="mx-auto grid max-w-6xl gap-8 px-6 py-16 md:grid-cols-[160px_minmax(0,1fr)] md:px-12">
+  {site.photo ? (
+    <img src={site.photo} alt={`Portrait de ${site.name}`} width="160" height="160" class="h-40 w-40 rounded-xl object-cover" />
+  ) : (
+    <div aria-hidden="true"></div>
+  )}
+  <div>
+    <h2 class="mb-4 text-3xl font-semibold tracking-tight">À propos</h2>
+    {site.about.map((paragraph) => <p class="mb-3 max-w-[40em] leading-relaxed text-muted">{paragraph}</p>)}
+  </div>
+</section>
