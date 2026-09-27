@@ -36,4 +36,4 @@ Grafana, Prometheus et Loki sont en place dès la première mise en ligne : les 
 
 ## Résultat
 
-Plateforme livrée et mise en production en janvier 2026. [À COMPLÉTER : ce que le client pouvait faire avec, sans chiffre inventé.]
+Plateforme livrée et mise en production en janvier 2026. [À COMPLÉTER : ce que la plateforme permet aux centres de formation, au présent, sans aucun chiffre.]
