@@ -42,8 +42,6 @@ const principles = defineCollection({
     order: z.number().int(),
     title: prose,
     text: prose,
-    proof: prose,
-    caseStudy: reference('caseStudies').optional(),
   }),
 });
 
