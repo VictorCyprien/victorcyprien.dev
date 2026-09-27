@@ -26,3 +26,4 @@
   title: Fermé par défaut
   text: "Chaque accès aux données est refusé par défaut, puis ouvert explicitement. L'authentification repose sur un service éprouvé, jamais sur du maison."
   proof: "Contrapp et AURA : Supabase, une règle d'accès par table"
+  caseStudy: contrapp
