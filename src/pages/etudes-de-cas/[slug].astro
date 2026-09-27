@@ -1,0 +1,38 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedCaseStudies } from '../../lib/content';
+import { formatPeriod } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const studies = await getPublishedCaseStudies();
+  return studies.map((study) => ({ params: { slug: study.id }, props: { study } }));
+}
+
+const { study } = Astro.props;
+const { Content } = await render(study);
+const { title, summary, sector, period, stack } = study.data;
+---
+
+<BaseLayout title={`${title}, Victor Cyprien`} description={summary}>
+  <article class="mx-auto max-w-3xl px-6 py-16">
+    <a href="/etudes-de-cas/" class="text-sm text-muted hover:text-text">Toutes les études de cas</a>
+    <h1 class="mb-4 mt-6 text-4xl font-semibold leading-tight tracking-tight">{title}</h1>
+    <p class="mb-8 text-lg leading-relaxed text-muted">{summary}</p>
+    <dl class="mb-12 grid gap-x-6 gap-y-2 border-y border-line py-5 text-sm sm:grid-cols-[120px_minmax(0,1fr)]">
+      <dt class="text-muted">Secteur</dt><dd>{sector}</dd>
+      <dt class="text-muted">Période</dt><dd>{formatPeriod(period.start, period.end)}</dd>
+    </dl>
+    <div class="case-study">
+      <Content />
+      <h2>Stack</h2>
+      <p class="text-sm">{stack.join(', ')}</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study :global(h2) { margin: 2.5rem 0 1rem; font-size: 1.5rem; font-weight: 600; }
+  .case-study :global(h3) { margin: 1.75rem 0 0.5rem; font-size: 1.125rem; font-weight: 600; }
+  .case-study :global(p) { margin-bottom: 1rem; line-height: 1.7; color: var(--muted); }
+</style>
