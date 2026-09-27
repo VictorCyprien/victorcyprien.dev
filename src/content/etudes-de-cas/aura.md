@@ -1,6 +1,6 @@
 ---
 title: "AURA : une plateforme de coaching sport et nutrition"
-summary: "Application de coaching sport et nutrition avec coach IA, pour le grand public et en marque blanche. Back-end, coach IA et infrastructure."
+summary: "Application de coaching sport et nutrition, pour le grand public et en marque blanche. Back-end et infrastructure."
 sector: Sport et nutrition, B2C et B2B2C
 period: { start: "2026-01", end: null }
 stack: [Python, Supabase, Railway, Sentry, Next.js]
@@ -14,17 +14,13 @@ AURA regroupe une application de coaching (GymAura), trois moteurs métier, une 
 
 ## Mon rôle
 
-Back-end, intégration du coach IA et infrastructure.
+Back-end et infrastructure.
 
 ## Décisions
 
 ### Mesurer avant de choisir la base
 
 Avant le lancement, un benchmark de charge a comparé PostgreSQL auto-hébergé et cloud managé. Pour un MVP, le cloud managé l'a emporté : simple, rapide à mettre en place, sans serveur à maintenir. [À COMPLÉTER : ce que le benchmark comparait, sans résultat chiffré (NDA).]
-
-### Un coach IA contextualisé
-
-[À COMPLÉTER : comment le coach IA est branché, côté architecture, sans donnée interne (NDA).]
 
 ### D'AWS à Railway
 

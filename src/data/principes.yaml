@@ -1,29 +1,20 @@
 - id: cadrer
   order: 1
   title: Cadrer par écrit avant de coder
-  text: "Besoin, périmètre, choix techniques et planning sont écrits et validés avant la première ligne de code. Vous payez un livrable, pas du temps."
-  proof: Toutes les missions
+  text: "Avant la première ligne de code, on se met d'accord par écrit : ce qu'il faut faire, ce qui n'en fait pas partie, le prix et le calendrier. Vous payez un résultat, pas des heures."
 - id: dimensionner
   order: 2
-  title: Dimensionner pour aujourd'hui, pas pour un jour peut-être
-  text: "Un MVP pour 1 000 utilisateurs n'a pas besoin de l'architecture de 100 000. Je mesure, puis je prends le plus simple qui tient : souvent du cloud managé, rapide à mettre en place, sans serveur à gérer. Pas d'usine à gaz."
-  proof: "AURA : benchmark de charge, cloud managé retenu pour le MVP"
-  caseStudy: aura
+  title: Construire pour vos besoins d'aujourd'hui
+  text: "Une application qui démarre avec mille utilisateurs n'a pas besoin de l'équipement prévu pour cent mille. Je mesure ce dont vous avez vraiment besoin, puis je choisis la solution la plus simple qui tient. Vous ne payez pas pour un avenir hypothétique."
 - id: surveiller
   order: 3
-  title: Voir la prod dès le premier jour
-  text: "Dès la première mise en ligne, vous voyez les erreurs, les lenteurs et les ressources. L'outil suit l'hébergement, choisi avec vous : les métriques de la plateforme quand elles suffisent, une stack Grafana, Prometheus et Loki sur un serveur à soi."
-  proof: "Contrapp (VPS, Grafana, Prometheus, Loki) et AURA (Railway, Sentry)"
-  caseStudy: contrapp
+  title: Voir ce qui se passe dès la mise en ligne
+  text: "Dès le premier jour, vous savez si votre application va bien : les erreurs, les lenteurs, la charge. Les outils de suivi dépendent de l'hébergement ; on les choisit ensemble."
 - id: dormir
   order: 4
-  title: Une infra qui laisse dormir
-  text: "Un push déploie, un clic revient en arrière, aucun serveur à patcher la nuit."
-  proof: AURA sur Railway
-  caseStudy: aura
+  title: Des mises en ligne sans stress
+  text: "Publier une nouvelle version se fait en un geste, revenir à la précédente aussi. Personne n'a besoin de réparer un serveur en pleine nuit."
 - id: fermer
   order: 5
-  title: Fermé par défaut
-  text: "Chaque accès aux données est refusé par défaut, puis ouvert explicitement. L'authentification repose sur un service éprouvé, jamais sur du maison."
-  proof: "Contrapp et AURA : Supabase, une règle d'accès par table"
-  caseStudy: contrapp
+  title: Vos données fermées par défaut
+  text: "Personne n'accède à une donnée sans autorisation explicite. La connexion des utilisateurs repose sur un service reconnu, jamais sur un système bricolé maison."

@@ -3,7 +3,7 @@ title: "Contrapp : les contrats d'apprentissage des CFA"
 summary: "Plateforme SaaS B2B qui gère les contrats d'apprentissage des centres de formation. Back-end, facturation et infrastructure, jusqu'à la mise en production."
 sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
-stack: [Python, FastAPI, Supabase, Stripe, Railway, VPS Linux, Docker, Grafana, Prometheus, Loki]
+stack: [Python, FastAPI, Supabase, Stripe, VPS Linux, Docker, Grafana, Prometheus, Loki]
 order: 1
 draft: true
 ---
@@ -26,9 +26,9 @@ API en Python avec FastAPI, base PostgreSQL managée par Supabase, authentificat
 
 [À COMPLÉTER : le modèle de facturation et ce que Stripe a évité de développer.]
 
-### Railway et un VPS Linux
+### Un VPS Linux
 
-[À COMPLÉTER : ce qui tourne sur Railway, ce qui tourne sur le VPS, et pourquoi ce partage.]
+[À COMPLÉTER : ce qui tourne sur le VPS, et pourquoi un VPS plutôt qu'une plateforme managée.]
 
 ### La surveillance dès la mise en production
 
