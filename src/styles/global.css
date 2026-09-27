@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "@fontsource/schibsted-grotesk/400.css";
+@import "@fontsource/schibsted-grotesk/500.css";
+@import "@fontsource/schibsted-grotesk/600.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+/* Dark is the default theme, also without JavaScript. */
+:root,
+[data-theme="dark"] {
+  --bg: #19202A;
+  --surface: #212A36;
+  --line: #334052;
+  --text: #ECE7DD;
+  --muted: #A3ADBA;
+  --cta: #E9B872;
+  --cta-text: #19202A;
+  --watch: #8CC5A8;
+  --wire: #56657A;
+  --box: #3A4658;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #F1F3EF;
+  --surface: #FFFFFF;
+  --line: #D5DCD4;
+  --text: #1A231F;
+  --muted: #55615B;
+  --cta: #E9B872;
+  --cta-text: #1A231F;
+  --watch: #2E6B57;
+  --wire: #9AA79F;
+  --box: #B9C4BB;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-cta: var(--cta);
+  --color-cta-text: var(--cta-text);
+  --color-watch: var(--watch);
+  --color-wire: var(--wire);
+  --color-box: var(--box);
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+  }
+  :focus-visible {
+    outline: 2px solid var(--cta);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
