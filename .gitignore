@@ -2,6 +2,18 @@
 # never reach the public repository. Every tracked root path is listed here.
 /*
 !/.gitignore
+!/.github/
+!/src/
+!/public/
+!/scripts/
+!/tests/
+!/astro.config.mjs
+!/package.json
+!/package-lock.json
+!/playwright.config.ts
+!/tsconfig.json
+!/README.md
+!/CLAUDE.md
 
 # Specs and plans stay local, even if docs/ is allowed later.
 /docs/superpowers/

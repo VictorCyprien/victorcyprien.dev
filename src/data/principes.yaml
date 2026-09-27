@@ -1,0 +1,28 @@
+- id: cadrer
+  order: 1
+  title: Cadrer par écrit avant de coder
+  text: "Besoin, périmètre, choix techniques et planning sont écrits et validés avant la première ligne de code. Vous payez un livrable, pas du temps."
+  proof: Toutes les missions
+- id: dimensionner
+  order: 2
+  title: Dimensionner pour aujourd'hui, pas pour un jour peut-être
+  text: "Un MVP pour 1 000 utilisateurs n'a pas besoin de l'architecture de 100 000. Je mesure, puis je prends le plus simple qui tient : souvent du cloud managé, rapide à mettre en place, sans serveur à gérer. Pas d'usine à gaz."
+  proof: "AURA : benchmark de charge, cloud managé retenu pour le MVP"
+  caseStudy: aura
+- id: surveiller
+  order: 3
+  title: Voir la prod dès le premier jour
+  text: "Dès la première mise en ligne, vous voyez les erreurs, les lenteurs et les ressources. L'outil suit l'hébergement, choisi avec vous : les métriques de la plateforme quand elles suffisent, une stack Grafana, Prometheus et Loki sur un serveur à soi."
+  proof: "Contrapp (VPS, Grafana, Prometheus, Loki) et AURA (Railway, Sentry)"
+  caseStudy: contrapp
+- id: dormir
+  order: 4
+  title: Une infra qui laisse dormir
+  text: "Un push déploie, un clic revient en arrière, aucun serveur à patcher la nuit."
+  proof: AURA sur Railway
+  caseStudy: aura
+- id: fermer
+  order: 5
+  title: Fermé par défaut
+  text: "Chaque accès aux données est refusé par défaut, puis ouvert explicitement. L'authentification repose sur un service éprouvé, jamais sur du maison."
+  proof: "Contrapp et AURA : Supabase, une règle d'accès par table"
