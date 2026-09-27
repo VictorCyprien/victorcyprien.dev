@@ -1,0 +1,23 @@
+---
+import { getCareer } from '../lib/content';
+import { formatPeriod } from '../lib/format';
+
+const career = await getCareer();
+---
+
+<section id="parcours" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
+  <h2 class="mb-8 text-3xl font-semibold tracking-tight">Parcours</h2>
+  <ol>
+    {career.map(({ data }) => (
+      <li class="grid gap-2 border-t border-line py-5 md:grid-cols-[220px_minmax(0,1fr)] md:gap-7">
+        <p class="text-sm text-muted">{formatPeriod(data.start, data.end)}</p>
+        <div>
+          <h3 class="font-semibold">{data.role}, {data.org}</h3>
+          <p class="text-sm text-muted">{data.place}</p>
+          <p class="mt-2 leading-relaxed text-muted">{data.summary}</p>
+          {data.stack.length > 0 && <p class="mt-2 text-sm text-muted">{data.stack.join(', ')}</p>}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
