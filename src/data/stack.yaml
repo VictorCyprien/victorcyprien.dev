@@ -1,0 +1,12 @@
+- id: coeur
+  order: 1
+  name: Mon cœur de métier
+  items: [Python, FastAPI, PostgreSQL, Supabase, Redis, Docker, Linux, Railway, Grafana, Prometheus, Loki, Stripe, Sentry]
+- id: aussi
+  order: 2
+  name: Je livre aussi
+  items: [React, Next.js, TypeScript, Vite]
+- id: pratique
+  order: 3
+  name: Déjà pratiqué en production
+  items: [Flask, MongoDB, AWS, Terraform, Redis Queue, Flutter]
