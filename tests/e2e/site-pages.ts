@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 
-export const STATIC_PAGES = ['/', '/etudes-de-cas/'];
+export const STATIC_PAGES = ['/', '/etudes-de-cas/', '/mentions-legales/'];
 
 /** Static pages plus every case study linked from the case study index. */
 export async function allPages(page: Page): Promise<string[]> {

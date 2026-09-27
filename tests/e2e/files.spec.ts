@@ -12,3 +12,12 @@ test('llms.txt sums up the site and lists every published case study', async ({ 
     expect(text, path).toContain(path);
   }
 });
+
+test('robots.txt matches the environment', async ({ request }) => {
+  const text = await (await request.get('/robots.txt')).text();
+  if (process.env.PUBLIC_SITE_ENV === 'preview') {
+    expect(text).toContain('Disallow: /');
+  } else {
+    expect(text).toContain('Sitemap: https://victorcyprien.dev/sitemap-index.xml');
+  }
+});

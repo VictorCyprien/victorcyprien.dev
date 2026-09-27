@@ -26,3 +26,30 @@ test('French punctuation never starts a line', async ({ page }) => {
     expect(text, path).not.toMatch(/ [:;?!](\s|$)/);
   }
 });
+
+test('every page answers and every internal link resolves', async ({ page }) => {
+  const seen = new Set<string>();
+  const queue = ['/'];
+  while (queue.length > 0) {
+    const path = queue.shift()!;
+    if (seen.has(path)) continue;
+    seen.add(path);
+    const response = await page.goto(path);
+    expect(response?.status(), path).toBe(200);
+    if (!(response?.headers()['content-type'] ?? '').includes('text/html')) continue;
+    const hrefs = await page.locator('a[href]').evaluateAll((links) => links.map((link) => link.getAttribute('href') ?? ''));
+    for (const href of hrefs) {
+      if (!href.startsWith('/')) continue;
+      const target = href.split('#')[0];
+      if (target && !seen.has(target)) queue.push(target);
+    }
+  }
+  expect(seen).toContain('/mentions-legales/');
+  expect(seen).toContain('/etudes-de-cas/');
+});
+
+test('an unknown address serves the 404 page', async ({ page }) => {
+  const response = await page.goto('/cette-page-n-existe-pas/');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page introuvable');
+});
