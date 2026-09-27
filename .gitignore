@@ -2,6 +2,8 @@
 # never reach the public repository. Every tracked root path is listed here.
 /*
 !/.gitignore
-!/docs/
+
+# Specs and plans stay local, even if docs/ is allowed later.
+/docs/superpowers/
 
 .DS_Store
