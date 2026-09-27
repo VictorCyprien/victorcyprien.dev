@@ -59,6 +59,9 @@
     outline: 2px solid var(--cta);
     outline-offset: 3px;
   }
+  [data-theme="light"] :focus-visible {
+    outline-color: var(--text);
+  }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
