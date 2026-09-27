@@ -1,0 +1,7 @@
+# Deny by default: this folder also holds private source notes that must
+# never reach the public repository. Every tracked root path is listed here.
+/*
+!/.gitignore
+!/docs/
+
+.DS_Store
