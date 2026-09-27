@@ -20,11 +20,11 @@ Back-end, intégration du coach IA et infrastructure.
 
 ### Mesurer avant de choisir la base
 
-Avant le lancement, un benchmark de charge a comparé PostgreSQL auto-hébergé et cloud managé. Pour un MVP, le cloud managé l'a emporté : simple, rapide à mettre en place, sans serveur à maintenir. [À COMPLÉTER : ce que le benchmark mesurait, avec les unités.]
+Avant le lancement, un benchmark de charge a comparé PostgreSQL auto-hébergé et cloud managé. Pour un MVP, le cloud managé l'a emporté : simple, rapide à mettre en place, sans serveur à maintenir. [À COMPLÉTER : ce que le benchmark comparait, sans résultat chiffré (NDA).]
 
 ### Un coach IA contextualisé
 
-[À COMPLÉTER : ce que le coach sait de l'utilisateur, et comment les appels au modèle sont protégés.]
+[À COMPLÉTER : comment le coach IA est branché, côté architecture, sans donnée interne (NDA).]
 
 ### D'AWS à Railway
 
