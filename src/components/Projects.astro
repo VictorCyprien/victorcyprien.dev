@@ -17,11 +17,11 @@ const others = projects.filter((project) => !project.data.featured);
         <ProjectDiagram id={id} class="border-b border-line bg-bg px-6 py-6" />
         <div class="flex flex-1 flex-col p-6">
           <h3 class="text-xl font-semibold">{data.name}</h3>
-          {data.period && <p class="mt-1 text-sm text-muted">{formatPeriod(data.period.start, data.period.end)}</p>}
+          {data.period && <p class="mt-1 text-sm tabular-nums text-muted">{formatPeriod(data.period.start, data.period.end)}</p>}
           <p class="mt-4 leading-relaxed text-muted">{data.summary}</p>
           <p class="mt-4 text-sm text-muted">{data.stack.join(', ')}</p>
           {data.caseStudy && published.has(data.caseStudy.id) && (
-            <a href={`/etudes-de-cas/${data.caseStudy.id}/`} class="mt-6 self-start border-b border-watch text-sm transition-colors hover:border-text">Lire l'étude de cas</a>
+            <a href={`/etudes-de-cas/${data.caseStudy.id}/`} class="link mt-6 self-start text-sm">Lire l'étude de cas</a>
           )}
         </div>
       </article>

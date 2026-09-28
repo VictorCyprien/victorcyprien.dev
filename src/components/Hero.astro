@@ -14,7 +14,7 @@ const site = await getSite();
     <h1 class="mb-5 max-w-[22ch] text-balance text-4xl font-semibold leading-[1.06] tracking-tight md:text-[46px]">{site.headline}</h1>
     <p class="mb-7 max-w-[32em] text-lg leading-relaxed text-muted">{site.lead}</p>
     <div class="flex flex-wrap gap-3">
-      <a href={site.callHref} class="rounded-[10px] bg-cta px-5 py-3 font-medium text-cta-text transition hover:brightness-110 active:translate-y-px">Réserver un appel</a>
+      <a href={site.callHref} class="btn-primary">Réserver un appel</a>
       <a href="#projets" class="rounded-[10px] border border-line px-5 py-3 transition hover:border-muted hover:bg-surface active:translate-y-px">Voir les projets</a>
     </div>
   </div>

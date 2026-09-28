@@ -10,13 +10,13 @@ const site = await getSite();
     <div>
       <h2 class="mb-4 text-4xl font-semibold tracking-tight">Contact</h2>
       <p class="mb-8 max-w-[34em] text-lg leading-relaxed text-muted">Un projet à cadrer, une application à reprendre ou à mettre en production&nbsp;: parlons-en.</p>
-      <a href={site.callHref} class="inline-block rounded-[10px] bg-cta px-5 py-3 font-medium text-cta-text transition hover:brightness-110 active:translate-y-px">Réserver un appel</a>
+      <a href={site.callHref} class="btn-primary">Réserver un appel</a>
     </div>
-    <ul class="grid gap-3 text-sm md:justify-items-end">
-      <li><a href={`mailto:${site.email}`} class="border-b border-line transition-colors hover:border-text">{site.email}</a></li>
-      <li><a href={site.links.linkedin} class="border-b border-line transition-colors hover:border-text">LinkedIn</a></li>
-      <li><a href={site.links.github} class="border-b border-line transition-colors hover:border-text">GitHub</a></li>
-      <li><a href={site.links.malt} class="border-b border-line transition-colors hover:border-text">Malt</a></li>
+    <ul class="links grid gap-3 text-sm md:justify-items-end">
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a href={site.links.linkedin}>LinkedIn</a></li>
+      <li><a href={site.links.github}>GitHub</a></li>
+      <li><a href={site.links.malt}>Malt</a></li>
     </ul>
   </div>
 </section>

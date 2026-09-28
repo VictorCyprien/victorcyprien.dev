@@ -75,6 +75,24 @@
   }
 }
 
+/* Shared patterns: the primary call button, and underlined links (single, or every link inside a
+   container whose markup comes from Markdown or a list). */
+@layer components {
+  .btn-primary {
+    @apply inline-block rounded-[10px] bg-cta px-5 py-3 font-medium text-cta-text transition hover:brightness-110 active:translate-y-px;
+  }
+  .link,
+  .links a {
+    color: var(--text);
+    border-bottom: 1px solid var(--watch);
+    transition: border-color 150ms;
+  }
+  .link:hover,
+  .links a:hover {
+    border-color: var(--text);
+  }
+}
+
 /* Architecture diagrams (hero and projects) share one drawing style, set from the theme tokens. */
 @layer components {
   .diagram .node { fill: var(--surface); stroke: var(--line); }

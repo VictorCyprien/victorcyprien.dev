@@ -13,13 +13,13 @@ const links = [
 
 <!-- Below lg the navigation moves to its own row, so it stays visible on a phone. Below sm the call button
      leaves the header: it does not fit next to the name, and the hero shows it right away. -->
-<header class="mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 px-6 py-5 md:px-12 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6">
+<header class="mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 px-6 py-5 md:px-12 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6">
   <a href="/" class="justify-self-start whitespace-nowrap font-semibold">{site.name}</a>
-  <nav aria-label="Navigation principale" class="col-span-2 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted lg:col-span-1 lg:gap-x-6">
-    {links.map((link) => <a href={link.href} class="transition-colors hover:text-text">{link.label}</a>)}
+  <nav aria-label="Navigation principale" class="col-span-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted lg:col-span-1 lg:gap-x-6">
+    {links.map((link) => <a href={link.href} class="py-1 transition-colors hover:text-text">{link.label}</a>)}
   </nav>
   <div class="col-start-2 row-start-1 flex items-center gap-3 lg:col-start-3 lg:justify-self-end lg:gap-6">
     <ThemeToggle />
-    <a href={site.callHref} class="hidden whitespace-nowrap rounded-[10px] bg-cta px-4 py-2 text-sm font-medium text-cta-text transition hover:brightness-110 active:translate-y-px sm:inline-block">Réserver un appel</a>
+    <a href={site.callHref} class="btn-primary hidden whitespace-nowrap px-4 py-2 text-sm sm:inline-block">Réserver un appel</a>
   </div>
 </header>

@@ -11,7 +11,7 @@ const studies = await getPublishedCaseStudies();
     <h1 class="mb-3 text-4xl font-semibold tracking-tight">Études de cas</h1>
     <p class="mb-10 max-w-[40em] text-muted">Les projets en détail&nbsp;: le contexte, les décisions prises et leurs raisons, le résultat.</p>
     {studies.length === 0 ? (
-      <p class="text-muted">Aucune étude de cas publiée pour le moment. Les projets sont décrits sur la <a href="/#projets" class="border-b border-watch text-text transition-colors hover:border-text">page d'accueil</a>.</p>
+      <p class="text-muted">Aucune étude de cas publiée pour le moment. Les projets sont décrits sur la <a href="/#projets" class="link">page d'accueil</a>.</p>
     ) : (
       <ul class="grid gap-6 md:grid-cols-2">
         {studies.map((study) => (
