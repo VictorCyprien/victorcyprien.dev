@@ -8,9 +8,9 @@ test('formatMonth gives a short French month', () => {
 });
 
 test('formatPeriod closes a finished period', () => {
-  assert.equal(formatPeriod('2025-07', '2026-01'), 'juil. 2025 → janv. 2026');
+  assert.equal(formatPeriod('2025-07', '2026-01'), 'juil. 2025 - janv. 2026');
 });
 
 test('formatPeriod marks an ongoing period', () => {
-  assert.equal(formatPeriod('2023-10', null), "oct. 2023 → aujourd'hui");
+  assert.equal(formatPeriod('2023-10', null), "oct. 2023 - aujourd'hui");
 });
