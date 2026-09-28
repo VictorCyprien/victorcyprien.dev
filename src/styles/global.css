@@ -74,3 +74,14 @@
     }
   }
 }
+
+/* Architecture diagrams (hero and projects) share one drawing style, set from the theme tokens. */
+@layer components {
+  .diagram .node { fill: var(--surface); stroke: var(--line); }
+  .diagram .watch { fill: var(--surface); stroke: var(--watch); }
+  .diagram .frame { fill: none; stroke: var(--box); stroke-dasharray: 5 5; }
+  .diagram .wire { fill: none; stroke: var(--wire); stroke-width: 1.5; }
+  .diagram .watch-wire { fill: none; stroke: var(--watch); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .diagram .role { fill: var(--text); font: 500 13px var(--font-sans); }
+  .diagram .tech { fill: var(--muted); font: 400 11px var(--font-mono); }
+}
