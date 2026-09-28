@@ -55,6 +55,10 @@
     color: var(--text);
     font-family: var(--font-sans);
   }
+  ::selection {
+    background: var(--cta);
+    color: var(--cta-text);
+  }
   :focus-visible {
     outline: 2px solid var(--cta);
     outline-offset: 3px;

@@ -5,9 +5,11 @@ const site = await getSite();
 const year = new Date().getFullYear();
 ---
 
-<footer class="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-2 border-t border-line px-6 py-8 text-sm text-muted md:px-12">
-  <span class="mr-auto">© {year} {site.name}</span>
-  <a href="/etudes-de-cas/" class="transition-colors hover:text-text">Études de cas</a>
-  <a href="/mentions-legales/" class="transition-colors hover:text-text">Mentions légales</a>
-  <a href="/llms.txt" class="transition-colors hover:text-text">llms.txt</a>
+<footer class="mx-auto max-w-6xl px-6 text-sm text-muted md:px-12">
+  <div class="flex flex-wrap gap-x-6 gap-y-2 border-t border-line py-8">
+    <span class="mr-auto">© {year} {site.name}</span>
+    <a href="/etudes-de-cas/" class="transition-colors hover:text-text">Études de cas</a>
+    <a href="/mentions-legales/" class="transition-colors hover:text-text">Mentions légales</a>
+    <a href="/llms.txt" class="transition-colors hover:text-text">llms.txt</a>
+  </div>
 </footer>
