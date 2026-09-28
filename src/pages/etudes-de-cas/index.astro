@@ -16,7 +16,7 @@ const studies = await getPublishedCaseStudies();
       <ul class="grid gap-6 md:grid-cols-2">
         {studies.map((study) => (
           <li>
-            <a href={`/etudes-de-cas/${study.id}/`} class="block h-full rounded-xl border border-line bg-surface p-6 transition-colors hover:border-watch">
+            <a href={`/etudes-de-cas/${study.id}/`} class="block h-full rounded-xl border border-line bg-surface p-6 shadow-card transition-colors hover:border-watch">
               <h2 class="text-xl font-semibold">{study.data.title}</h2>
               <p class="mt-1 text-sm text-muted">{study.data.sector}, {formatPeriod(study.data.period.start, study.data.period.end)}</p>
               <p class="mt-4 leading-relaxed text-muted">{study.data.summary}</p>

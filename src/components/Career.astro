@@ -13,7 +13,7 @@ const diplomas = await getDiplomas();
     <ol class="grid gap-10 border-l border-line pl-6">
       {career.map(({ data }) => (
         <li>
-          <p class="text-sm tabular-nums text-muted">{formatPeriod(data.start, data.end)}</p>
+          <p class="text-sm text-muted">{formatPeriod(data.start, data.end)}</p>
           <h3 class="mt-1 text-lg font-semibold">{data.role}, {data.url ? <a href={data.url}>{data.org}</a> : data.org}</h3>
           <p class="text-sm text-muted">{data.place}</p>
           <p class="mt-2 max-w-[42em] leading-relaxed text-muted">{data.summary}</p>
