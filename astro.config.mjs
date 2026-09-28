@@ -10,6 +10,7 @@ const isPreview = process.env.PUBLIC_SITE_ENV === 'preview';
 export default defineConfig({
   site: isPreview ? 'https://preview.victorcyprien.dev' : 'https://victorcyprien.dev',
   integrations: [sitemap()],
-  markdown: { remarkPlugins: [remarkFrenchSpacing] },
+  // Straight apostrophes everywhere: YAML and templates never curl them, so Markdown must not either.
+  markdown: { remarkPlugins: [remarkFrenchSpacing], smartypants: false },
   vite: { plugins: [tailwindcss()] },
 });
