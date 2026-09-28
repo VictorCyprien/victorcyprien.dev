@@ -13,6 +13,8 @@ const caseStudies = defineCollection({
   schema: z.object({
     title: prose,
     summary: prose,
+    // "En bref" at the top of the page: the need, what Victor did, the result.
+    brief: z.object({ need: prose, work: prose, result: prose }),
     sector: prose,
     period,
     stack: z.array(z.string()).min(1),

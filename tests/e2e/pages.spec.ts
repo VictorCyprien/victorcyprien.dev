@@ -104,6 +104,66 @@ test('every case study ends with the call button', async ({ page }) => {
   }
 });
 
+test('each case study opens with its brief, its reading time and a table of contents', async ({ page }) => {
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  for (const path of studies) {
+    await page.goto(path);
+    const main = page.getByRole('main');
+    await expect(main.getByRole('heading', { name: 'En bref' }), path).toBeVisible();
+    await expect(main.getByText(/^\d+ min$/), path).toBeVisible();
+    const targets = await page
+      .getByRole('navigation', { name: 'Sommaire' })
+      .locator('a')
+      .evaluateAll((links) => links.map((link) => decodeURIComponent((link.getAttribute('href') ?? '').slice(1))));
+    expect(targets.length, path).toBeGreaterThan(5);
+    for (const id of targets) await expect(page.locator(`[id="${id}"]`), `${path} #${id}`).toHaveCount(1);
+  }
+});
+
+test('the table of contents follows the reading on a desktop screen', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'the pinned table of contents is for desktop screens');
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  await page.goto(studies[0]);
+  const toc = page.getByRole('navigation', { name: 'Sommaire' });
+  await expect(toc.getByRole('link', { name: 'Résultat', exact: true })).toBeVisible();
+  await page.getByRole('heading', { name: 'Résultat', exact: true }).evaluate((heading) => heading.scrollIntoView());
+  await expect(toc.locator('a[aria-current="location"]')).toHaveText('Résultat');
+});
+
+test('the table of contents stays folded on a phone until opened', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'the folded table of contents is for phones');
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  await page.goto(studies[0]);
+  const toc = page.getByRole('navigation', { name: 'Sommaire' });
+  await expect(toc.getByRole('link', { name: 'Contexte' })).toBeHidden();
+  await toc.getByText('Sommaire').click();
+  await expect(toc.getByRole('link', { name: 'Contexte' })).toBeVisible();
+});
+
+test('hovering a diagram brick shows its role and fades the rest on a desktop screen', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'hover needs a mouse');
+  await page.goto('/');
+  const figure = page.locator('figure[data-diagram="aura"]');
+  const note = figure.locator('[data-diagram-note]');
+  await expect(note).toHaveText(/Passez la souris/);
+  await figure.locator('[data-id="nutrition"]').hover();
+  await expect(note).toContainText('Nutrition. Un des trois moteurs');
+  await expect(figure.locator('[data-id="watch"]')).toHaveCSS('opacity', '0.3');
+  await expect(figure.locator('[data-id="brands"]')).toHaveCSS('opacity', '1');
+  await page.mouse.move(0, 0);
+  await expect(note).toHaveText(/Passez la souris/);
+  await expect(figure.locator('[data-id="watch"]')).toHaveCSS('opacity', '1');
+});
+
+test('diagrams stay still on a phone', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'the still diagram is for touch screens');
+  await page.goto('/');
+  await expect(page.locator('[data-diagram-note]').first()).toBeHidden();
+});
+
 test('each featured project shows its architecture diagram', async ({ page }) => {
   await page.goto('/');
   const projects = page.locator('#projets');
