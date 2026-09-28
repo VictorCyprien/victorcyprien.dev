@@ -1,6 +1,10 @@
 ---
 title: "AURA : une plateforme de coaching sport et nutrition"
 summary: "Application de coaching sport et nutrition, pour le grand public et en marque blanche. J'en porte le back-end et l'infrastructure."
+brief:
+  need: "BeAble2 voulait une plateforme de coaching sport et nutrition, pour le grand public et pour des marques qui la prennent en marque blanche."
+  work: "Je porte le back-end et l'infrastructure : trois API, l'hébergement chez Railway et Supabase, la surveillance et les tests de charge."
+  result: "L'application est en production, en bêta fermée, et les tests de charge valident la prochaine étape de croissance."
 sector: Sport et nutrition, B2C et B2B2C
 period: { start: "2026-01", end: null }
 stack: [Python, FastAPI, Supabase, Railway, Sentry, Flutter, Next.js]
@@ -14,7 +18,13 @@ AURA est une plateforme de coaching sport et nutrition portée par BeAble2. Le g
 
 ## Mon rôle
 
-Je m'occupe du back-end et de l'infrastructure. On est deux développeurs sur le back-end.
+Je m'occupe du back-end et de l'infrastructure.
+
+## Contraintes
+
+- Deux développeurs sur le back-end.
+- Des marques qui n'ont rien à gérer de leur côté.
+- Des données séparées d'une marque à l'autre.
 
 ## Décisions
 
@@ -24,7 +34,7 @@ L'application est découpée en trois moteurs : nutrition, fitness et communaut�
 
 ### Tout héberger pour les marques
 
-Les marques n'ont presque rien à gérer de leur côté. On héberge pour elles les API et les back-offices sur Railway, et la surveillance reste chez nous. Chaque marque a sa propre base dans notre organisation Supabase : cette base lui appartient, et ses données restent séparées de celles des autres. La base du grand public, elle, appartient à BeAble2.
+On héberge pour les marques les API et les back-offices sur Railway, et la surveillance reste chez nous. Chaque marque a sa propre base dans notre organisation Supabase : cette base lui appartient, et ses données restent séparées de celles des autres. La base du grand public, elle, appartient à BeAble2.
 
 ### Du VPS au cloud managé
 
@@ -32,20 +42,33 @@ Au départ, l'API et la base, un Supabase auto-hébergé, tournaient sur un VPS.
 
 ### D'AWS à Railway
 
-Sur le conseil d'un spécialiste du cloud, l'infrastructure est ensuite passée sur AWS, décrite avec Terraform. Ce montage était taillé pour une échelle qui n'était pas la nôtre. Avec peu d'utilisateurs, les fonctions serverless démarraient à froid à presque chaque requête. Il y avait trop de services à gérer pour deux personnes, et une seule pouvait mettre en ligne.
+Sur le conseil d'un spécialiste du cloud, l'infrastructure est ensuite passée sur AWS, décrite avec Terraform. Ce montage était taillé pour une échelle qui n'était pas la nôtre. Avec peu d'utilisateurs, les fonctions serverless démarraient à froid à presque chaque requête. Il y avait trop de services à gérer pour deux personnes, et une seule pouvait mettre en ligne. Au bout de quelques mois, on est passés sur Railway. La multi-région attendra que le trafic la justifie.
 
-Au bout de quelques mois, on est passés sur Railway. Un push déploie, n'importe qui dans l'équipe peut mettre en ligne, un clic ramène la version précédente, et la préproduction se gère au même endroit que la production. La multi-région attendra que le trafic la justifie.
+## Ce que j'ai construit
 
-### Voir la production dès le premier jour
+### La surveillance
 
 Sentry remonte les erreurs et Railway fournit les métriques. Tant que ça suffit, on n'ajoute rien de plus.
 
-### Tenir la charge
+### Les tests de charge
 
-Sur Railway, j'ai mené une campagne de tests en visant la charge de la prochaine étape de croissance. Les premières mesures étaient loin du compte. Le code et la puissance des machines semblaient les causes évidentes, et les mesures ont montré que ce n'était ni l'un ni l'autre. Il y avait trop peu de connexions à la base par processus, un seul processus par instance au lieu de deux, et un test plus lourd que l'usage réel. Une fois ces points corrigés, le moteur fitness atteint le débit visé.
-
-Côté nutrition, une recherche lisait toute la table au lieu d'utiliser son index. Après correction, la seule limite qui reste est la taille de la base, qui dépend du budget qu'on lui donne. Le test d'endurance a tenu deux heures sans erreur, et des créations de comptes simultanées n'ont produit aucun doublon.
+Sur Railway, j'ai mené une campagne de tests en visant la charge de la prochaine étape de croissance. Les premières mesures étaient loin du compte. J'ai trouvé trois causes : trop peu de connexions à la base par processus, un seul processus par instance au lieu de deux, et un test plus lourd que l'usage réel. Côté nutrition, une recherche lisait en plus toute la table au lieu d'utiliser son index.
 
 ## Résultat
 
-L'application est en production, en bêta fermée, avec une préproduction séparée. Prochaine étape : l'ouverture de la bêta.
+### Ce qui a changé
+
+Avec la base chez Supabase cloud, l'API ne partage plus ses processeurs avec la base et l'authentification. Depuis le passage sur Railway, un push déploie, n'importe qui dans l'équipe peut mettre en ligne, un clic ramène la version précédente, et la préproduction se gère au même endroit que la production. Après les corrections, le moteur fitness atteint le débit visé. Côté nutrition, la seule limite qui reste est la taille de la base, qui dépend du budget qu'on lui donne.
+
+### Fausses pistes
+
+Pendant les tests de charge, le code et la puissance des machines semblaient les causes évidentes. Les mesures ont montré que ce n'était ni l'un ni l'autre : les vraies causes étaient les réglages et le test lui-même.
+
+### Résultat concret
+
+L'application est en production, en bêta fermée, avec une préproduction séparée. Le test d'endurance a tenu deux heures sans erreur, et des créations de comptes simultanées n'ont produit aucun doublon. Prochaine étape : l'ouverture de la bêta.
+
+## Ce que je ferais différemment
+
+- Je confronterais un conseil d'expert à notre échelle avant de le suivre. AWS nous a coûté quelques mois sur une infrastructure taillée pour un trafic qu'on n'avait pas.
+- Je passerais tout de suite au cloud managé, au lieu de refaire sur le VPS le montage auto-hébergé de Contrapp.
