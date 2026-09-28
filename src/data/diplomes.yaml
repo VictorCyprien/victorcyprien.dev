@@ -1,0 +1,16 @@
+- id: mastere-esi
+  year: 2023
+  title: Mastère Expert en systèmes d'information
+  school: Institut Limayrac
+  url: https://www.limayrac.fr/
+- id: bachelor-si
+  year: 2021
+  title: Bachelor en systèmes d'information
+  school: Institut Limayrac
+  url: https://www.limayrac.fr/
+- id: bts-sn
+  year: 2020
+  title: BTS Systèmes numériques, option Informatique et réseaux
+  school: Institut Limayrac
+  url: https://www.limayrac.fr/
+  detail: "Projet de fin d'études : trottinettes connectées, en Bluetooth et GPS. Référent technique."

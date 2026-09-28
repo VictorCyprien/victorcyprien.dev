@@ -56,6 +56,19 @@ const career = defineCollection({
     place: prose,
     summary: prose,
     stack: z.array(z.string()).default([]),
+    url: z.url().optional(),
+  }),
+});
+
+const diplomas = defineCollection({
+  loader: file('src/data/diplomes.yaml'),
+  schema: z.object({
+    id: z.string(),
+    year: z.number().int(),
+    title: prose,
+    school: prose,
+    url: z.url(),
+    detail: prose.optional(),
   }),
 });
 
@@ -91,4 +104,4 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { caseStudies, projects, principles, career, stackTiers, site };
+export const collections = { caseStudies, projects, principles, career, diplomas, stackTiers, site };

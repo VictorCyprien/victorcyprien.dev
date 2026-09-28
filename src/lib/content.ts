@@ -31,6 +31,10 @@ export async function getCareer() {
   return (await getCollection('career')).sort((a, b) => b.data.start.localeCompare(a.data.start));
 }
 
+export async function getDiplomas() {
+  return (await getCollection('diplomas')).sort((a, b) => b.data.year - a.data.year);
+}
+
 export async function getStackTiers() {
   return (await getCollection('stackTiers')).sort((a, b) => a.data.order - b.data.order);
 }
