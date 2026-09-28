@@ -103,3 +103,10 @@ test('every case study ends with the call button', async ({ page }) => {
     await expect(page.getByRole('main').getByRole('link', { name: 'Réserver un appel' }), path).toBeVisible();
   }
 });
+
+test('each featured project shows its architecture diagram', async ({ page }) => {
+  await page.goto('/');
+  const projects = page.locator('#projets');
+  await expect(projects.getByRole('img', { name: 'Le montage de Contrapp' })).toBeVisible();
+  await expect(projects.getByRole('img', { name: "Le montage d'AURA" })).toBeVisible();
+});

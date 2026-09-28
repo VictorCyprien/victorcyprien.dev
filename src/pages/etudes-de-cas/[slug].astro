@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDiagram from '../../components/ProjectDiagram.astro';
 import { getPublishedCaseStudies, getSite } from '../../lib/content';
 import { formatPeriod } from '../../lib/format';
 
@@ -24,6 +25,7 @@ const { title, summary, sector, period, stack } = study.data;
       <dt class="text-muted">Secteur</dt><dd>{sector}</dd>
       <dt class="text-muted">Période</dt><dd>{formatPeriod(period.start, period.end)}</dd>
     </dl>
+    <ProjectDiagram id={study.id} caption="Le montage en production, simplifié." class="mb-12 rounded-xl border border-line p-6" />
     <div class="case-study">
       <Content />
       <h2>Stack</h2>
