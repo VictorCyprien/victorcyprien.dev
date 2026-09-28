@@ -1,15 +1,15 @@
 - id: cadrer
   order: 1
   title: Cadrer par écrit avant de coder
-  text: "Avant la première ligne de code, on se met d'accord par écrit : ce qu'il faut faire, ce qui n'en fait pas partie, le prix et le calendrier. Vous payez un résultat, pas des heures."
+  text: "Avant la première ligne de code, on se met d'accord par écrit : ce qu'il faut faire, ce qui n'en fait pas partie, le prix et le calendrier. Ce prix est fixé pour le livrable, quel que soit le temps que j'y passe."
 - id: dimensionner
   order: 2
   title: Construire pour vos besoins d'aujourd'hui
-  text: "Une application qui démarre avec mille utilisateurs n'a pas besoin de l'équipement prévu pour cent mille. Je mesure ce dont vous avez vraiment besoin, puis je choisis la solution la plus simple qui tient. Vous ne payez pas pour un avenir hypothétique."
+  text: "Une application qui démarre avec mille utilisateurs n'a pas besoin de l'infrastructure prévue pour cent mille. Je mesure ce dont vous avez besoin, puis je choisis la solution la plus simple qui tient cette charge. On la fait évoluer quand le trafic le demande."
 - id: surveiller
   order: 3
   title: Voir ce qui se passe dès la mise en ligne
-  text: "Dès le premier jour, vous savez si votre application va bien : les erreurs, les lenteurs, la charge. Les outils de suivi dépendent de l'hébergement ; on les choisit ensemble."
+  text: "Dès le premier jour, vous voyez si votre application va bien : les erreurs, les lenteurs, la charge. Les outils de suivi dépendent de l'hébergement, et on les choisit ensemble."
 - id: dormir
   order: 4
   title: Des mises en ligne sans stress
@@ -17,4 +17,4 @@
 - id: fermer
   order: 5
   title: Vos données fermées par défaut
-  text: "Personne n'accède à une donnée sans autorisation explicite. La connexion des utilisateurs repose sur un service reconnu, jamais sur un système bricolé maison."
+  text: "Personne n'accède à une donnée sans autorisation explicite. La connexion des utilisateurs passe par un service d'authentification éprouvé, comme celui de Supabase : je n'écris jamais ma propre authentification."
