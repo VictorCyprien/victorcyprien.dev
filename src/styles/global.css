@@ -95,6 +95,22 @@
   .links a:hover {
     border-color: var(--text);
   }
+  /* A hairline over a home section that follows another section on the ground, aligned with the text margins. */
+  .section-rule {
+    position: relative;
+  }
+  .section-rule::before {
+    content: '';
+    position: absolute;
+    inset: 0 1.5rem auto;
+    height: 1px;
+    background: var(--line);
+  }
+  @media (width >= 48rem) {
+    .section-rule::before {
+      inset-inline: 3rem;
+    }
+  }
 }
 
 /* Architecture diagrams (hero and projects) share one drawing style, set from the theme tokens. */
