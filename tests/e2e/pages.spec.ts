@@ -60,6 +60,15 @@ test('the parcours section shows a diplomas block with links to schools and comp
   expect(text).not.toContain('[À COMPLÉTER');
 });
 
+test('every image on the home page loads, the portrait included', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('img', { name: 'Portrait de Victor Cyprien' })).toBeVisible();
+  const broken = await page.locator('img').evaluateAll((images) =>
+    images.filter((image) => !(image as HTMLImageElement).complete || (image as HTMLImageElement).naturalWidth === 0).map((image) => image.getAttribute('src')),
+  );
+  expect(broken).toEqual([]);
+});
+
 test('an unknown address serves the 404 page', async ({ page }) => {
   const response = await page.goto('/cette-page-n-existe-pas/');
   expect(response?.status()).toBe(404);
