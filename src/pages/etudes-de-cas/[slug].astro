@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublishedCaseStudies } from '../../lib/content';
+import { getPublishedCaseStudies, getSite } from '../../lib/content';
 import { formatPeriod } from '../../lib/format';
 
 export async function getStaticPaths() {
@@ -11,6 +11,7 @@ export async function getStaticPaths() {
 
 const { study } = Astro.props;
 const { Content } = await render(study);
+const site = await getSite();
 const { title, summary, sector, period, stack } = study.data;
 ---
 
@@ -28,6 +29,11 @@ const { title, summary, sector, period, stack } = study.data;
       <h2>Stack</h2>
       <p class="text-sm">{stack.join(', ')}</p>
     </div>
+    <div class="mt-16 rounded-xl border border-line bg-surface p-6 md:p-8">
+      <h2 class="mb-3 text-2xl font-semibold tracking-tight">Un projet comparable&nbsp;?</h2>
+      <p class="mb-6 leading-relaxed text-muted">On en parle lors d'un appel. Ensuite, je vous envoie un cadrage écrit&nbsp;: ce qu'il faut faire, le prix et le calendrier.</p>
+      <a href={site.callHref} class="inline-block rounded-[10px] bg-cta px-5 py-3 font-medium text-cta-text transition hover:brightness-110 active:translate-y-px">Réserver un appel</a>
+    </div>
   </article>
 </BaseLayout>
 
@@ -38,5 +44,6 @@ const { title, summary, sector, period, stack } = study.data;
   .case-study :global(ul) { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; color: var(--muted); }
   .case-study :global(ol) { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; color: var(--muted); }
   .case-study :global(li) { margin-bottom: 0.25rem; line-height: 1.7; }
-  .case-study :global(a) { color: var(--text); border-bottom: 1px solid var(--watch); }
+  .case-study :global(a) { color: var(--text); border-bottom: 1px solid var(--watch); transition: border-color 150ms; }
+  .case-study :global(a:hover) { border-color: var(--text); }
 </style>

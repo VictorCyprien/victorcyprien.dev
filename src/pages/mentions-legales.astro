@@ -32,5 +32,6 @@ const site = await getSite();
 <style>
   .legal h2 { margin: 2rem 0 0.75rem; font-size: 1.25rem; font-weight: 600; }
   .legal p { margin-bottom: 0.5rem; line-height: 1.7; color: var(--muted); }
-  .legal a { color: var(--text); border-bottom: 1px solid var(--watch); }
+  .legal a { color: var(--text); border-bottom: 1px solid var(--watch); transition: border-color 150ms; }
+  .legal a:hover { border-color: var(--text); }
 </style>

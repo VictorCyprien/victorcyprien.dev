@@ -18,7 +18,7 @@ const others = projects.filter((project) => !project.data.featured);
         <p class="mt-4 leading-relaxed text-muted">{data.summary}</p>
         <p class="mt-4 text-sm text-muted">{data.stack.join(', ')}</p>
         {data.caseStudy && published.has(data.caseStudy.id) && (
-          <a href={`/etudes-de-cas/${data.caseStudy.id}/`} class="mt-6 self-start border-b border-watch text-sm">Lire l'étude de cas</a>
+          <a href={`/etudes-de-cas/${data.caseStudy.id}/`} class="mt-6 self-start border-b border-watch text-sm transition-colors hover:border-text">Lire l'étude de cas</a>
         )}
       </article>
     ))}
