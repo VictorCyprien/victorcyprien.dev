@@ -3,7 +3,7 @@ title: "Contrapp : les contrats d'alternance des CFA"
 summary: "Plateforme SaaS qui simplifie la création et la signature des contrats d'alternance pour les CFA. API, base de données, facturation et infrastructure, jusqu'à la mise en production."
 sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
-stack: [Python, FastAPI, Supabase, Stripe, VPS Linux, Docker, Grafana, Prometheus, Loki]
+stack: [Python, FastAPI, Supabase, Stripe, DocuSign, VPS Linux, Docker, Grafana, Prometheus, Loki]
 order: 1
 draft: true
 ---
