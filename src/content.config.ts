@@ -98,7 +98,7 @@ const site = defineCollection({
     photo: z.string().nullable(),
     links: z.object({
       linkedin: z.url(),
-      github: z.string(),
+      github: z.url(),
       malt: z.url(),
     }),
   }),
