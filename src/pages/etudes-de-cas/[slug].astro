@@ -1,7 +1,8 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublishedCaseStudies } from '../../lib/content';
+import ProjectDiagram from '../../components/ProjectDiagram.astro';
+import { getPublishedCaseStudies, getSite } from '../../lib/content';
 import { formatPeriod } from '../../lib/format';
 
 export async function getStaticPaths() {
@@ -11,22 +12,29 @@ export async function getStaticPaths() {
 
 const { study } = Astro.props;
 const { Content } = await render(study);
+const site = await getSite();
 const { title, summary, sector, period, stack } = study.data;
 ---
 
 <BaseLayout title={`${title}, Victor Cyprien`} description={summary}>
   <article class="mx-auto max-w-3xl px-6 py-16">
-    <a href="/etudes-de-cas/" class="text-sm text-muted hover:text-text">Toutes les études de cas</a>
+    <a href="/etudes-de-cas/" class="text-sm text-muted transition-colors hover:text-text">Toutes les études de cas</a>
     <h1 class="mb-4 mt-6 text-4xl font-semibold leading-tight tracking-tight">{title}</h1>
     <p class="mb-8 text-lg leading-relaxed text-muted">{summary}</p>
     <dl class="mb-12 grid gap-x-6 gap-y-2 border-y border-line py-5 text-sm sm:grid-cols-[120px_minmax(0,1fr)]">
       <dt class="text-muted">Secteur</dt><dd>{sector}</dd>
       <dt class="text-muted">Période</dt><dd>{formatPeriod(period.start, period.end)}</dd>
     </dl>
-    <div class="case-study">
+    <ProjectDiagram id={study.id} caption="Le montage en production, simplifié." class="mb-12 rounded-xl border border-line p-6" />
+    <div class="case-study links">
       <Content />
       <h2>Stack</h2>
       <p class="text-sm">{stack.join(', ')}</p>
+    </div>
+    <div class="mt-16 rounded-xl border border-line bg-surface p-6 md:p-8">
+      <h2 class="mb-3 text-2xl font-semibold tracking-tight">Un projet comparable&nbsp;?</h2>
+      <p class="mb-6 leading-relaxed text-muted">On en parle lors d'un appel. Ensuite, je vous envoie un cadrage écrit&nbsp;: ce qu'il faut faire, le prix et le calendrier.</p>
+      <a href={site.callHref} class="btn-primary">Réserver un appel</a>
     </div>
   </article>
 </BaseLayout>
@@ -38,5 +46,4 @@ const { title, summary, sector, period, stack } = study.data;
   .case-study :global(ul) { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; color: var(--muted); }
   .case-study :global(ol) { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; color: var(--muted); }
   .case-study :global(li) { margin-bottom: 0.25rem; line-height: 1.7; }
-  .case-study :global(a) { color: var(--text); border-bottom: 1px solid var(--watch); }
 </style>

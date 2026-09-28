@@ -19,7 +19,7 @@
   role: Développeur back-end, en alternance
   org: Beeguard
   place: Labège
-  summary: Conception, tests, déploiement et maintenance des services back-end. API de gestion des utilisateurs et de stockage S3. Refonte de l'architecture de notification par SMS.
+  summary: J'ai conçu, testé, déployé et maintenu des services back-end, dont une API de gestion des utilisateurs et du stockage S3. J'ai aussi refait l'architecture des notifications par SMS.
   stack: [Python, Flask, Faust, Kafka, Docker]
   url: https://www.beeguard.fr/
 - id: kipsoft
@@ -28,6 +28,6 @@
   role: Stagiaire développeur
   org: Kipsoft
   place: Labège
-  summary: Plugin PHP sur mesure pour le site « Ma liste à moi ».
+  summary: Un plugin PHP sur mesure pour le site « Ma liste à moi ».
   stack: [PHP]
   url: https://www.kipsoft.fr/

@@ -2,7 +2,7 @@
   type="button"
   data-theme-toggle
   aria-label="Passer en thème clair"
-  class="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted hover:text-text"
+  class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-line text-muted transition hover:border-muted hover:text-text active:translate-y-px"
 >
   <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
     <circle cx="12" cy="12" r="4" />
@@ -27,6 +27,8 @@
 
   function apply(theme: 'dark' | 'light') {
     root.dataset.theme = theme;
+    // The browser bar (mobile address bar, tab strip) takes the page background of the active theme.
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
     button?.setAttribute('aria-label', theme === 'dark' ? 'Passer en thème clair' : 'Passer en thème sombre');
   }
 

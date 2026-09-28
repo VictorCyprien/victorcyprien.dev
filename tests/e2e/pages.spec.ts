@@ -60,8 +60,53 @@ test('the parcours section shows a diplomas block with links to schools and comp
   expect(text).not.toContain('[À COMPLÉTER');
 });
 
+test('every image on the home page loads, the portrait included', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('img', { name: 'Portrait de Victor Cyprien' })).toBeVisible();
+  const broken = await page.locator('img').evaluateAll((images) =>
+    images.filter((image) => !(image as HTMLImageElement).complete || (image as HTMLImageElement).naturalWidth === 0).map((image) => image.getAttribute('src')),
+  );
+  expect(broken).toEqual([]);
+});
+
 test('an unknown address serves the 404 page', async ({ page }) => {
   const response = await page.goto('/cette-page-n-existe-pas/');
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page introuvable');
+});
+
+test('the header names the site and shows every navigation link', async ({ page }) => {
+  await page.goto('/');
+  const header = page.getByRole('banner');
+  await expect(header.getByRole('link', { name: 'Victor Cyprien' })).toHaveAttribute('href', '/');
+  const nav = page.getByRole('navigation', { name: 'Navigation principale' });
+  for (const label of ['Comment je décide', 'Projets', 'Parcours', 'Études de cas']) {
+    await expect(nav.getByRole('link', { name: label })).toBeInViewport();
+  }
+});
+
+test('the home headline fits on two lines on a desktop screen', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'the two-line rule is for desktop screens');
+  await page.goto('/');
+  const lines = await page.getByRole('heading', { level: 1 }).evaluate((heading) => {
+    const lineHeight = parseFloat(getComputedStyle(heading).lineHeight);
+    return Math.round(heading.getBoundingClientRect().height / lineHeight);
+  });
+  expect(lines).toBeLessThanOrEqual(2);
+});
+
+test('every case study ends with the call button', async ({ page }) => {
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  for (const path of studies) {
+    await page.goto(path);
+    await expect(page.getByRole('main').getByRole('link', { name: 'Réserver un appel' }), path).toBeVisible();
+  }
+});
+
+test('each featured project shows its architecture diagram', async ({ page }) => {
+  await page.goto('/');
+  const projects = page.locator('#projets');
+  await expect(projects.getByRole('img', { name: 'Le montage de Contrapp' })).toBeVisible();
+  await expect(projects.getByRole('img', { name: "Le montage d'AURA" })).toBeVisible();
 });

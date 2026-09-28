@@ -92,13 +92,18 @@ const site = defineCollection({
     headline: prose,
     lead: prose,
     schemaCaption: prose,
-    about: z.array(prose).min(1),
+    // About: one opening sentence, how Victor works with a client, then the BeAble2 note.
+    about: z.object({
+      intro: prose,
+      ways: z.array(prose).min(1),
+      partner: prose.optional(),
+    }),
     email: z.email(),
     callHref: z.string(),
     photo: z.string().nullable(),
     links: z.object({
       linkedin: z.url(),
-      github: z.string(),
+      github: z.url(),
       malt: z.url(),
     }),
   }),

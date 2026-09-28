@@ -6,32 +6,30 @@ const site = await getSite();
 ---
 
 <BaseLayout title="Mentions légales, Victor Cyprien" description="Éditeur, hébergeur et données personnelles du site victorcyprien.dev.">
-  <article class="legal mx-auto max-w-3xl px-6 py-16">
+  <article class="legal links mx-auto max-w-3xl px-6 py-16">
     <h1 class="mb-8 text-4xl font-semibold tracking-tight">Mentions légales</h1>
 
     <h2>Éditeur du site</h2>
-    <p>{site.name}, [À COMPLÉTER&nbsp;: statut juridique].</p>
-    <p>SIRET&nbsp;: [À COMPLÉTER].</p>
+    <p>{site.name}, entrepreneur individuel (micro-entreprise).</p>
+    <p>SIRET&nbsp;: 924&nbsp;144&nbsp;926&nbsp;00012.</p>
     <p>Adresse&nbsp;: [À COMPLÉTER].</p>
     <p>Téléphone&nbsp;: [À COMPLÉTER&nbsp;: numéro de téléphone professionnel].</p>
-    <p>TVA&nbsp;: [À COMPLÉTER&nbsp;: numéro de TVA intracommunautaire, ou « TVA non applicable, art. 293 B du CGI »].</p>
+    <p>TVA non applicable, art. 293 B du CGI.</p>
     <p>Email&nbsp;: <a href={`mailto:${site.email}`}>{site.email}</a></p>
     <p>Directeur de la publication&nbsp;: {site.name}.</p>
 
     <h2>Hébergeur</h2>
     <p>Hostinger International Ltd, 61 Lordou Vironos Street, 6023 Larnaca, Chypre. Site&nbsp;: <a href="https://www.hostinger.fr">hostinger.fr</a>.</p>
-    <p>[À COMPLÉTER&nbsp;: téléphone de l'hébergeur, et adresse vérifiée dans ses conditions publiées]</p>
 
     <h2>Données personnelles</h2>
     <p>Ce site ne dépose aucun cookie, ne mesure pas l'audience et ne contient aucun formulaire. Les emails que vous envoyez servent uniquement à vous répondre. Ils sont conservés le temps de l'échange, puis trois ans au plus après le dernier contact. Vous pouvez demander à y accéder, à les rectifier ou à les effacer en écrivant à <a href={`mailto:${site.email}`}>{site.email}</a>, et adresser une réclamation à la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).</p>
 
     <h2>Propriété intellectuelle</h2>
-    <p>Les textes de ce site appartiennent à {site.name}. Le code source est public sur GitHub.</p>
+    <p>Les textes de ce site appartiennent à {site.name}. Le code source est public sur <a href="https://github.com/VictorCyprien/victorcyprien.dev">GitHub</a>.</p>
   </article>
 </BaseLayout>
 
 <style>
   .legal h2 { margin: 2rem 0 0.75rem; font-size: 1.25rem; font-weight: 600; }
   .legal p { margin-bottom: 0.5rem; line-height: 1.7; color: var(--muted); }
-  .legal a { color: var(--text); border-bottom: 1px solid var(--watch); }
 </style>

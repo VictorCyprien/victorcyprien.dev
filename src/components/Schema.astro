@@ -6,7 +6,7 @@ const { caption } = Astro.props;
 ---
 
 <figure>
-  <svg viewBox="0 0 380 300" role="img" aria-labelledby="schema-title schema-desc" class="block h-auto w-full">
+  <svg viewBox="0 0 380 300" role="img" aria-labelledby="schema-title schema-desc" class="diagram block h-auto w-full">
     <title id="schema-title">Le montage type d'un projet</title>
     <desc id="schema-desc">Vos utilisateurs accèdent à une interface en Next.js ou React. Elle appelle une API en Python avec FastAPI. L'interface, l'API et un cache Redis sont hébergés sur Railway. La base de données PostgreSQL, chez Supabase, et la surveillance, avec Sentry et Grafana, restent hors de cet hébergement.</desc>
 
@@ -45,13 +45,3 @@ const { caption } = Astro.props;
   </svg>
   <figcaption class="mt-3 text-sm leading-relaxed text-muted">{caption}</figcaption>
 </figure>
-
-<style>
-  .node { fill: var(--surface); stroke: var(--line); }
-  .watch { fill: var(--surface); stroke: var(--watch); }
-  .frame { fill: none; stroke: var(--box); stroke-dasharray: 5 5; }
-  .wire { fill: none; stroke: var(--wire); stroke-width: 1.5; }
-  .watch-wire { fill: none; stroke: var(--watch); stroke-width: 1.5; stroke-dasharray: 4 4; }
-  .role { fill: var(--text); font: 500 13px var(--font-sans); }
-  .tech { fill: var(--muted); font: 400 11px var(--font-mono); }
-</style>

@@ -12,5 +12,5 @@ export function formatMonth(month: string): string {
 
 /** Formats a period. A null end means the work is still going on. */
 export function formatPeriod(start: string, end: string | null): string {
-  return `${formatMonth(start)} → ${end === null ? "aujourd'hui" : formatMonth(end)}`;
+  return `${formatMonth(start)} - ${end === null ? "aujourd'hui" : formatMonth(end)}`;
 }

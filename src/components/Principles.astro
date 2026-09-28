@@ -2,17 +2,28 @@
 import { getPrinciples } from '../lib/content';
 
 const principles = await getPrinciples();
+// The first principle leads: framing in writing is what the hero promises.
+const [lead, ...rest] = principles;
 ---
 
-<section id="principes" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
-  <h2 class="mb-2 text-3xl font-semibold tracking-tight">Comment je décide</h2>
-  <p class="mb-6 max-w-[40em] text-muted">Cinq principes que j'applique sur chaque projet.</p>
-  <ul>
-    {principles.map(({ data }) => (
-      <li class="grid gap-3 border-t border-line py-5 md:grid-cols-[250px_minmax(0,1fr)] md:gap-7">
-        <h3 class="text-lg font-semibold leading-snug">{data.title}</h3>
-        <p class="leading-relaxed text-muted">{data.text}</p>
-      </li>
-    ))}
-  </ul>
+<!-- A full-width surface band sets the method apart from the proof that follows. -->
+<section id="principes" class="border-y border-line bg-surface">
+  <div class="mx-auto max-w-6xl px-6 py-20 md:px-12">
+    <h2 class="mb-2 text-3xl font-semibold tracking-tight">Comment je décide</h2>
+    <p class="mb-12 max-w-[40em] text-muted">Cinq principes que j'applique sur chaque projet.</p>
+    <ul class="grid gap-x-16 gap-y-10 md:grid-cols-2">
+      {lead && (
+        <li class="md:col-span-2">
+          <h3 class="mb-3 text-2xl font-semibold tracking-tight">{lead.data.title}</h3>
+          <p class="max-w-[46em] text-lg leading-relaxed text-muted">{lead.data.text}</p>
+        </li>
+      )}
+      {rest.map(({ data }) => (
+        <li>
+          <h3 class="mb-2 text-lg font-semibold leading-snug">{data.title}</h3>
+          <p class="leading-relaxed text-muted">{data.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
 </section>
