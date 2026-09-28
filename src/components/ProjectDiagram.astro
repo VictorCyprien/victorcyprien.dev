@@ -13,9 +13,9 @@ const drawn = ['contrapp', 'aura'];
 {drawn.includes(id) && (
   <figure class={className}>
     {id === 'contrapp' && (
-      <svg viewBox="0 0 340 392" role="img" aria-labelledby="diagram-contrapp-title diagram-contrapp-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
+      <svg viewBox="0 -9 340 410" role="img" aria-labelledby="diagram-contrapp-title diagram-contrapp-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
         <title id="diagram-contrapp-title">Le montage de Contrapp</title>
-        <desc id="diagram-contrapp-desc">Les équipes des CFA utilisent une application web. Elle appelle une API en Python avec FastAPI, qui s'appuie sur une base Supabase. L'API passe par Stripe pour les paiements et par DocuSign pour faire signer les contrats à l'entreprise et à l'alternant. L'interface, l'API, la base et la surveillance, avec Grafana, Prometheus et Loki, tournent sur un même serveur VPS Linux, dans des conteneurs Docker.</desc>
+        <desc id="diagram-contrapp-desc">Les équipes des CFA utilisent une application web en React, construite avec Vite. Elle appelle une API en Python avec FastAPI, qui s'appuie sur une base Supabase. L'API passe par Stripe pour les paiements et par DocuSign pour faire signer les contrats à l'entreprise et à l'alternant. L'interface, l'API, la base et la surveillance, avec Grafana, Prometheus et Loki, tournent sur un même serveur VPS Linux, dans des conteneurs Docker.</desc>
 
         <rect class="node" x="10" y="8" width="180" height="44" rx="10" />
         <text class="role" x="24" y="27">Utilisateurs</text>
@@ -28,7 +28,7 @@ const drawn = ['contrapp', 'aura'];
         <path class="wire" d="M100 52 V84" />
         <rect class="node" x="18" y="84" width="170" height="44" rx="10" />
         <text class="role" x="32" y="103">Interface</text>
-        <text class="tech" x="32" y="119">application web</text>
+        <text class="tech" x="32" y="119">React, Vite</text>
 
         <rect class="watch" x="202" y="84" width="128" height="58" rx="10" />
         <text class="role" x="216" y="103">Surveillance</text>
@@ -55,49 +55,57 @@ const drawn = ['contrapp', 'aura'];
       </svg>
     )}
     {id === 'aura' && (
-      <svg viewBox="0 0 340 392" role="img" aria-labelledby="diagram-aura-title diagram-aura-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
+      <svg viewBox="0 0 340 410" role="img" aria-labelledby="diagram-aura-title diagram-aura-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
         <title id="diagram-aura-title">Le montage d'AURA</title>
-        <desc id="diagram-aura-desc">L'application mobile est en Flutter, le back-office des clients en marque blanche en Next.js. Les deux appellent trois API en Python avec FastAPI, une par moteur&nbsp;: nutrition, fitness et communauté. Elles sont hébergées sur Railway. Chez Supabase cloud, chaque client en marque blanche a sa propre base, et le grand public a la sienne. Sentry et les métriques de Railway assurent la surveillance.</desc>
+        <desc id="diagram-aura-desc">Chaque marque reçoit sa propre application mobile en Flutter, adaptée à son image, et le grand public a son application. Ces applications appellent trois API en Python avec FastAPI, une par moteur&nbsp;: nutrition, fitness et communauté. BeAble2 héberge sur Railway ces API et le back-office en Next.js de chaque marque. Dans l'organisation Supabase de BeAble2, chaque marque a sa propre base, qui lui appartient, et la base du grand public appartient à BeAble2. Sentry et les métriques de Railway assurent la surveillance.</desc>
 
-        <rect class="node" x="10" y="8" width="156" height="44" rx="10" />
-        <text class="role" x="24" y="27">Application mobile</text>
-        <text class="tech" x="24" y="43">Flutter</text>
-        <rect class="node" x="178" y="8" width="152" height="44" rx="10" />
-        <text class="role" x="192" y="27">Back-office</text>
-        <text class="tech" x="192" y="43">Next.js</text>
+        <rect class="node" x="22" y="4" width="160" height="44" rx="10" />
+        <rect class="node" x="16" y="10" width="160" height="44" rx="10" />
+        <rect class="node" x="10" y="16" width="160" height="44" rx="10" />
+        <text class="role" x="24" y="35">Apps des marques</text>
+        <text class="tech" x="24" y="51">Flutter</text>
+        <rect class="node" x="194" y="16" width="136" height="44" rx="10" />
+        <text class="role" x="208" y="35">App grand public</text>
+        <text class="tech" x="208" y="51">Flutter</text>
 
-        <rect class="frame" x="4" y="70" width="332" height="110" rx="14" />
-        <text class="role" x="18" y="156">Hébergement</text>
-        <text class="tech" x="18" y="170">Railway</text>
+        <rect class="frame" x="4" y="80" width="332" height="154" rx="14" />
+        <text class="role" x="18" y="206">Hébergement</text>
+        <text class="tech" x="18" y="222">Railway</text>
 
-        <path class="wire" d="M88 52 V62 M254 52 V62 M88 62 H254 M170 62 V86 M68 78 H272 M68 78 V86 M272 78 V86" />
-        <rect class="node" x="18" y="86" width="100" height="44" rx="10" />
-        <text class="role" x="32" y="105">Nutrition</text>
-        <text class="tech" x="32" y="121">FastAPI</text>
-        <rect class="node" x="120" y="86" width="100" height="44" rx="10" />
-        <text class="role" x="134" y="105">Fitness</text>
-        <text class="tech" x="134" y="121">FastAPI</text>
-        <rect class="node" x="222" y="86" width="110" height="44" rx="10" />
-        <text class="role" x="236" y="105">Communauté</text>
-        <text class="tech" x="236" y="121">FastAPI</text>
+        <path class="wire" d="M90 60 V70 M262 60 V70 M68 70 H272 M68 70 V92 M170 70 V92 M272 70 V92" />
+        <rect class="node" x="18" y="92" width="100" height="44" rx="10" />
+        <text class="role" x="32" y="111">Nutrition</text>
+        <text class="tech" x="32" y="127">FastAPI</text>
+        <rect class="node" x="120" y="92" width="100" height="44" rx="10" />
+        <text class="role" x="134" y="111">Fitness</text>
+        <text class="tech" x="134" y="127">FastAPI</text>
+        <rect class="node" x="222" y="92" width="110" height="44" rx="10" />
+        <text class="role" x="236" y="111">Communauté</text>
+        <text class="tech" x="236" y="127">FastAPI</text>
 
-        <path class="wire" d="M68 130 V140 M170 130 V140 M272 130 V140 M68 140 H272 M170 140 V200" />
-        <rect class="frame" x="4" y="200" width="192" height="164" rx="14" />
-        <rect class="node" x="30" y="216" width="160" height="44" rx="10" />
-        <rect class="node" x="24" y="222" width="160" height="44" rx="10" />
-        <rect class="node" x="18" y="228" width="160" height="44" rx="10" />
-        <text class="role" x="32" y="247">Marques blanches</text>
-        <text class="tech" x="32" y="263">une base chacune</text>
-        <rect class="node" x="18" y="284" width="160" height="44" rx="10" />
-        <text class="role" x="32" y="303">Grand public</text>
-        <text class="tech" x="32" y="319">une base</text>
-        <text class="role" x="18" y="352">Supabase cloud</text>
+        <path class="wire" d="M68 136 V148 M170 136 V148 M272 136 V148 M68 148 H272 M250 148 V166 M120 148 V250" />
+        <rect class="node" x="184" y="166" width="144" height="44" rx="10" />
+        <rect class="node" x="178" y="172" width="144" height="44" rx="10" />
+        <rect class="node" x="172" y="178" width="144" height="44" rx="10" />
+        <text class="role" x="186" y="197">Back-offices</text>
+        <text class="tech" x="186" y="213">Next.js</text>
 
-        <path class="watch-wire" d="M310 216 V180" />
-        <rect class="watch" x="202" y="216" width="134" height="58" rx="10" />
-        <text class="role" x="214" y="235">Surveillance</text>
-        <text class="tech" x="214" y="251">Sentry,</text>
-        <text class="tech" x="214" y="265">métriques Railway</text>
+        <rect class="frame" x="4" y="250" width="192" height="154" rx="14" />
+        <rect class="node" x="30" y="262" width="160" height="44" rx="10" />
+        <rect class="node" x="24" y="268" width="160" height="44" rx="10" />
+        <rect class="node" x="18" y="274" width="160" height="44" rx="10" />
+        <text class="role" x="32" y="293">Bases des marques</text>
+        <text class="tech" x="32" y="309">à chaque marque</text>
+        <rect class="node" x="18" y="328" width="160" height="44" rx="10" />
+        <text class="role" x="32" y="347">Base grand public</text>
+        <text class="tech" x="32" y="363">à BeAble2</text>
+        <text class="role" x="18" y="392">Supabase cloud</text>
+
+        <path class="watch-wire" d="M300 262 V234" />
+        <rect class="watch" x="202" y="262" width="134" height="58" rx="10" />
+        <text class="role" x="214" y="281">Surveillance</text>
+        <text class="tech" x="214" y="297">Sentry,</text>
+        <text class="tech" x="214" y="311">métriques Railway</text>
       </svg>
     )}
     {caption && <figcaption class="mt-4 text-center text-sm text-muted">{caption}</figcaption>}
