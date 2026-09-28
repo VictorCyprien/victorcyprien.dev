@@ -8,7 +8,7 @@ const featured = projects.filter((project) => project.data.featured);
 const others = projects.filter((project) => !project.data.featured);
 ---
 
-<section id="projets" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
+<section id="projets" class="mx-auto max-w-6xl px-6 py-20 md:px-12">
   <h2 class="mb-8 text-3xl font-semibold tracking-tight">Projets</h2>
   <div class="grid gap-6 md:grid-cols-2">
     {featured.map(({ data }) => (
@@ -25,12 +25,13 @@ const others = projects.filter((project) => !project.data.featured);
   </div>
   {others.length > 0 && (
     <>
-      <h3 class="mb-4 mt-12 text-lg font-semibold">Autres projets</h3>
-      <ul>
+      <h3 class="mb-6 mt-16 text-lg font-semibold">Autres projets</h3>
+      <ul class="grid gap-x-16 gap-y-8 md:grid-cols-2">
         {others.map(({ data }) => (
-          <li class="grid gap-2 border-t border-line py-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-7">
-            <span class="font-medium">{data.name}</span>
-            <span class="text-muted">{data.summary} <span class="text-sm">{data.stack.join(', ')}</span></span>
+          <li>
+            <p class="font-medium">{data.name}</p>
+            <p class="mt-1 leading-relaxed text-muted">{data.summary}</p>
+            <p class="mt-2 text-sm text-muted">{data.stack.join(', ')}</p>
           </li>
         ))}
       </ul>
