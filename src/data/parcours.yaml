@@ -4,7 +4,8 @@
   role: Associé
   org: BeAble2
   place: À distance
-  summary: Startup qui porte AURA, une plateforme de coaching sport et nutrition.
+  summary: Agence IA. J'y porte le back-end et l'infrastructure d'AURA, une plateforme de coaching sport et nutrition.
+  url: https://beable2.ai/fr/
 - id: freelance
   start: "2023-10"
   end: null
