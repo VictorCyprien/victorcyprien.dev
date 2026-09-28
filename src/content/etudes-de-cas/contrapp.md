@@ -1,6 +1,6 @@
 ---
-title: "Contrapp : les contrats d'apprentissage des CFA"
-summary: "Plateforme SaaS B2B qui gère les contrats d'apprentissage des centres de formation. Back-end, facturation et infrastructure, jusqu'à la mise en production."
+title: "Contrapp : les contrats d'alternance des CFA"
+summary: "Plateforme SaaS qui simplifie la création et la signature des contrats d'alternance pour les CFA. API, base de données, facturation et infrastructure, jusqu'à la mise en production."
 sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
 stack: [Python, FastAPI, Supabase, Stripe, VPS Linux, Docker, Grafana, Prometheus, Loki]
@@ -10,30 +10,34 @@ draft: true
 
 ## Contexte
 
-Les centres de formation d'apprentis (CFA) suivent chaque contrat d'apprentissage, de sa création à sa signature. [À COMPLÉTER : le problème concret du client avant Contrapp.]
+Un entrepreneur, qui travaillait dans un CFA, voyait son équipe buter sur le logiciel du marché utilisé pour créer les contrats d'alternance : interface peu intuitive, comptes en double pour une même adresse email. Avec le CEO de BeAble2, il a lancé Contrapp : un SaaS sur mesure pour créer et signer un contrat d'alternance en quelques clics.
 
 ## Mon rôle
 
-Back-end et DevOps : l'API, la base de données, la facturation et toute l'infrastructure, de la conception à la mise en production.
+Back-end et DevOps : j'ai repris l'API, conçu la base Supabase, intégré Stripe, puis monté le serveur et sa surveillance, jusqu'à la mise en production.
 
 ## Décisions
 
-### Un back-end Python sur Supabase
+### Reprendre l'API avant d'ajouter des fonctionnalités
 
-API en Python avec FastAPI, base PostgreSQL managée par Supabase, authentification déléguée à Supabase. Chaque table a sa règle d'accès, refusée par défaut. [À COMPLÉTER : pourquoi Supabase plutôt qu'une base gérée à la main.]
+L'API existait déjà, sous forme de démo écrite sans conventions : logique dupliquée d'une route à l'autre, accès à la base dispersés. J'ai repris chaque point d'entrée pour séparer les rôles : la route reçoit la requête, un service porte la logique métier, l'accès aux données est regroupé. L'API est devenue plus simple à maintenir et à faire évoluer.
+
+### Supabase pour ne pas tout réécrire
+
+Supabase apporte PostgreSQL, et avec lui l'authentification, le stockage de fichiers et les règles d'accès par ligne. Autant de briques à ne pas développer ni héberger à part.
 
 ### Stripe pour la facturation
 
-[À COMPLÉTER : le modèle de facturation et ce que Stripe a évité de développer.]
+La facturation se fait au contrat, par paliers, avec un tarif adapté à la taille de chaque CFA. Stripe gère les paiements : un acteur de référence, avec un SDK très bien documenté. Aucun module de paiement à écrire ni à sécuriser nous-mêmes.
 
-### Un VPS Linux
+### Un seul serveur, tout au même endroit
 
-[À COMPLÉTER : ce qui tourne sur le VPS, et pourquoi un VPS plutôt qu'une plateforme managée.]
+Front, API, base Supabase et surveillance tournent sur un même VPS Linux, dans des conteneurs Docker. Pour une équipe qui découvrait encore le cloud, c'était le montage le plus simple à comprendre et à maîtriser.
 
 ### La surveillance dès la mise en production
 
-Grafana, Prometheus et Loki sont en place dès la première mise en ligne : les erreurs, les lenteurs et les ressources sont visibles avant le premier incident.
+Grafana, Prometheus et Loki sont en place dès la première mise en ligne : erreurs, lenteurs et ressources du serveur sont visibles avant le premier incident.
 
 ## Résultat
 
-Plateforme livrée et mise en production en janvier 2026. [À COMPLÉTER : ce que la plateforme permet aux centres de formation, au présent, sans aucun chiffre.]
+Plateforme livrée et mise en production en janvier 2026. Un CFA y crée ses contrats d'alternance et les envoie en signature à l'entreprise et à l'alternant. Son équipe y travaille à plusieurs, chacun avec son rôle.
