@@ -1,8 +1,9 @@
 ---
-import { getCareer } from '../lib/content';
+import { getCareer, getDiplomas } from '../lib/content';
 import { formatPeriod } from '../lib/format';
 
 const career = await getCareer();
+const diplomas = await getDiplomas();
 ---
 
 <section id="parcours" class="mx-auto max-w-6xl px-6 py-16 md:px-12">
@@ -12,7 +13,7 @@ const career = await getCareer();
       <li class="grid gap-2 border-t border-line py-5 md:grid-cols-[220px_minmax(0,1fr)] md:gap-7">
         <p class="text-sm text-muted">{formatPeriod(data.start, data.end)}</p>
         <div>
-          <h3 class="font-semibold">{data.role}, {data.org}</h3>
+          <h3 class="font-semibold">{data.role}, {data.url ? <a href={data.url}>{data.org}</a> : data.org}</h3>
           <p class="text-sm text-muted">{data.place}</p>
           <p class="mt-2 leading-relaxed text-muted">{data.summary}</p>
           {data.stack.length > 0 && <p class="mt-2 text-sm text-muted">{data.stack.join(', ')}</p>}
@@ -20,4 +21,24 @@ const career = await getCareer();
       </li>
     ))}
   </ol>
+
+  <h3 class="mb-6 mt-12 text-2xl font-semibold tracking-tight">Diplômes</h3>
+  <ol>
+    {diplomas.map(({ data }) => (
+      <li class="grid gap-2 border-t border-line py-5 md:grid-cols-[220px_minmax(0,1fr)] md:gap-7">
+        <p class="text-sm text-muted">{data.year}</p>
+        <div>
+          <h4 class="font-semibold">{data.title}, <a href={data.url}>{data.school}</a></h4>
+          {data.detail && <p class="mt-2 leading-relaxed text-muted">{data.detail}</p>}
+        </div>
+      </li>
+    ))}
+  </ol>
 </section>
+
+<style>
+  #parcours a {
+    color: var(--text);
+    border-bottom: 1px solid var(--watch);
+  }
+</style>

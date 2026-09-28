@@ -48,6 +48,18 @@ test('every page answers and every internal link resolves', async ({ page }) => 
   expect(seen).toContain('/etudes-de-cas/');
 });
 
+test('the parcours section shows a diplomas block with links to schools and companies', async ({ page }) => {
+  await page.goto('/');
+  const parcours = page.locator('#parcours');
+  await expect(parcours.getByRole('heading', { name: 'Diplômes', level: 3 })).toBeVisible();
+  await expect(parcours.locator('ol').nth(1).getByRole('listitem')).toHaveCount(3);
+  await expect(parcours.locator('a[href="https://www.beeguard.fr/"]')).toHaveText('Beeguard');
+  await expect(parcours.locator('a[href="https://www.kipsoft.fr/"]')).toHaveText('Kipsoft');
+  await expect(parcours.locator('a[href="https://www.limayrac.fr/"]')).toHaveCount(3);
+  const text = (await parcours.textContent()) ?? '';
+  expect(text).not.toContain('[À COMPLÉTER');
+});
+
 test('an unknown address serves the 404 page', async ({ page }) => {
   const response = await page.goto('/cette-page-n-existe-pas/');
   expect(response?.status()).toBe(404);
