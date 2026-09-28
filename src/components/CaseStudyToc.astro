@@ -1,0 +1,64 @@
+---
+// A case study's table of contents: folded on a phone, pinned beside the text on a desktop screen.
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+  class?: string;
+}
+const { headings, class: className } = Astro.props;
+---
+
+<nav aria-label="Sommaire" class={className}>
+  <details class="rounded-xl border border-line px-4 py-3" data-toc>
+    <summary class="cursor-pointer py-1 font-semibold">Sommaire</summary>
+    <ul class="mt-2 grid gap-0.5 text-sm">
+      {headings.map((heading) => (
+        <li class:list={[heading.depth > 2 && 'pl-3']}>
+          <a href={`#${heading.slug}`} class="block border-l-2 border-transparent py-1 pl-3 leading-snug text-muted transition-colors hover:text-text">{heading.text}</a>
+        </li>
+      ))}
+    </ul>
+  </details>
+</nav>
+
+<style>
+  /* Pinned on a desktop screen: always open, no fold control, no frame. */
+  details[data-pinned] { border-color: transparent; padding: 0; }
+  details[data-pinned] summary { display: none; }
+  details[data-pinned] ul { margin-top: 0; }
+  a[aria-current] { color: var(--text); border-color: var(--watch); }
+</style>
+
+<script>
+  const details = document.querySelector<HTMLDetailsElement>('[data-toc]');
+  if (details) {
+    const wide = window.matchMedia('(min-width: 1024px)');
+    const pin = () => {
+      details.open = wide.matches;
+      details.toggleAttribute('data-pinned', wide.matches);
+    };
+    pin();
+    wide.addEventListener('change', pin);
+
+    const entries = [...details.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')]
+      .map((link) => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
+      .filter((entry): entry is { link: HTMLAnchorElement; target: HTMLElement } => entry.target !== null);
+
+    // The current section is the last heading that has reached the top of the screen. The line sits just
+    // below the 2rem scroll margin, so a heading reached from the table of contents counts as current.
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = 80;
+      let current = entries[0];
+      for (const entry of entries) if (entry.target.getBoundingClientRect().top <= line) current = entry;
+      for (const { link } of entries) {
+        if (link === current?.link) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    };
+    window.addEventListener('scroll', () => { frame ||= requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+</script>
