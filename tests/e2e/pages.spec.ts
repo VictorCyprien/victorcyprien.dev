@@ -143,6 +143,27 @@ test('the table of contents stays folded on a phone until opened', async ({ page
   await expect(toc.getByRole('link', { name: 'Contexte' })).toBeVisible();
 });
 
+test('hovering a diagram brick shows its role and fades the rest on a desktop screen', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'hover needs a mouse');
+  await page.goto('/');
+  const figure = page.locator('figure[data-diagram="aura"]');
+  const note = figure.locator('[data-diagram-note]');
+  await expect(note).toHaveText(/Passez la souris/);
+  await figure.locator('[data-id="nutrition"]').hover();
+  await expect(note).toContainText('Nutrition. Un des trois moteurs');
+  await expect(figure.locator('[data-id="watch"]')).toHaveCSS('opacity', '0.3');
+  await expect(figure.locator('[data-id="brands"]')).toHaveCSS('opacity', '1');
+  await page.mouse.move(0, 0);
+  await expect(note).toHaveText(/Passez la souris/);
+  await expect(figure.locator('[data-id="watch"]')).toHaveCSS('opacity', '1');
+});
+
+test('diagrams stay still on a phone', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'the still diagram is for touch screens');
+  await page.goto('/');
+  await expect(page.locator('[data-diagram-note]').first()).toBeHidden();
+});
+
 test('each featured project shows its architecture diagram', async ({ page }) => {
   await page.goto('/');
   const projects = page.locator('#projets');

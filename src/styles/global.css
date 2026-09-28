@@ -122,4 +122,22 @@
   .diagram .watch-wire { fill: none; stroke: var(--watch); stroke-width: 1.5; stroke-dasharray: 4 4; }
   .diagram .role { fill: var(--text); font: 500 13px var(--font-sans); }
   .diagram .tech { fill: var(--muted); font: 400 11px var(--font-mono); }
+
+  /* Tracing, while a mouse is on a brick: the brick and what it links to stay, the rest fades, requests flow along the lit wires. */
+  .diagram [data-id] { transition: opacity 150ms; }
+  .diagram :is(.node, .watch, .frame, .wire, .watch-wire) { transition: opacity 150ms, stroke 150ms; }
+  .diagram.tracing [data-id]:not(.is-hot, .is-lit) { opacity: 0.3; }
+  .diagram.tracing :is(.wire, .watch-wire):not(.is-lit) { opacity: 0.2; }
+  .diagram.tracing .is-hot :is(.node, .watch, .frame) { stroke: var(--text); }
+  .diagram.tracing .wire.is-lit { stroke: var(--muted); }
+  .diagram.tracing :is(.wire, .watch-wire).is-lit { stroke-dasharray: 6 5; animation: diagram-flow 900ms linear infinite; }
+  @keyframes diagram-flow { to { stroke-dashoffset: -22; } }
+  @media (prefers-reduced-motion: reduce) {
+    .diagram.tracing .is-lit { animation: none; }
+  }
+  /* The role line only makes sense where a mouse can hover. */
+  .diagram-note { display: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .diagram-note { display: block; }
+  }
 }
