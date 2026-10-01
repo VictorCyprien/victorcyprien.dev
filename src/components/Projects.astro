@@ -34,7 +34,8 @@ const others = projects.filter((project) => !project.data.featured);
         {others.map(({ data }) => (
           <li>
             <p class="font-medium">{data.name}</p>
-            <p class="mt-1 leading-relaxed text-muted">{data.summary}</p>
+            {data.period && <p class="mt-1 text-sm text-muted">{formatPeriod(data.period.start, data.period.end)}</p>}
+            <p class="mt-2 leading-relaxed text-muted">{data.summary}</p>
             <p class="mt-2 text-sm text-muted">{data.stack.join(', ')}</p>
           </li>
         ))}
