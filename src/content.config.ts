@@ -19,6 +19,7 @@ const caseStudies = defineCollection({
     period,
     stack: z.array(z.string()).min(1),
     order: z.number().int(),
+    personal: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });
@@ -33,6 +34,7 @@ const projects = defineCollection({
     featured: z.boolean(),
     caseStudy: reference('caseStudies').optional(),
     order: z.number().int(),
+    personal: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });
