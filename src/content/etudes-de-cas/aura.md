@@ -9,7 +9,7 @@ sector: Sport et nutrition, B2C et B2B2C
 period: { start: "2026-01", end: null }
 stack: [Python, FastAPI, Supabase, Railway, Sentry, Flutter, Next.js]
 order: 2
-draft: true
+draft: false
 ---
 
 ## Contexte
