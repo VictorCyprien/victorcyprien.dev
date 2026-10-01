@@ -14,3 +14,7 @@ test('formatPeriod closes a finished period', () => {
 test('formatPeriod marks an ongoing period', () => {
   assert.equal(formatPeriod('2023-10', null), "oct. 2023 - aujourd'hui");
 });
+
+test('formatPeriod shows a one-month period once', () => {
+  assert.equal(formatPeriod('2025-12', '2025-12'), 'déc. 2025');
+});

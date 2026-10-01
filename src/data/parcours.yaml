@@ -10,9 +10,8 @@
   start: "2023-10"
   end: null
   role: Développeur freelance, back-end et DevOps
-  org: Indépendant
   place: Toulouse, à distance
-  summary: Missions pour des PME et des startups, dont Contrapp.
+  summary: Missions pour des PME et des startups
 - id: beeguard
   start: "2021-09"
   end: "2023-09"

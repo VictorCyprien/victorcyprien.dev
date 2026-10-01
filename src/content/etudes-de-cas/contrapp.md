@@ -9,7 +9,7 @@ sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
 stack: [Python, FastAPI, Supabase, Stripe, DocuSign, VPS Linux, Docker, Grafana, Prometheus, Loki, React, Vite]
 order: 1
-draft: true
+draft: false
 ---
 
 ## Contexte
