@@ -14,7 +14,7 @@ const diplomas = await getDiplomas();
       {career.map(({ data }) => (
         <li>
           <p class="text-sm text-muted">{formatPeriod(data.start, data.end)}</p>
-          <h3 class="mt-1 text-lg font-semibold">{data.role}, {data.url ? <a href={data.url}>{data.org}</a> : data.org}</h3>
+          <h3 class="mt-1 text-lg font-semibold">{data.role}{data.org && <>, {data.url ? <a href={data.url}>{data.org}</a> : data.org}</>}</h3>
           <p class="text-sm text-muted">{data.place}</p>
           <p class="mt-2 max-w-[42em] leading-relaxed text-muted">{data.summary}</p>
           {data.stack.length > 0 && <p class="mt-2 text-sm text-muted">{data.stack.join(', ')}</p>}

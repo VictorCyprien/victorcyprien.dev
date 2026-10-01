@@ -54,7 +54,7 @@ const career = defineCollection({
     start: month,
     end: month.nullable(),
     role: prose,
-    org: prose,
+    org: prose.optional(),
     place: prose,
     summary: prose,
     stack: z.array(z.string()).default([]),
