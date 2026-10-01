@@ -16,6 +16,7 @@ concurrency:
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       PUBLIC_SITE_ENV: ${{ github.ref_name == 'main' && 'production' || 'preview' }}
     steps:
