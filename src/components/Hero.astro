@@ -9,7 +9,7 @@ const site = await getSite();
   <div>
     <p class="mb-6 flex items-center gap-3 text-muted">
       {site.photo && <img src={site.photo} alt="" width="44" height="44" class="h-11 w-11 rounded-full object-cover" />}
-      <span><span class="font-medium text-text">{site.name}</span>, {site.role}</span>
+      <span class="text-balance"><span class="font-medium text-text">{site.name}</span>, {site.role}</span>
     </p>
     <h1 class="mb-5 max-w-[22ch] text-balance text-4xl font-semibold leading-[1.06] tracking-tight md:text-[46px]">{site.headline}</h1>
     <p class="mb-7 max-w-[32em] text-lg leading-relaxed text-muted">{site.lead}</p>
