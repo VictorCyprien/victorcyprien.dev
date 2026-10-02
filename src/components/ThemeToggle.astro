@@ -32,14 +32,18 @@
     button?.setAttribute('aria-label', theme === 'dark' ? 'Passer en thème clair' : 'Passer en thème sombre');
   }
 
-  apply(root.dataset.theme === 'light' ? 'light' : 'dark');
+  // The chosen theme, kept here because a crossfade applies it a frame after the click.
+  let chosen: 'dark' | 'light' = root.dataset.theme === 'light' ? 'light' : 'dark';
+  apply(chosen);
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   button?.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    const next = chosen === 'dark' ? 'light' : 'dark';
+    chosen = next;
     // Crossfade where the browser can; otherwise, or when motion is reduced, the theme switches at once.
-    if (document.startViewTransition && !reducedMotion.matches) document.startViewTransition(() => apply(next));
+    // A crossfade cut short by the next click still applies its theme, so its rejection is expected.
+    if (document.startViewTransition && !reducedMotion.matches) document.startViewTransition(() => apply(next)).ready.catch(() => {});
     else apply(next);
     try {
       localStorage.setItem('theme', next);

@@ -42,6 +42,17 @@ test('the theme switch crossfades', async ({ page }) => {
   expect(await transitions(page)).toBe(1);
 });
 
+test('two quick clicks on the theme button come back to the first theme', async ({ page }) => {
+  await page.goto('/');
+  // Both clicks land before the first crossfade has applied its theme.
+  await page.locator('[data-theme-toggle]').evaluate((button: HTMLButtonElement) => {
+    button.click();
+    button.click();
+  });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('dark');
+});
+
 test('a link to a section scrolls there smoothly', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'smooth');

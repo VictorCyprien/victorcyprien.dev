@@ -64,8 +64,9 @@ const { headings, class: className } = Astro.props;
       marker.style.transform = `translate(${current.offsetLeft}px, ${current.offsetTop}px) scaleY(${current.offsetHeight})`;
       marker.setAttribute('data-placed', '');
     };
-    details.addEventListener('toggle', () => place(false));
-    window.addEventListener('resize', () => place(false));
+    // Opening the list, a new breakpoint, a resize or the web font arriving all move the links.
+    const list = details.querySelector('ul');
+    if (list) new ResizeObserver(() => place(false)).observe(list);
 
     const wide = window.matchMedia('(min-width: 1024px)');
     const pin = () => {
@@ -73,7 +74,7 @@ const { headings, class: className } = Astro.props;
       details.toggleAttribute('data-pinned', wide.matches);
     };
     pin();
-    wide.addEventListener('change', () => { pin(); place(false); });
+    wide.addEventListener('change', pin);
 
     const entries = [...details.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')]
       .map((link) => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
