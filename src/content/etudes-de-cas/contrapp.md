@@ -1,6 +1,6 @@
 ---
-title: "Contrapp : les contrats d'alternance des CFA"
-summary: "Plateforme SaaS où les CFA créent leurs contrats d'alternance et les font signer en ligne. J'ai pris en charge l'API, la base de données, la facturation et l'infrastructure, jusqu'à la mise en production."
+title: "Contrapp : reprise d'API et mise en production d'un SaaS pour CFA"
+summary: "SaaS où les CFA créent et font signer leurs contrats d'alternance en ligne. J'ai repris l'API, conçu la base Supabase et monté l'infrastructure jusqu'en production."
 brief:
   need: "Un CFA voulait créer ses contrats d'alternance et les faire signer sans se battre avec le logiciel qu'il utilisait."
   work: "J'ai repris l'API, conçu la base Supabase, intégré Stripe, puis monté le serveur et sa surveillance."
