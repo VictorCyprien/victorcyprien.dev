@@ -1,12 +1,16 @@
 - id: site
   name: Victor Cyprien
-  role: freelance à Toulouse
+  role: freelance à Toulouse, à distance partout en France
   location: Toulouse, à distance partout en France
+  # Search engines: the job as people search for it, the city, and the home page description.
+  jobTitle: Développeur back-end et DevOps freelance
+  city: Toulouse
+  description: Développeur back-end et DevOps freelance à Toulouse, à distance partout en France. Je conçois, mets en ligne et fais tourner des applications web sur mesure.
   headline: Back-end et DevOps pour PME et startups.
   lead: Je conçois, mets en ligne et fais tourner des applications web sur mesure. Chaque projet commence par un cadrage écrit, et le prix est fixé par livrable.
   schemaCaption: Le montage type d'un projet. On choisit chaque brique ensemble, selon votre besoin et votre budget.
   about:
-    intro: Je développe des applications web depuis cinq ans, en alternance puis en freelance.
+    intro: Je développe des applications web depuis 2021, en alternance puis en freelance.
     ways:
       - Vous n'avez qu'un interlocuteur, moi, du cadrage à la mise en production et après.
       - Je fais des points courts et réguliers, par écrit, sur le canal de votre choix.

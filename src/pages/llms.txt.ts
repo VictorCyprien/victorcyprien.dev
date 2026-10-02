@@ -1,10 +1,14 @@
 import type { APIRoute } from 'astro';
-import { getPrinciples, getPublishedCaseStudies, getSite } from '../lib/content';
+import { getCareer, getDiplomas, getPrinciples, getPublishedCaseStudies, getSite, getStackTiers } from '../lib/content';
+import { formatPeriod } from '../lib/format';
 
 export const GET: APIRoute = async ({ site: siteUrl }) => {
   const site = await getSite();
   const principles = await getPrinciples();
   const studies = await getPublishedCaseStudies();
+  const tiers = await getStackTiers();
+  const career = await getCareer();
+  const diplomas = await getDiplomas();
   const url = (path: string) => new URL(path, siteUrl).toString();
 
   const lines = [
@@ -12,7 +16,14 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     '',
     `> ${site.headline} ${site.lead}`,
     '',
-    `Freelance basé à ${site.location}.`,
+    `${site.jobTitle}, basé à ${site.location}.`,
+    '',
+    '## Comment je travaille',
+    '',
+    site.about.intro,
+    '',
+    ...site.about.ways.map((way) => `- ${way}`),
+    ...(site.about.partner ? ['', site.about.partner] : []),
     '',
     '## Comment je décide',
     '',
@@ -24,11 +35,27 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
       ? studies.map((study) => `- [${study.data.title}](${url(`/etudes-de-cas/${study.id}/`)}) : ${study.data.summary}`)
       : ['- Aucune étude publiée pour le moment.']),
     '',
+    '## Stack',
+    '',
+    ...tiers.map(({ data }) => `- ${data.name} : ${data.items.join(', ')}`),
+    '',
+    '## Parcours',
+    '',
+    ...career.map(({ data }) => `- ${formatPeriod(data.start, data.end)} : ${data.role}${data.org ? `, ${data.org}` : ''}. ${data.summary}`),
+    '',
+    '## Diplômes',
+    '',
+    ...diplomas.map(({ data }) => `- ${data.year} : ${data.title}, ${data.school}`),
+    '',
     '## Contact',
     '',
+    `- Réserver un appel : ${site.callHref}`,
     `- Email : ${site.email}`,
     `- Site : ${url('/')}`,
     `- LinkedIn : ${site.links.linkedin}`,
+    `- GitHub : ${site.links.github}`,
+    `- Malt : ${site.links.malt}`,
+    `- Mentions légales : ${url('/mentions-legales/')}`,
     '',
   ];
 

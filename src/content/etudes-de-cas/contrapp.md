@@ -1,10 +1,10 @@
 ---
-title: "Contrapp : les contrats d'alternance des CFA"
-summary: "Plateforme SaaS où les CFA créent leurs contrats d'alternance et les font signer en ligne. J'ai pris en charge l'API, la base de données, la facturation et l'infrastructure, jusqu'à la mise en production."
+title: "Contrapp : reprise d'API et mise en production d'un SaaS pour CFA"
+summary: "SaaS où les CFA créent et font signer leurs contrats d'alternance en ligne. J'ai repris l'API, conçu la base Supabase et monté l'infrastructure jusqu'en production."
 brief:
   need: "Un CFA voulait créer ses contrats d'alternance et les faire signer sans se battre avec le logiciel qu'il utilisait."
   work: "J'ai repris l'API, conçu la base Supabase, intégré Stripe, puis monté le serveur et sa surveillance."
-  result: "Plateforme livrée et mise en production en janvier 2026. Le CFA y crée ses contrats et les envoie en signature à l'entreprise et à l'alternant."
+  result: "Plateforme livrée et mise en production en janvier 2026. Le CFA y a créé ses contrats et les a envoyés en signature à l'entreprise et à l'alternant."
 sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
 stack: [Python, FastAPI, Supabase, Stripe, DocuSign, VPS Linux, Docker, Grafana, Prometheus, Loki, React, Vite]
@@ -43,7 +43,7 @@ La facturation se fait au contrat, par paliers, avec un tarif adapté à la tail
 
 ### Un seul serveur, tout au même endroit
 
-Front, API, base Supabase et surveillance tournent sur un même VPS Linux, dans des conteneurs Docker. Pour une équipe qui découvrait le cloud, c'était le montage le plus simple à comprendre et à maîtriser.
+Front, API, base Supabase et surveillance sur un même VPS Linux, dans des conteneurs Docker. Pour une équipe qui découvrait le cloud, c'était le montage le plus simple à comprendre et à maîtriser.
 
 ## Ce que j'ai construit
 
@@ -67,7 +67,7 @@ Pour savoir quelle charge la plateforme tient, j'ai d'abord lancé les tests de 
 
 ### Résultat concret
 
-Plateforme livrée et mise en production en janvier 2026. Un CFA y crée ses contrats d'alternance et les envoie en signature à l'entreprise et à l'alternant, via DocuSign. Son équipe y travaille à plusieurs, chacun avec son rôle.
+Plateforme livrée et mise en production en janvier 2026. Un CFA y a créé ses contrats d'alternance et les a envoyés en signature à l'entreprise et à l'alternant, via DocuSign. Son équipe y a travaillé à plusieurs, chacun avec son rôle.
 
 ## Ce que je ferais différemment
 

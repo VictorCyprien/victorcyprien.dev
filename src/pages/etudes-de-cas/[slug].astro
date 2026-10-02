@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyToc from '../../components/CaseStudyToc.astro';
 import ProjectDiagram from '../../components/ProjectDiagram.astro';
 import { getPublishedCaseStudies, getSite } from '../../lib/content';
+import { caseStudyGraph } from '../../lib/schema';
 import { formatPeriod } from '../../lib/format';
 import { readingMinutes } from '../../lib/reading';
 
@@ -25,12 +26,12 @@ const toc = [
 ];
 ---
 
-<BaseLayout title={`${title}, Victor Cyprien`} description={summary}>
+<BaseLayout title={`${title}, Victor Cyprien`} description={summary} jsonLd={caseStudyGraph(study, site, Astro.site!)}>
   <!-- On a phone the table of contents sits between the header and the text; on a desktop screen it is pinned in its own column. -->
   <article class="mx-auto grid max-w-6xl px-6 py-16 md:px-12 lg:grid-cols-[minmax(0,1fr)_200px] lg:grid-rows-[auto_1fr] lg:gap-x-12 xl:grid-cols-[minmax(0,48rem)_220px] xl:justify-between">
     <header class="min-w-0">
       <a href="/etudes-de-cas/" class="text-sm text-muted transition-colors hover:text-text">Toutes les études de cas</a>
-      <h1 class="mb-8 mt-6 text-4xl font-semibold leading-tight tracking-tight">{title}</h1>
+      <h1 class="mb-8 mt-6 text-balance text-4xl font-semibold leading-tight tracking-tight">{title}</h1>
       <section aria-labelledby="en-bref" class="mb-8 rounded-xl border border-line bg-surface p-6">
         <h2 id="en-bref" class="mb-4 text-lg font-semibold">En bref</h2>
         <dl class="grid gap-x-6 gap-y-1 sm:grid-cols-[130px_minmax(0,1fr)] sm:gap-y-3">

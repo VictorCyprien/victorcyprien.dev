@@ -15,6 +15,9 @@ RedirectMatch 404 /\.git
 # Unknown routes get the site's own 404 page.
 ErrorDocument 404 /404.html
 
+# Text files (llms.txt, robots.txt) are UTF-8: say so, or some clients garble the accents.
+AddDefaultCharset UTF-8
+
 <IfModule mod_headers.c>
   # Security headers, on every answer including errors.
   # The CSP lets the browser enforce the project rule "no request to a third party": everything comes
