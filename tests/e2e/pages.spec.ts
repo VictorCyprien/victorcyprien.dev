@@ -130,6 +130,16 @@ test('the table of contents follows the reading on a desktop screen', async ({ p
   await expect(toc.getByRole('link', { name: 'Résultat', exact: true })).toBeVisible();
   await page.getByRole('heading', { name: 'Résultat', exact: true }).evaluate((heading) => heading.scrollIntoView());
   await expect(toc.locator('a[aria-current="location"]')).toHaveText('Résultat');
+  // The veille bar settles beside the current link, at its height.
+  await expect
+    .poll(() =>
+      toc.evaluate((nav) => {
+        const marker = nav.querySelector('.toc-marker')!.getBoundingClientRect();
+        const link = nav.querySelector('a[aria-current]')!.getBoundingClientRect();
+        return [marker.left - link.left, marker.top - link.top, marker.height - link.height].map((gap) => Math.round(Math.abs(gap)));
+      }),
+    )
+    .toEqual([0, 0, 0]);
 });
 
 test('the table of contents stays folded on a phone until opened', async ({ page }, testInfo) => {

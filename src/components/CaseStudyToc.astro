@@ -19,6 +19,7 @@ const { headings, class: className } = Astro.props;
         </li>
       ))}
     </ul>
+    <span class="toc-marker" aria-hidden="true"></span>
   </details>
 </nav>
 
@@ -27,19 +28,52 @@ const { headings, class: className } = Astro.props;
   details[data-pinned] { border-color: transparent; padding: 0; }
   details[data-pinned] summary { display: none; }
   details[data-pinned] ul { margin-top: 0; }
-  a[aria-current] { color: var(--text); border-color: var(--watch); }
+  a[aria-current] { color: var(--text); }
+  /* One veille bar marks the current section and glides to the next one as the reader moves on.
+     It is a 1px bar stretched to the link's height, so the glide only moves transforms. */
+  details { position: relative; }
+  .toc-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 1px;
+    background: var(--watch);
+    transform-origin: 0 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .toc-marker[data-placed] { opacity: 1; }
+  .toc-marker[data-gliding] { transition: transform 250ms var(--ease-settle); }
 </style>
 
 <script>
   const details = document.querySelector<HTMLDetailsElement>('[data-toc]');
   if (details) {
+    const marker = details.querySelector<HTMLElement>('.toc-marker');
+    let current: HTMLAnchorElement | undefined;
+
+    // Glides from the previous section; jumps when the list has just opened or changed size.
+    const place = (glide: boolean) => {
+      if (!marker) return;
+      if (!current || current.offsetHeight === 0) {
+        marker.removeAttribute('data-placed');
+        return;
+      }
+      marker.toggleAttribute('data-gliding', glide && marker.hasAttribute('data-placed'));
+      marker.style.transform = `translate(${current.offsetLeft}px, ${current.offsetTop}px) scaleY(${current.offsetHeight})`;
+      marker.setAttribute('data-placed', '');
+    };
+    details.addEventListener('toggle', () => place(false));
+    window.addEventListener('resize', () => place(false));
+
     const wide = window.matchMedia('(min-width: 1024px)');
     const pin = () => {
       details.open = wide.matches;
       details.toggleAttribute('data-pinned', wide.matches);
     };
     pin();
-    wide.addEventListener('change', pin);
+    wide.addEventListener('change', () => { pin(); place(false); });
 
     const entries = [...details.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')]
       .map((link) => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
@@ -51,11 +85,15 @@ const { headings, class: className } = Astro.props;
     const update = () => {
       frame = 0;
       const line = 80;
-      let current = entries[0];
-      for (const entry of entries) if (entry.target.getBoundingClientRect().top <= line) current = entry;
+      let reached = entries[0];
+      for (const entry of entries) if (entry.target.getBoundingClientRect().top <= line) reached = entry;
       for (const { link } of entries) {
-        if (link === current?.link) link.setAttribute('aria-current', 'location');
+        if (link === reached?.link) link.setAttribute('aria-current', 'location');
         else link.removeAttribute('aria-current');
+      }
+      if (reached?.link !== current) {
+        current = reached?.link;
+        place(true);
       }
     };
     window.addEventListener('scroll', () => { frame ||= requestAnimationFrame(update); }, { passive: true });
