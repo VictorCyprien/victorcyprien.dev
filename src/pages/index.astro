@@ -8,11 +8,12 @@ import StackTiers from '../components/StackTiers.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import { getSite } from '../lib/content';
+import { homeGraph } from '../lib/schema';
 
 const site = await getSite();
 ---
 
-<BaseLayout title={`${site.name}, back-end et DevOps freelance`} description={site.lead}>
+<BaseLayout title={`${site.jobTitle} à ${site.city}, ${site.name}`} description={site.description} jsonLd={homeGraph(site, Astro.site!)}>
   <Hero />
   <Principles />
   <Projects />

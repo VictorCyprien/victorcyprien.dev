@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyToc from '../../components/CaseStudyToc.astro';
 import ProjectDiagram from '../../components/ProjectDiagram.astro';
 import { getPublishedCaseStudies, getSite } from '../../lib/content';
+import { caseStudyGraph } from '../../lib/schema';
 import { formatPeriod } from '../../lib/format';
 import { readingMinutes } from '../../lib/reading';
 
@@ -25,7 +26,7 @@ const toc = [
 ];
 ---
 
-<BaseLayout title={`${title}, Victor Cyprien`} description={summary}>
+<BaseLayout title={`${title}, Victor Cyprien`} description={summary} jsonLd={caseStudyGraph(study, Astro.site!)}>
   <!-- On a phone the table of contents sits between the header and the text; on a desktop screen it is pinned in its own column. -->
   <article class="mx-auto grid max-w-6xl px-6 py-16 md:px-12 lg:grid-cols-[minmax(0,1fr)_200px] lg:grid-rows-[auto_1fr] lg:gap-x-12 xl:grid-cols-[minmax(0,48rem)_220px] xl:justify-between">
     <header class="min-w-0">
