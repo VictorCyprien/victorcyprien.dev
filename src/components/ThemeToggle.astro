@@ -34,9 +34,13 @@
 
   apply(root.dataset.theme === 'light' ? 'light' : 'dark');
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
   button?.addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    apply(next);
+    // Crossfade where the browser can; otherwise, or when motion is reduced, the theme switches at once.
+    if (document.startViewTransition && !reducedMotion.matches) document.startViewTransition(() => apply(next));
+    else apply(next);
     try {
       localStorage.setItem('theme', next);
     } catch {
