@@ -16,7 +16,7 @@ test('the home page shows the headline and the call button', async ({ page }) =>
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Back-end et DevOps pour PME et startups.');
   const call = page.getByRole('main').getByRole('link', { name: 'Réserver un appel' }).first();
-  await expect(call).toHaveAttribute('href', /^mailto:contact@victorcyprien\.dev/);
+  await expect(call).toHaveAttribute('href', /^https:\/\/cal\.com\//);
 });
 
 test('French punctuation never starts a line', async ({ page }) => {
