@@ -27,8 +27,8 @@ const ids = (siteUrl: URL) => ({
   website: new URL('/#site', siteUrl).href,
 });
 
-/** The home page: Victor, his freelance activity and the site. */
-export function homeGraph(site: SiteFacts, siteUrl: URL) {
+/** The home page: Victor, his freelance activity and the site. `skills` is the core tier of the stack. */
+export function homeGraph(site: SiteFacts, siteUrl: URL, skills: string[]) {
   const id = ids(siteUrl);
   const home = new URL('/', siteUrl).href;
   const address = { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: 'FR' };
@@ -45,6 +45,7 @@ export function homeGraph(site: SiteFacts, siteUrl: URL) {
         ...(site.photo && { image: new URL(site.photo, siteUrl).href }),
         email: site.email,
         address,
+        knowsAbout: skills,
         worksFor: { '@id': id.service },
         sameAs: profiles,
       },
@@ -74,13 +75,17 @@ export function homeGraph(site: SiteFacts, siteUrl: URL) {
 }
 
 /** A case study page: where it sits in the site, what it is and who wrote it. */
-export function caseStudyGraph(study: CaseStudyFacts, siteUrl: URL) {
+export function caseStudyGraph(study: CaseStudyFacts, site: SiteFacts, siteUrl: URL) {
   const id = ids(siteUrl);
+  const home = new URL('/', siteUrl).href;
   const page = new URL(`/etudes-de-cas/${study.id}/`, siteUrl).href;
   const title = plain(study.data.title);
   return {
     '@context': 'https://schema.org',
     '@graph': [
+      // Short copies of the home page nodes, so each page's references resolve on their own.
+      { '@type': 'Person', '@id': id.person, name: plain(site.name), url: home },
+      { '@type': 'WebSite', '@id': id.website, name: plain(site.name), url: home },
       {
         '@type': 'BreadcrumbList',
         itemListElement: [

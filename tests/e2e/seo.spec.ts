@@ -15,6 +15,7 @@ test('the home page tells search engines who Victor is and where he works', asyn
   expect(graph.map((node) => node['@type'])).toEqual(['Person', 'ProfessionalService', 'WebSite']);
   const person = graph[0];
   expect(person).toMatchObject({ name: 'Victor Cyprien', address: { addressLocality: 'Toulouse' } });
+  expect(person.knowsAbout).toContain('FastAPI');
   // The profiles in the data are the ones linked from the contact section.
   const profiles = await page.locator('#contact').getByRole('link').evaluateAll((links) => links.map((link) => link.getAttribute('href')));
   for (const profile of person.sameAs as string[]) expect(profiles).toContain(profile);
@@ -25,7 +26,9 @@ test('each case study names its place in the site', async ({ page }) => {
   test.skip(studies.length === 0, 'no case study is published in this build');
   for (const path of studies) {
     await page.goto(path);
-    const [breadcrumb, webPage] = await structuredData(page);
+    const graph = await structuredData(page);
+    expect(graph.map((node) => node['@type']), path).toEqual(['Person', 'WebSite', 'BreadcrumbList', 'WebPage']);
+    const [, , breadcrumb, webPage] = graph;
     const items = breadcrumb.itemListElement as { name: string }[];
     const heading = (await page.getByRole('heading', { level: 1 }).textContent())?.replace(/\u00a0/g, ' ');
     expect(items.map((item) => item.name), path).toEqual(['Accueil', 'Études de cas', heading]);
