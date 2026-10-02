@@ -22,7 +22,8 @@ test('every page loads under the production content security policy', async ({ p
   });
 
   for (const path of pages) {
-    await page.goto(path);
+    const response = await page.goto(path);
+    expect(response?.headers()['content-security-policy'], `${path} is served with the policy`).toBe(csp);
     // Let late resources (fonts, the theme script) load before reading the violations.
     await page.waitForLoadState('networkidle');
     expect(await page.evaluate(() => (window as unknown as { blocked: string[] }).blocked), path).toEqual([]);

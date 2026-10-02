@@ -24,8 +24,12 @@ ErrorDocument 404 /404.html
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  # HTTPS is stable on the domain, so browsers keep to it for a year. Subdomains are left out on purpose.
-  Header always set Strict-Transport-Security "max-age=31536000"
+  # For browsers older than frame-ancestors.
+  Header always set X-Frame-Options "DENY"
+  # HTTPS only. One week to start: once a certificate renewal has worked after the launch, raise it to
+  # a year (31536000). A failed renewal under HSTS locks visitors out for the whole max-age.
+  # Subdomains are left out on purpose.
+  Header always set Strict-Transport-Security "max-age=604800"
 
   # Astro fingerprints its JS, CSS and font files: they can be cached for a year.
   <FilesMatch "\.(js|css|woff2?)$">
