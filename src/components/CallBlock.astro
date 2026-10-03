@@ -1,0 +1,15 @@
+---
+import { getSite } from '../lib/content';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const site = await getSite();
+---
+
+<div class:list={['rounded-xl border border-line bg-surface p-6 md:p-8', className]}>
+  <h2 class="mb-3 text-2xl font-semibold tracking-tight">Un projet comparable&nbsp;?</h2>
+  <p class="mb-6 leading-relaxed text-muted">On en parle lors d'un appel. Ensuite, je vous envoie un cadrage écrit&nbsp;: ce qu'il faut faire, le prix et le calendrier.</p>
+  <a href={site.callHref} class="btn-primary">Réserver un appel</a>
+</div>

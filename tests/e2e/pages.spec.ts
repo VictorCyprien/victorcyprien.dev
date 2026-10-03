@@ -104,6 +104,19 @@ test('every case study ends with the call button', async ({ page }) => {
   }
 });
 
+test('the case study list and each case study lead to the other studies and to a call', async ({ page }) => {
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length < 2, 'linking studies needs at least two of them');
+  await page.goto('/etudes-de-cas/');
+  await expect(page.getByRole('main').getByRole('link', { name: 'Réserver un appel' })).toBeVisible();
+  for (const path of studies) {
+    await page.goto(path);
+    const others = page.getByRole('region', { name: /^Autres? études? de cas$/ }).getByRole('link');
+    const targets = await others.evaluateAll((links) => links.map((link) => link.getAttribute('href')));
+    expect(targets.sort(), path).toEqual(studies.filter((other) => other !== path).sort());
+  }
+});
+
 test('each case study opens with its brief, its reading time and a table of contents', async ({ page }) => {
   const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
   test.skip(studies.length === 0, 'no case study is published in this build');
