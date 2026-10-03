@@ -48,6 +48,21 @@ test('every page answers and every internal link resolves', async ({ page }) => 
   expect(seen).toContain('/etudes-de-cas/');
 });
 
+test('each service on the home page points to a published case study as proof', async ({ page }) => {
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  await page.goto('/');
+  const services = page.locator('#services');
+  await expect(services.getByRole('heading', { level: 2 })).toHaveText('Ce que je fais');
+  const items = services.getByRole('listitem');
+  expect(await items.count()).toBeGreaterThan(0);
+  for (const item of await items.all()) {
+    const proof = await item.getByRole('link').evaluateAll((links) => links.map((link) => link.getAttribute('href') ?? ''));
+    expect(proof.length, (await item.getByRole('heading').textContent()) ?? '').toBeGreaterThan(0);
+    for (const href of proof) expect(studies).toContain(href);
+  }
+});
+
 test('the parcours section shows a diplomas block with links to schools and companies', async ({ page }) => {
   await page.goto('/');
   const parcours = page.locator('#parcours');
@@ -80,7 +95,7 @@ test('the header names the site and shows every navigation link', async ({ page 
   const header = page.getByRole('banner');
   await expect(header.getByRole('link', { name: 'Victor Cyprien' })).toHaveAttribute('href', '/');
   const nav = page.getByRole('navigation', { name: 'Navigation principale' });
-  for (const label of ['Comment je décide', 'Projets', 'Parcours', 'Études de cas']) {
+  for (const label of ['Services', 'Comment je décide', 'Projets', 'Parcours', 'Études de cas']) {
     await expect(nav.getByRole('link', { name: label })).toBeInViewport();
   }
 });

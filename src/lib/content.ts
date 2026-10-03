@@ -34,6 +34,10 @@ export async function getCaseStudyNames(): Promise<Map<string, string>> {
   );
 }
 
+export async function getServices() {
+  return (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+}
+
 export async function getPrinciples() {
   return (await getCollection('principles')).sort((a, b) => a.data.order - b.data.order);
 }

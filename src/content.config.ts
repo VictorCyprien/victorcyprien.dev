@@ -41,6 +41,18 @@ const projects = defineCollection({
   }),
 });
 
+const services = defineCollection({
+  loader: file('src/data/services.yaml'),
+  schema: z.object({
+    id: z.string(),
+    order: z.number().int(),
+    title: prose,
+    text: prose,
+    // The case studies that prove Victor does it, in the order they are cited.
+    proof: z.array(reference('caseStudies')).min(1),
+  }),
+});
+
 const principles = defineCollection({
   loader: file('src/data/principes.yaml'),
   schema: z.object({
@@ -118,4 +130,4 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { caseStudies, projects, principles, career, diplomas, stackTiers, site };
+export const collections = { caseStudies, projects, services, principles, career, diplomas, stackTiers, site };
