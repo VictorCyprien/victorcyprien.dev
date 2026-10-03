@@ -1,6 +1,6 @@
 ---
 title: "Contrapp : reprise d'API et mise en production d'un SaaS pour CFA"
-summary: "SaaS où les CFA créent et font signer leurs contrats d'alternance en ligne. J'ai repris l'API, conçu la base Supabase et monté l'infrastructure jusqu'en production."
+summary: "SaaS conçu pour que les CFA créent et fassent signer leurs contrats d'alternance en ligne. J'ai repris l'API, conçu la base Supabase et monté l'infrastructure jusqu'en production."
 brief:
   need: "Un CFA voulait créer ses contrats d'alternance et les faire signer sans se battre avec le logiciel qu'il utilisait."
   work: "J'ai repris l'API, conçu la base Supabase, intégré Stripe, puis monté le serveur et sa surveillance."
@@ -8,7 +8,7 @@ brief:
 sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
 stack: [Python, FastAPI, Supabase, Stripe, DocuSign, VPS Linux, Docker, Grafana, Prometheus, Loki, React, Vite]
-principles: [dimensionner, surveiller, fermer]
+principles: [surveiller, fermer]
 order: 1
 draft: false
 ---

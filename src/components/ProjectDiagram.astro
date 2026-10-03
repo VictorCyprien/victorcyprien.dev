@@ -19,9 +19,9 @@ const drawn = ['contrapp', 'aura'];
   <figure class={className} data-diagram={id}>
     {id === 'contrapp' && (
       <svg viewBox="0 -9 340 410" role="img" aria-label="Le montage de Contrapp" aria-describedby="diagram-contrapp-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
-        <desc id="diagram-contrapp-desc">Les équipes des CFA utilisent une application web en React, construite avec Vite. Elle appelle une API en Python avec FastAPI, qui s'appuie sur une base Supabase. L'API passe par Stripe pour les paiements et par DocuSign pour faire signer les contrats à l'entreprise et à l'alternant. L'interface, l'API, la base et la surveillance, avec Grafana, Prometheus et Loki, tournent sur un même serveur VPS Linux, dans des conteneurs Docker.</desc>
+        <desc id="diagram-contrapp-desc">L'application web des CFA est en React, construite avec Vite. Elle appelle une API en Python avec FastAPI, qui s'appuie sur une base Supabase. L'API passe par Stripe pour les paiements et par DocuSign pour faire signer les contrats à l'entreprise et à l'alternant. L'interface, l'API, la base et la surveillance, avec Grafana, Prometheus et Loki, tournent sur un même serveur VPS Linux, dans des conteneurs Docker.</desc>
 
-        <g data-id="users" data-links="interface" data-role="Les équipes des CFA créent leurs contrats d'alternance et les envoient en signature.">
+        <g data-id="users" data-links="interface" data-role="L'équipe du CFA y a créé ses contrats d'alternance et les a envoyés en signature.">
           <rect class="node" x="10" y="8" width="180" height="44" rx="10" />
           <text class="role" x="24" y="27">Utilisateurs</text>
           <text class="tech" x="24" y="43">équipes des CFA</text>
@@ -77,9 +77,9 @@ const drawn = ['contrapp', 'aura'];
     )}
     {id === 'aura' && (
       <svg viewBox="0 0 340 410" role="img" aria-label="Le montage d'AURA" aria-describedby="diagram-aura-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
-        <desc id="diagram-aura-desc">Chaque marque reçoit sa propre application mobile en Flutter, adaptée à son image, et le grand public a son application. Ces applications appellent trois API en Python avec FastAPI, une par moteur&nbsp;: nutrition, fitness et communauté. BeAble2 héberge sur Railway ces API et le back-office en Next.js de chaque marque. Dans l'organisation Supabase de BeAble2, chaque marque a sa propre base, qui lui appartient, et la base du grand public appartient à BeAble2. Sentry et les métriques de Railway assurent la surveillance.</desc>
+        <desc id="diagram-aura-desc">Une marque qui prend AURA en marque blanche reçoit sa propre application mobile en Flutter, adaptée à son image, et le grand public a son application. Ces applications appellent trois API en Python avec FastAPI, une par moteur&nbsp;: nutrition, fitness et communauté. BeAble2 héberge sur Railway ces API et le back-office en Next.js de chaque marque. Dans l'organisation Supabase de BeAble2, chaque marque a sa propre base, qui lui appartient, et la base du grand public appartient à BeAble2. Sentry et les métriques de Railway assurent la surveillance.</desc>
 
-        <g data-id="brands" data-links="nutrition fitness communaute" data-role="Chaque marque reçoit sa version de l'application mobile, adaptée à son image.">
+        <g data-id="brands" data-links="nutrition fitness communaute" data-role="Une marque qui prend AURA en marque blanche reçoit sa version de l'application mobile, adaptée à son image.">
           <rect class="node" x="22" y="4" width="160" height="44" rx="10" />
           <rect class="node" x="16" y="10" width="160" height="44" rx="10" />
           <rect class="node" x="10" y="16" width="160" height="44" rx="10" />
