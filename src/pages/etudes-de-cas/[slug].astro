@@ -1,6 +1,8 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CallBlock from '../../components/CallBlock.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import CaseStudyToc from '../../components/CaseStudyToc.astro';
 import ProjectDiagram from '../../components/ProjectDiagram.astro';
 import { getPublishedCaseStudies, getSite } from '../../lib/content';
@@ -10,10 +12,10 @@ import { readingMinutes } from '../../lib/reading';
 
 export async function getStaticPaths() {
   const studies = await getPublishedCaseStudies();
-  return studies.map((study) => ({ params: { slug: study.id }, props: { study } }));
+  return studies.map((study) => ({ params: { slug: study.id }, props: { study, others: studies.filter((other) => other !== study) } }));
 }
 
-const { study } = Astro.props;
+const { study, others } = Astro.props;
 const { Content, headings } = await render(study);
 const site = await getSite();
 const { title, summary, brief, sector, period, stack } = study.data;
@@ -54,11 +56,15 @@ const toc = [
         <h2 id="stack">Stack</h2>
         <p class="text-sm">{stack.join(', ')}</p>
       </div>
-      <div class="mt-16 rounded-xl border border-line bg-surface p-6 md:p-8">
-        <h2 class="mb-3 text-2xl font-semibold tracking-tight">Un projet comparable&nbsp;?</h2>
-        <p class="mb-6 leading-relaxed text-muted">On en parle lors d'un appel. Ensuite, je vous envoie un cadrage écrit&nbsp;: ce qu'il faut faire, le prix et le calendrier.</p>
-        <a href={site.callHref} class="btn-primary">Réserver un appel</a>
-      </div>
+      {others.length > 0 && (
+        <section aria-labelledby="autres-etudes" class="mt-16">
+          <h2 id="autres-etudes" class="mb-6 text-2xl font-semibold tracking-tight">{others.length === 1 ? 'Autre étude de cas' : 'Autres études de cas'}</h2>
+          <ul class="grid gap-6">
+            {others.map((other) => <li><CaseStudyCard study={other} heading="h3" /></li>)}
+          </ul>
+        </section>
+      )}
+      <CallBlock class="mt-16" />
     </div>
   </article>
 </BaseLayout>

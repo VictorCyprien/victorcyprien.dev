@@ -19,6 +19,18 @@ test('the home page tells search engines who Victor is and where he works', asyn
   // The profiles in the data are the ones linked from the contact section.
   const profiles = await page.locator('#contact').getByRole('link').evaluateAll((links) => links.map((link) => link.getAttribute('href')));
   for (const profile of person.sameAs as string[]) expect(profiles).toContain(profile);
+  // The freelance activity carries the same profiles, the school and the partner company come from the parcours.
+  expect(graph[1].sameAs).toEqual(person.sameAs);
+  expect((person.alumniOf as { name: string }[]).map((school) => school.name)).toEqual(['Institut Limayrac']);
+  expect(person.worksFor).toContainEqual(expect.objectContaining({ '@type': 'Organization', name: 'BeAble2' }));
+});
+
+test('the case study list names its place in the site', async ({ page }) => {
+  await page.goto('/etudes-de-cas/');
+  const [breadcrumb, ...rest] = await structuredData(page);
+  expect(rest).toEqual([]);
+  const items = breadcrumb.itemListElement as { name: string }[];
+  expect(items.map((item) => item.name)).toEqual(['Accueil', await page.getByRole('heading', { level: 1 }).textContent()]);
 });
 
 test('each case study names its place in the site', async ({ page }) => {
