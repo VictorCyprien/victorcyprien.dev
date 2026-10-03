@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { study, others } = Astro.props;
 const { Content, headings } = await render(study);
 const site = await getSite();
-const { title, summary, brief, sector, period, stack } = study.data;
+const { title, seoTitle, seoDescription, summary, brief, sector, period, stack } = study.data;
 // In the home page order, whatever the order in the front matter.
 const principles = (await getPrinciples()).filter((principle) => study.data.principles.some((ref) => ref.id === principle.id));
 const minutes = readingMinutes([brief.need, brief.work, brief.result, study.body ?? ''].join(' '));
@@ -30,7 +30,7 @@ const toc = [
 ];
 ---
 
-<BaseLayout title={`${title}, Victor Cyprien`} description={summary} jsonLd={caseStudyGraph(study, site, Astro.site!)}>
+<BaseLayout title={seoTitle ?? `${title}, Victor Cyprien`} description={seoDescription ?? summary} jsonLd={caseStudyGraph(study, site, Astro.site!)}>
   <!-- On a phone the table of contents sits between the header and the text; on a desktop screen it is pinned in its own column. -->
   <article class="mx-auto grid max-w-6xl px-6 py-16 md:px-12 lg:grid-cols-[minmax(0,1fr)_200px] lg:grid-rows-[auto_1fr] lg:gap-x-12 xl:grid-cols-[minmax(0,48rem)_220px] xl:justify-between">
     <header class="min-w-0">

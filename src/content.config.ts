@@ -12,6 +12,9 @@ const caseStudies = defineCollection({
   loader: glob({ base: './src/content/etudes-de-cas', pattern: '**/*.md' }),
   schema: z.object({
     title: prose,
+    // The search result's title and snippet, when the page's own are too long to show in full.
+    seoTitle: z.string().max(60).transform(frenchSpacing).optional(),
+    seoDescription: z.string().max(155).transform(frenchSpacing).optional(),
     summary: prose,
     // "En bref" at the top of the page: the need, what Victor did, the result.
     brief: z.object({ need: prose, work: prose, result: prose }),

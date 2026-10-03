@@ -1,5 +1,7 @@
 ---
 title: "Contrapp : reprise d'API et mise en production d'un SaaS pour CFA"
+seoTitle: "Contrapp : reprise d'API et mise en production d'un SaaS"
+seoDescription: "SaaS de contrats d'alternance pour les CFA : j'ai repris l'API FastAPI, amélioré la base Supabase et monté l'infrastructure jusqu'en production."
 summary: "SaaS conçu pour que les CFA créent et fassent signer leurs contrats d'alternance en ligne. J'ai repris l'API, amélioré la base Supabase et monté l'infrastructure jusqu'en production."
 brief:
   need: "Un CFA voulait créer ses contrats d'alternance et les faire signer sans se battre avec le logiciel qu'il utilisait."

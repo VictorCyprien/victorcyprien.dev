@@ -1,5 +1,7 @@
 ---
 title: "AURA : le back-end et l'infrastructure d'une plateforme de coaching"
+seoTitle: "AURA : back-end et infrastructure, fitness et nutrition"
+seoDescription: "Coaching sport et nutrition, en marque blanche et grand public : j'en porte le back-end et l'infrastructure, trois API FastAPI sur Railway et Supabase."
 summary: "Plateforme de coaching sport et nutrition, en marque blanche et grand public. J'en porte le back-end et l'infrastructure : trois API FastAPI, Railway, Supabase."
 brief:
   need: "BeAble2 voulait une plateforme de coaching sport et nutrition, pour le grand public et pour des marques qui la prendraient en marque blanche."
