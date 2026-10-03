@@ -5,7 +5,7 @@ import CallBlock from '../../components/CallBlock.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import CaseStudyToc from '../../components/CaseStudyToc.astro';
 import ProjectDiagram from '../../components/ProjectDiagram.astro';
-import { getPublishedCaseStudies, getSite } from '../../lib/content';
+import { getPrinciples, getPublishedCaseStudies, getSite } from '../../lib/content';
 import { caseStudyGraph } from '../../lib/schema';
 import { formatPeriod } from '../../lib/format';
 import { readingMinutes } from '../../lib/reading';
@@ -19,6 +19,8 @@ const { study, others } = Astro.props;
 const { Content, headings } = await render(study);
 const site = await getSite();
 const { title, summary, brief, sector, period, stack } = study.data;
+// In the home page order, whatever the order in the front matter.
+const principles = (await getPrinciples()).filter((principle) => study.data.principles.some((ref) => ref.id === principle.id));
 const minutes = readingMinutes([brief.need, brief.work, brief.result, study.body ?? ''].join(' '));
 // "En bref" and "Stack" are written in this template, around the Markdown headings.
 const toc = [
@@ -46,6 +48,16 @@ const toc = [
         <dt class="text-muted">Secteur</dt><dd>{sector}</dd>
         <dt class="text-muted">Période</dt><dd>{formatPeriod(period.start, period.end)}</dd>
         <dt class="text-muted">Lecture</dt><dd>{minutes} min</dd>
+        {principles.length > 0 && (
+          <>
+            <dt class="text-muted">Principes</dt>
+            <dd>
+              <ul class="space-y-1">
+                {principles.map((principle) => <li><a href={`/#principe-${principle.id}`} class="link">{principle.data.title}</a></li>)}
+              </ul>
+            </dd>
+          </>
+        )}
       </dl>
     </header>
     <CaseStudyToc headings={toc} class="mb-12 lg:sticky lg:top-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mb-0 lg:max-h-[calc(100vh-4rem)] lg:self-start lg:overflow-y-auto" />

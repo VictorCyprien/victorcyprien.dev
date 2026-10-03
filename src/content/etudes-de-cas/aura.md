@@ -8,6 +8,7 @@ brief:
 sector: Sport et nutrition, B2C et B2B2C
 period: { start: "2026-01", end: null }
 stack: [Python, FastAPI, Supabase, Railway, Sentry, Flutter, Next.js]
+principles: [dimensionner, dormir, surveiller]
 order: 2
 draft: false
 ---
