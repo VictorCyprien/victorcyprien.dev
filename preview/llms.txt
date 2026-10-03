@@ -1,0 +1,64 @@
+# Victor Cyprien
+
+> Back-end et DevOps pour PME et startups. Je conçois, mets en ligne et fais tourner des applications web sur mesure. Chaque projet commence par un cadrage écrit, et le prix est fixé par livrable.
+
+Développeur back-end et DevOps freelance, basé à Toulouse, à distance partout en France.
+
+## Ce que je fais
+
+- Reprendre une application existante : Votre application existe déjà : un prototype, une démo, ou du code écrit par quelqu'un d'autre. Je remets son back-end au propre avant d'y ajouter quoi que ce soit, pour qu'il reste simple à faire évoluer. Exemple : [Contrapp](https://preview.victorcyprien.dev/etudes-de-cas/contrapp/).
+- Développer le back-end : L'API et la base de données, sur mesure. Pour la connexion des utilisateurs et les paiements, je branche des briques éprouvées, comme Supabase ou Stripe, plutôt que de les écrire moi-même. Exemples : [Contrapp](https://preview.victorcyprien.dev/etudes-de-cas/contrapp/), [AURA](https://preview.victorcyprien.dev/etudes-de-cas/aura/).
+- Mettre en production : On choisit ensemble l'hébergement, selon votre besoin et votre budget : un seul serveur ou un cloud managé. Puis je mets l'application en ligne. Exemples : [Contrapp](https://preview.victorcyprien.dev/etudes-de-cas/contrapp/), [AURA](https://preview.victorcyprien.dev/etudes-de-cas/aura/).
+- Surveiller et tenir la charge : Dès la mise en ligne, vous voyez les erreurs, les lenteurs et la charge. Avant une étape de croissance, je mesure la charge que l'application tient, et je corrige ce qui la limite. Exemples : [AURA](https://preview.victorcyprien.dev/etudes-de-cas/aura/), [Contrapp](https://preview.victorcyprien.dev/etudes-de-cas/contrapp/).
+
+## Comment je travaille
+
+Je développe des applications web depuis 2021, en alternance puis en freelance.
+
+- Vous n'avez qu'un interlocuteur, moi, du cadrage à la mise en production et après.
+- Je fais des points courts et réguliers, par écrit, sur le canal de votre choix.
+- À la livraison, vous recevez le code, sa documentation et de quoi le faire tourner sans moi.
+
+Je suis aussi associé de BeAble2, une agence IA, où je porte le back-end et l'infrastructure d'AURA. Je prends des missions en freelance à côté.
+
+## Comment je décide
+
+- Cadrer par écrit avant de coder : Avant la première ligne de code, on se met d'accord par écrit : ce qu'il faut faire, ce qui n'en fait pas partie, le prix et le calendrier. Ce prix est fixé pour le livrable, quel que soit le temps que j'y passe.
+- Construire pour vos besoins d'aujourd'hui : Une application qui démarre avec mille utilisateurs n'a pas besoin de l'infrastructure prévue pour cent mille. Je mesure ce dont vous avez besoin, puis je choisis la solution la plus simple qui tient cette charge. On la fait évoluer quand le trafic le demande.
+- Voir ce qui se passe dès la mise en ligne : Dès le premier jour, vous voyez si votre application va bien : les erreurs, les lenteurs, la charge. Les outils de suivi dépendent de l'hébergement, et on les choisit ensemble.
+- Des mises en ligne sans stress : Publier une nouvelle version se fait en un geste, revenir à la précédente aussi. Personne n'a besoin de réparer un serveur en pleine nuit.
+- Vos données fermées par défaut : Personne n'accède à une donnée sans autorisation explicite. La connexion des utilisateurs passe par un service d'authentification éprouvé, comme celui de Supabase : je n'écris jamais ma propre authentification.
+
+## Études de cas
+
+- [Contrapp : reprise d'API et mise en production d'un SaaS pour CFA](https://preview.victorcyprien.dev/etudes-de-cas/contrapp/) : SaaS conçu pour que les CFA créent et fassent signer leurs contrats d'alternance en ligne. J'ai repris l'API, amélioré la base Supabase et monté l'infrastructure jusqu'en production.
+- [AURA : le back-end et l'infrastructure d'une plateforme de coaching](https://preview.victorcyprien.dev/etudes-de-cas/aura/) : Plateforme de coaching sport et nutrition, en marque blanche et grand public. J'en porte le back-end et l'infrastructure : trois API FastAPI, Railway, Supabase.
+
+## Stack
+
+- Mon cœur de métier : Python, FastAPI, PostgreSQL, Supabase, Redis, Docker, Linux, Railway, Grafana, Prometheus, Loki, Stripe, Sentry
+- Je livre aussi : React, Next.js, TypeScript, Vite
+- Déjà pratiqué en production : Flask, MongoDB, AWS, Terraform, Redis Queue, Flutter
+
+## Parcours
+
+- mai 2025 - aujourd'hui : Associé, BeAble2. Agence IA. J'y porte le back-end et l'infrastructure d'AURA, une plateforme de coaching sport et nutrition.
+- oct. 2023 - aujourd'hui : Développeur freelance, back-end et DevOps. Missions pour des PME et des startups
+- sept. 2021 - sept. 2023 : Développeur back-end, en alternance, Beeguard. J'ai conçu, testé, déployé et maintenu des services back-end, dont une API de gestion des utilisateurs et du stockage S3. J'ai aussi refait l'architecture des notifications par SMS.
+- mai 2019 - juin 2019 : Stagiaire développeur, Kipsoft. Un plugin PHP sur mesure pour le site « Ma liste à moi ».
+
+## Diplômes
+
+- 2023 : Mastère Expert en systèmes d'information, Institut Limayrac
+- 2021 : Bachelor en systèmes d'information, Institut Limayrac
+- 2020 : BTS Systèmes numériques, option Informatique et réseaux, Institut Limayrac
+
+## Contact
+
+- Réserver un appel : https://cal.com/victor-cyprien-ts3qny/30min
+- Email : contact@victorcyprien.dev
+- Site : https://preview.victorcyprien.dev/
+- LinkedIn : https://www.linkedin.com/in/victor-cyprien-7b2a36173
+- GitHub : https://github.com/VictorCyprien
+- Malt : https://www.malt.fr/profile/victorcyprien
+- Mentions légales : https://preview.victorcyprien.dev/mentions-legales/
