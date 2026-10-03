@@ -42,10 +42,31 @@ jobs:
           printf '\n# Preview only\n<IfModule mod_headers.c>\n  Header set X-Robots-Tag "noindex, nofollow"\n</IfModule>\n' >> dist/.htaccess
           # The host lock goes first, so no redirect answers for another host before it.
           { printf '# Preview only: the files answer on the preview host alone.\nRewriteEngine On\nRewriteCond %%{HTTP_HOST} !^preview\\.victorcyprien\\.dev$ [NC]\nRewriteRule ^ - [F]\n\n'; cat dist/.htaccess; } > dist/.htaccess.tmp && mv dist/.htaccess.tmp dist/.htaccess
+      # Hostinger allows one Git deployment per website, so both sites live on the deploy branch:
+      # production at its root, the preview in preview/, which the preview subdomain points at.
+      # Each push replaces only its own part.
       - name: Publish the built site
         if: github.ref_name == 'main' || github.ref_name == 'develop'
-        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: ${{ github.ref_name == 'main' && 'deploy' || 'deploy-preview' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --quiet --branch deploy "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" out
+          cd out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          if [ "$GITHUB_REF_NAME" = main ]; then
+            find . -mindepth 1 -maxdepth 1 ! -name .git ! -name preview -exec rm -rf {} +
+            cp -a ../dist/. .
+          else
+            rm -rf preview
+            cp -a ../dist preview
+          fi
+          git add -A
+          git commit --quiet -m "deploy: ${GITHUB_REF_NAME} ${GITHUB_SHA}" || { echo "Nothing to publish"; exit 0; }
+          # main and develop can publish at the same time. They touch different folders, so a rebase settles it.
+          # Never force: Hostinger only pulls, and a rewritten branch breaks its pull.
+          for attempt in 1 2 3; do
+            git push --quiet origin HEAD:deploy && exit 0
+            git pull --quiet --rebase origin deploy
+          done
+          exit 1
