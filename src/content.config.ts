@@ -18,6 +18,8 @@ const caseStudies = defineCollection({
     sector: prose,
     period,
     stack: z.array(z.string()).min(1),
+    // The principles from the home page that this study shows at work.
+    principles: z.array(reference('principles')).default([]),
     order: z.number().int(),
     personal: z.boolean().default(false),
     draft: z.boolean().default(false),

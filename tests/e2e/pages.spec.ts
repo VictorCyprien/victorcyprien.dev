@@ -117,6 +117,24 @@ test('the case study list and each case study lead to the other studies and to a
   }
 });
 
+test('each case study names the principles it applies, and each principle points back to it', async ({ page }) => {
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  const links: [string, string][] = [];
+  for (const path of studies) {
+    await page.goto(path);
+    const targets = await page.getByRole('main').locator('a[href^="/#principe-"]').evaluateAll((anchors) => anchors.map((anchor) => anchor.getAttribute('href') ?? ''));
+    expect(targets.length, path).toBeGreaterThan(0);
+    for (const target of targets) links.push([path, target]);
+  }
+  await page.goto('/');
+  for (const [path, target] of links) {
+    const principle = page.locator(`[id="${target.slice(2)}"]`);
+    await expect(principle, target).toHaveCount(1);
+    await expect(principle.locator(`a[href="${path}"]`), `${target} links back to ${path}`).toHaveCount(1);
+  }
+});
+
 test('each case study opens with its brief, its reading time and a table of contents', async ({ page }) => {
   const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
   test.skip(studies.length === 0, 'no case study is published in this build');

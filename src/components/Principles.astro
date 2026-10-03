@@ -1,9 +1,14 @@
 ---
-import { getPrinciples } from '../lib/content';
+import { getPrinciples, getPublishedCaseStudies, getPublishedProjects } from '../lib/content';
 
 const principles = await getPrinciples();
-// The first principle leads: framing in writing is what the hero promises.
-const [lead, ...rest] = principles;
+const studies = await getPublishedCaseStudies();
+const projects = await getPublishedProjects();
+// A study is named after its project, "AURA" rather than its full title.
+const nameOf = (study: (typeof studies)[number]) => projects.find((project) => project.data.caseStudy?.id === study.id)?.data.name ?? study.data.title;
+// The case studies that show a principle at work, in the case study order.
+const appliedIn = (principleId: string) =>
+  studies.filter((study) => study.data.principles.some((ref) => ref.id === principleId)).map((study) => ({ href: `/etudes-de-cas/${study.id}/`, name: nameOf(study) }));
 ---
 
 <!-- A full-width surface band sets the method apart from the proof that follows. -->
@@ -12,18 +17,22 @@ const [lead, ...rest] = principles;
     <h2 class="mb-2 text-3xl font-semibold tracking-tight">Comment je décide</h2>
     <p class="mb-12 max-w-[40em] text-muted">Cinq principes que j'applique sur chaque projet.</p>
     <ul class="grid gap-x-16 gap-y-10 md:grid-cols-2">
-      {lead && (
-        <li class="md:col-span-2">
-          <h3 class="mb-3 text-2xl font-semibold tracking-tight">{lead.data.title}</h3>
-          <p class="max-w-[46em] text-lg leading-relaxed text-muted">{lead.data.text}</p>
-        </li>
-      )}
-      {rest.map(({ data }) => (
-        <li>
-          <h3 class="mb-2 text-lg font-semibold leading-snug">{data.title}</h3>
-          <p class="leading-relaxed text-muted">{data.text}</p>
-        </li>
-      ))}
+      {principles.map(({ id, data }, index) => {
+        // The first principle leads: framing in writing is what the hero promises.
+        const lead = index === 0;
+        const proof = appliedIn(id);
+        return (
+          <li id={`principe-${id}`} class:list={['scroll-mt-8', lead && 'md:col-span-2']}>
+            <h3 class={lead ? 'mb-3 text-2xl font-semibold tracking-tight' : 'mb-2 text-lg font-semibold leading-snug'}>{data.title}</h3>
+            <p class:list={['leading-relaxed text-muted', lead && 'max-w-[46em] text-lg']}>{data.text}</p>
+            {proof.length > 0 && (
+              <p class="mt-3 text-sm text-muted">
+                Appliqué dans&nbsp;: {proof.map((study, i) => <>{i > 0 && ', '}<a href={study.href} class="link">{study.name}</a></>)}
+              </p>
+            )}
+          </li>
+        );
+      })}
     </ul>
   </div>
 </section>
