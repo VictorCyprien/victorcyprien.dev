@@ -49,6 +49,18 @@ test('each case study names its place in the site', async ({ page }) => {
   }
 });
 
+test('each case study fits its search result: title within 60 characters, description within 155', async ({ page }) => {
+  const studies = (await allPages(page)).filter((path) => /^\/etudes-de-cas\/.+\//.test(path));
+  test.skip(studies.length === 0, 'no case study is published in this build');
+  for (const path of studies) {
+    await page.goto(path);
+    expect((await page.title()).length, `${path} title`).toBeLessThanOrEqual(60);
+    const description = (await page.locator('meta[name="description"]').getAttribute('content')) ?? '';
+    expect(description.length, `${path} description`).toBeLessThanOrEqual(155);
+    expect(description.length, `${path} description`).toBeGreaterThan(0);
+  }
+});
+
 test('every page carries its sharing and browser tags, with no layout spaces in the data', async ({ page }) => {
   for (const path of await allPages(page)) {
     await page.goto(path);

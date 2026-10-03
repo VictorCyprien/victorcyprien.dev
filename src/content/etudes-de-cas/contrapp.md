@@ -1,9 +1,11 @@
 ---
 title: "Contrapp : reprise d'API et mise en production d'un SaaS pour CFA"
-summary: "SaaS conçu pour que les CFA créent et fassent signer leurs contrats d'alternance en ligne. J'ai repris l'API, conçu la base Supabase et monté l'infrastructure jusqu'en production."
+seoTitle: "Contrapp : reprise d'API et mise en production d'un SaaS"
+seoDescription: "SaaS de contrats d'alternance pour les CFA : j'ai repris l'API FastAPI, amélioré la base Supabase et monté l'infrastructure jusqu'en production."
+summary: "SaaS conçu pour que les CFA créent et fassent signer leurs contrats d'alternance en ligne. J'ai repris l'API, amélioré la base Supabase et monté l'infrastructure jusqu'en production."
 brief:
   need: "Un CFA voulait créer ses contrats d'alternance et les faire signer sans se battre avec le logiciel qu'il utilisait."
-  work: "J'ai repris l'API, conçu la base Supabase, intégré Stripe, puis monté le serveur et sa surveillance."
+  work: "J'ai repris l'API, amélioré la base Supabase, intégré Stripe, puis monté le serveur et sa surveillance."
   result: "Plateforme livrée et mise en production en janvier 2026. Le CFA y a créé ses contrats et les a envoyés en signature à l'entreprise et à l'alternant."
 sector: Formation professionnelle
 period: { start: "2025-07", end: "2026-01" }
@@ -19,7 +21,7 @@ Un entrepreneur qui travaillait dans un CFA voyait son équipe buter sur le logi
 
 ## Mon rôle
 
-Back-end et DevOps. J'ai repris l'API, conçu la base Supabase et intégré Stripe, puis monté le serveur et sa surveillance jusqu'à la mise en production.
+Back-end et DevOps. J'ai repris l'API, amélioré la base Supabase et intégré Stripe, puis monté le serveur et sa surveillance jusqu'à la mise en production.
 
 ## Contraintes
 
