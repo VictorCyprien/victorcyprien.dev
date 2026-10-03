@@ -14,7 +14,7 @@ draft: false
 
 ## Contexte
 
-AURA est une plateforme de coaching sport et nutrition portée par BeAble2. Le grand public l'utilise depuis une application mobile, sur Android et iOS. Les marques la prennent en marque blanche : chacune reçoit sa version de l'application mobile et du back-office, adaptée à son image. Le projet est sous NDA : cette étude montre l'architecture et les décisions, pas les clients ni leurs données.
+AURA est une plateforme de coaching sport et nutrition portée par BeAble2. Pour le grand public, c'est une application mobile, sur Android et iOS. Les marques la prennent en marque blanche : chacune reçoit sa version de l'application mobile et du back-office, adaptée à son image. Le projet est sous NDA : cette étude montre l'architecture et les décisions, pas les clients ni leurs données.
 
 ## Mon rôle
 
@@ -71,4 +71,4 @@ L'application est en production, en bêta fermée, avec une préproduction sépa
 ## Ce que je ferais différemment
 
 - Je confronterais un conseil d'expert à notre échelle avant de le suivre. AWS nous a coûté quelques mois sur une infrastructure taillée pour un trafic qu'on n'avait pas.
-- Je passerais tout de suite au cloud managé, au lieu de refaire sur le VPS le montage auto-hébergé de Contrapp.
+- Je passerais tout de suite au cloud managé, au lieu de refaire sur le VPS le montage auto-hébergé de [Contrapp](/etudes-de-cas/contrapp/).
