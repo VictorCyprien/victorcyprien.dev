@@ -12,7 +12,7 @@ RewriteRule ^(.*/)?index\.html$ https://%{HTTP_HOST}/$1 [L,R=301]
 
 # A folder asked for without its final slash gets it, and HTTPS, in one redirect instead of two.
 RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_URI} !/\.git
+RewriteCond %{REQUEST_FILENAME} !/\.git(/|$)
 RewriteRule ^(.*[^/])$ https://%{HTTP_HOST}/$1/ [L,R=301]
 
 # Force HTTPS.
