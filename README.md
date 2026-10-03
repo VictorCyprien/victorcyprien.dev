@@ -52,7 +52,7 @@ Pour tester le mode préproduction : préfixer `build`, `test:build` et `test:e2
 Hébergement Hostinger, avec son déploiement Git.
 
 1. Un push sur `develop` ou `main` lance la GitHub Action `Test and deploy`.
-2. Elle lance tous les contrôles, construit le site, puis publie `dist/` sur une branche de publication : `deploy-preview` pour `develop`, `deploy` pour `main`.
-3. Hostinger suit ces branches : `deploy-preview` pour preview.victorcyprien.dev, `deploy` pour victorcyprien.dev.
+2. Elle lance tous les contrôles, construit le site, puis publie `dist/` sur la branche `deploy` : à la racine pour `main`, dans `preview/` pour `develop`. Chaque push ne remplace que sa partie.
+3. Hostinger n'accepte qu'un déploiement Git par site : il suit la branche `deploy` dans `public_html`. Le sous-domaine preview.victorcyprien.dev pointe sur `public_html/preview`.
 
 Retour arrière : dans GitHub, onglet Actions, ouvrir le run d'un commit précédent sur `main` et cliquer « Re-run all jobs ». En secours : `git revert` sur `main`, puis push.
