@@ -1,0 +1,51 @@
+name: Test and deploy
+
+on:
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One deployment per branch at a time, in push order.
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PUBLIC_SITE_ENV: ${{ github.ref_name == 'main' && 'production' || 'preview' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run test:unit
+      - run: npm run build
+      - run: npm run test:build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Block unfinished content in production
+        run: node scripts/check-todo.mjs dist ${{ github.ref_name != 'main' && '--warn' || '' }}
+      - name: Keep the preview out of search engines
+        if: github.ref_name != 'main'
+        run: |
+          printf '\n# Preview only\n<IfModule mod_headers.c>\n  Header set X-Robots-Tag "noindex, nofollow"\n</IfModule>\n' >> dist/.htaccess
+          # The host lock goes first, so no redirect answers for another host before it.
+          { printf '# Preview only: the files answer on the preview host alone.\nRewriteEngine On\nRewriteCond %%{HTTP_HOST} !^preview\\.victorcyprien\\.dev$ [NC]\nRewriteRule ^ - [F]\n\n'; cat dist/.htaccess; } > dist/.htaccess.tmp && mv dist/.htaccess.tmp dist/.htaccess
+      - name: Publish the built site
+        if: github.ref_name == 'main' || github.ref_name == 'develop'
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: ${{ github.ref_name == 'main' && 'deploy' || 'deploy-preview' }}

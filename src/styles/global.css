@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "@fontsource/schibsted-grotesk/400.css";
+@import "@fontsource/schibsted-grotesk/500.css";
+@import "@fontsource/schibsted-grotesk/600.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+/* Dark is the default theme, also without JavaScript. */
+:root,
+[data-theme="dark"] {
+  --bg: #19202A;
+  --surface: #212A36;
+  --line: #334052;
+  --text: #ECE7DD;
+  --muted: #A3ADBA;
+  --cta: #E9B872;
+  --cta-text: #19202A;
+  --watch: #8CC5A8;
+  --wire: #56657A;
+  --box: #3A4658;
+  /* Soft, tinted with the background hue: cards lift a little off the page. */
+  --card-shadow: 0 10px 28px rgb(8 11 16 / 0.55), 0 2px 6px rgb(8 11 16 / 0.35);
+  color-scheme: dark;
+}
+
+/* Motion settles fast and lands softly. Same curve in both themes. */
+:root {
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg: #F1F3EF;
+  --surface: #FFFFFF;
+  --line: #D5DCD4;
+  --text: #1A231F;
+  --muted: #55615B;
+  --cta: #E9B872;
+  --cta-text: #1A231F;
+  --watch: #2E6B57;
+  --wire: #9AA79F;
+  --box: #B9C4BB;
+  --card-shadow: 0 10px 28px rgb(26 35 31 / 0.09), 0 2px 6px rgb(26 35 31 / 0.06);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-cta: var(--cta);
+  --color-cta-text: var(--cta-text);
+  --color-watch: var(--watch);
+  --color-wire: var(--wire);
+  --color-box: var(--box);
+  --shadow-card: var(--card-shadow);
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+  }
+  ::selection {
+    background: var(--cta);
+    color: var(--cta-text);
+  }
+  :focus-visible {
+    outline: 2px solid var(--cta);
+    outline-offset: 3px;
+  }
+  [data-theme="light"] :focus-visible {
+    outline-color: var(--text);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  /* A link to a section scrolls there, so the reader sees where the section sits in the page. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  /* The theme switch crossfades the whole page (ThemeToggle starts the view transition). */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 250ms;
+    animation-timing-function: var(--ease-settle);
+  }
+}
+
+/* Shared patterns: the primary call button, and underlined links (single, or every link inside a
+   container whose markup comes from Markdown or a list). */
+@layer components {
+  .btn-primary {
+    @apply inline-block rounded-[10px] bg-cta px-5 py-3 font-medium text-cta-text transition hover:brightness-110 active:translate-y-px;
+  }
+  .link,
+  .links a {
+    color: var(--text);
+    border-bottom: 1px solid var(--watch);
+    transition: border-color 150ms;
+  }
+  .link:hover,
+  .links a:hover {
+    border-color: var(--text);
+  }
+  /* A hairline over a home section that follows another section on the ground, aligned with the text margins. */
+  .section-rule {
+    position: relative;
+  }
+  .section-rule::before {
+    content: '';
+    position: absolute;
+    inset: 0 1.5rem auto;
+    height: 1px;
+    background: var(--line);
+  }
+  @media (width >= 48rem) {
+    .section-rule::before {
+      inset-inline: 3rem;
+    }
+  }
+}
+
+/* Architecture diagrams (hero and projects) share one drawing style, set from the theme tokens. */
+@layer components {
+  .diagram .node { fill: var(--surface); stroke: var(--line); }
+  .diagram .watch { fill: var(--surface); stroke: var(--watch); }
+  .diagram .frame { fill: none; stroke: var(--box); stroke-dasharray: 5 5; }
+  .diagram .wire { fill: none; stroke: var(--wire); stroke-width: 1.5; }
+  .diagram .watch-wire { fill: none; stroke: var(--watch); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .diagram .role { fill: var(--text); font: 500 13px var(--font-sans); }
+  .diagram .tech { fill: var(--muted); font: 400 11px var(--font-mono); }
+
+  /* Tracing, while a mouse is on a brick: the brick and what it links to stay, the rest fades, requests flow along the lit wires. */
+  .diagram [data-id] { transition: opacity 150ms; }
+  .diagram :is(.node, .watch, .frame, .wire, .watch-wire) { transition: opacity 150ms, stroke 150ms; }
+  .diagram.tracing [data-id]:not(.is-hot, .is-lit) { opacity: 0.3; }
+  .diagram.tracing :is(.wire, .watch-wire):not(.is-lit) { opacity: 0.2; }
+  .diagram.tracing .is-hot :is(.node, .watch, .frame) { stroke: var(--text); }
+  .diagram.tracing .wire.is-lit { stroke: var(--muted); }
+  .diagram.tracing :is(.wire, .watch-wire).is-lit { stroke-dasharray: 6 5; animation: diagram-flow 900ms linear infinite; }
+  @keyframes diagram-flow { to { stroke-dashoffset: -22; } }
+  @media (prefers-reduced-motion: reduce) {
+    .diagram.tracing .is-lit { animation: none; }
+  }
+  /* The role line only makes sense where a mouse can hover. */
+  .diagram-note { display: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .diagram-note { display: block; }
+  }
+}

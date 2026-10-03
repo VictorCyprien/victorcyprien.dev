@@ -1,0 +1,22 @@
+---
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+---
+
+<!-- The closing band mirrors the principles band: the page ends on the action, not on a list. -->
+<section id="contact" class="border-t border-line bg-surface">
+  <div class="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-16 md:px-12">
+    <div>
+      <h2 class="mb-4 text-4xl font-semibold tracking-tight">Contact</h2>
+      <p class="mb-8 max-w-[34em] text-lg leading-relaxed text-muted">Vous avez un projet à cadrer, une application à reprendre ou à mettre en production&nbsp;? On en parle lors d'un appel.</p>
+      <a href={site.callHref} class="btn-primary">Réserver un appel</a>
+    </div>
+    <ul class="links grid gap-3 text-sm md:justify-items-end">
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a href={site.links.linkedin}>LinkedIn</a></li>
+      <li><a href={site.links.github}>GitHub</a></li>
+      <li><a href={site.links.malt}>Malt</a></li>
+    </ul>
+  </div>
+</section>

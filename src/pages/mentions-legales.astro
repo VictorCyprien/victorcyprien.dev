@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+---
+
+<BaseLayout title="Mentions légales, Victor Cyprien" description="Éditeur, hébergeur et données personnelles du site victorcyprien.dev.">
+  <article class="legal links mx-auto max-w-3xl px-6 py-16">
+    <h1 class="mb-8 text-4xl font-semibold tracking-tight">Mentions légales</h1>
+
+    <h2>Éditeur du site</h2>
+    <p>{site.name}, entrepreneur individuel (micro-entreprise).</p>
+    <p>SIRET&nbsp;: 924&nbsp;144&nbsp;926&nbsp;00012.</p>
+    <p>Adresse&nbsp;: Toulouse, France.</p>
+    <p>Téléphone&nbsp;: 07&nbsp;68&nbsp;63&nbsp;19&nbsp;91.</p>
+    <p>TVA non applicable, art. 293 B du CGI.</p>
+    <p>Email&nbsp;: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    <p>Directeur de la publication&nbsp;: {site.name}.</p>
+
+    <h2>Hébergeur</h2>
+    <p>Hostinger International Ltd, 61 Lordou Vironos Street, 6023 Larnaca, Chypre. Site&nbsp;: <a href="https://www.hostinger.fr">hostinger.fr</a>.</p>
+
+    <h2>Données personnelles</h2>
+    <p>Ce site ne dépose aucun cookie, ne mesure pas l'audience et ne contient aucun formulaire. Les emails que vous envoyez servent uniquement à vous répondre. Ils sont conservés le temps de l'échange, puis trois ans au plus après le dernier contact. La réservation d'un appel se fait sur Cal.com. Les informations que vous y saisissez servent uniquement à préparer l'appel et se conservent comme les emails. La société américaine Cal.com, Inc. les traite pour le compte de l'éditeur, comme sous-traitant, et les héberge aux États-Unis dans le cadre du Data Privacy Framework UE-États-Unis (<a href="https://cal.com/privacy">politique de confidentialité de Cal.com</a>). La réservation s'inscrit aussi dans l'agenda Google de l'éditeur, et l'appel se tient sur Google Meet&nbsp;: Google reçoit donc ces informations, ainsi que celles de votre participation à l'appel (<a href="https://policies.google.com/privacy">politique de confidentialité de Google</a>). Vous pouvez demander à y accéder, à les rectifier ou à les effacer en écrivant à <a href={`mailto:${site.email}`}>{site.email}</a>, et adresser une réclamation à la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).</p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>Les textes de ce site appartiennent à {site.name}. Le code source est public sur <a href="https://github.com/VictorCyprien/victorcyprien.dev">GitHub</a>.</p>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal h2 { margin: 2rem 0 0.75rem; font-size: 1.25rem; font-weight: 600; }
+  .legal p { margin-bottom: 0.5rem; line-height: 1.7; color: var(--muted); }
+</style>

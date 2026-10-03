@@ -1,0 +1,20 @@
+- id: reprendre
+  order: 1
+  title: Reprendre une application existante
+  text: "Votre application existe déjà : un prototype, une démo, ou du code écrit par quelqu'un d'autre. Je remets son back-end au propre avant d'y ajouter quoi que ce soit, pour qu'il reste simple à faire évoluer."
+  proof: [contrapp]
+- id: developper
+  order: 2
+  title: Développer le back-end
+  text: "L'API et la base de données, sur mesure. Pour la connexion des utilisateurs et les paiements, je branche des briques éprouvées, comme Supabase ou Stripe, plutôt que de les écrire moi-même."
+  proof: [contrapp, aura]
+- id: mettre-en-production
+  order: 3
+  title: Mettre en production
+  text: "On choisit ensemble l'hébergement, selon votre besoin et votre budget : un seul serveur ou un cloud managé. Puis je mets l'application en ligne."
+  proof: [contrapp, aura]
+- id: surveiller
+  order: 4
+  title: Surveiller et tenir la charge
+  text: "Dès la mise en ligne, vous voyez les erreurs, les lenteurs et la charge. Avant une étape de croissance, je mesure la charge que l'application tient, et je corrige ce qui la limite."
+  proof: [aura, contrapp]

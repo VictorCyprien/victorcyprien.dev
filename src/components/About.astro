@@ -1,0 +1,22 @@
+---
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+const { intro, ways, partner } = site.about;
+---
+
+<section id="a-propos" class="section-rule mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[220px_minmax(0,1fr)] md:px-12 lg:gap-16">
+  {site.photo ? (
+    <img src={site.photo} alt={`Portrait de ${site.name}`} width="220" height="220" class="h-auto w-40 rounded-xl object-cover md:w-[220px]" />
+  ) : (
+    <div aria-hidden="true"></div>
+  )}
+  <div>
+    <h2 class="mb-5 text-3xl font-semibold tracking-tight">À propos</h2>
+    <p class="max-w-[36em] text-xl leading-relaxed">{intro}</p>
+    <ul class="mt-6 grid max-w-[40em] list-disc gap-2 pl-5 leading-relaxed text-muted marker:text-watch">
+      {ways.map((way) => <li>{way}</li>)}
+    </ul>
+    {partner && <p class="mt-6 max-w-[40em] leading-relaxed text-muted">{partner}</p>}
+  </div>
+</section>

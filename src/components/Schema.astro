@@ -1,0 +1,85 @@
+---
+interface Props {
+  caption: string;
+}
+const { caption } = Astro.props;
+---
+
+<figure>
+  <svg viewBox="0 0 380 300" role="img" aria-label="Le montage type d'un projet" aria-describedby="schema-desc" class="diagram block h-auto w-full">
+    <desc id="schema-desc">Vos utilisateurs accèdent à une interface en Next.js ou React. Elle appelle une API en Python avec FastAPI. L'interface, l'API et un cache Redis sont hébergés sur Railway. La base de données PostgreSQL, chez Supabase, et la surveillance, avec Sentry et Grafana, restent hors de cet hébergement.</desc>
+
+    <!-- --at is when a piece starts drawing; --len is a stroke's length, so the pen can trace it. -->
+    <g class="brick" style="--at: 0ms; --len: 447">
+      <rect class="node" x="26" y="10" width="188" height="44" rx="10" />
+      <text class="role" x="40" y="29">Vos utilisateurs</text>
+      <text class="tech" x="40" y="45">web, mobile</text>
+    </g>
+    <path class="wire" d="M120 54 V86" style="--at: 240ms; --len: 32" />
+
+    <g class="sheet" style="--at: 0ms">
+      <rect class="frame" x="10" y="70" width="360" height="146" rx="14" />
+      <text class="role" x="354" y="98" text-anchor="end">Hébergement</text>
+      <text class="tech" x="354" y="114" text-anchor="end">Railway</text>
+    </g>
+
+    <g class="brick" style="--at: 320ms; --len: 447">
+      <rect class="node" x="26" y="86" width="188" height="44" rx="10" />
+      <text class="role" x="40" y="105">Interface</text>
+      <text class="tech" x="40" y="121">Next.js, React</text>
+    </g>
+    <path class="wire" d="M120 130 V156" style="--at: 540ms; --len: 26" />
+
+    <g class="brick" style="--at: 600ms; --len: 447">
+      <rect class="node" x="26" y="156" width="188" height="44" rx="10" />
+      <text class="role" x="40" y="175">API</text>
+      <text class="tech" x="40" y="191">Python, FastAPI</text>
+    </g>
+    <path class="wire" d="M214 178 H240" style="--at: 820ms; --len: 26" />
+
+    <g class="brick" style="--at: 880ms; --len: 299">
+      <rect class="node" x="240" y="156" width="114" height="44" rx="10" />
+      <text class="role" x="254" y="175">Cache</text>
+      <text class="tech" x="254" y="191">Redis</text>
+    </g>
+
+    <path class="wire" d="M120 200 V240" style="--at: 820ms; --len: 40" />
+    <g class="brick" style="--at: 880ms; --len: 447">
+      <rect class="node" x="26" y="240" width="188" height="44" rx="10" />
+      <text class="role" x="40" y="259">Base de données</text>
+      <text class="tech" x="40" y="275">PostgreSQL, Supabase</text>
+    </g>
+
+    <path class="watch-wire sheet" d="M297 240 V216" style="--at: 1100ms" />
+    <g class="brick" style="--at: 1100ms; --len: 331">
+      <rect class="watch" x="240" y="240" width="130" height="44" rx="10" />
+      <text class="role" x="254" y="259">Surveillance</text>
+      <text class="tech" x="254" y="275">Sentry, Grafana</text>
+    </g>
+  </svg>
+  <figcaption class="mt-3 text-sm leading-relaxed text-muted">{caption}</figcaption>
+</figure>
+
+<style>
+  /* The plan draws itself once, on load, in the order a request takes: a brick, then the wire to the next.
+     The hosting frame and the dashed watch wire fade in instead, since their dashes cannot be traced.
+     Nothing hides the drawing for good: each animation only sets its start state while it waits. */
+  @media (prefers-reduced-motion: no-preference) {
+    .brick rect { animation: schema-brick 420ms var(--ease-settle) var(--at) backwards; }
+    .brick text { animation: schema-fade 300ms var(--ease-settle) calc(var(--at) + 140ms) backwards; }
+    .wire { animation: schema-wire 200ms var(--ease-settle) var(--at) backwards; }
+    .sheet { animation: schema-fade 600ms var(--ease-settle) var(--at) backwards; }
+  }
+  @keyframes schema-brick {
+    from { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); fill-opacity: 0; }
+    40% { fill-opacity: 0; }
+    to { stroke-dasharray: var(--len); stroke-dashoffset: 0; fill-opacity: 1; }
+  }
+  @keyframes schema-wire {
+    from { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+    to { stroke-dasharray: var(--len); stroke-dashoffset: 0; }
+  }
+  @keyframes schema-fade {
+    from { opacity: 0; }
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatPeriod } from '../lib/format';
+
+interface Props {
+  study: CollectionEntry<'caseStudies'>;
+  /** The title's level, one below the heading of the list the card sits in. */
+  heading?: 'h2' | 'h3';
+}
+const { study, heading: Heading = 'h2' } = Astro.props;
+const { title, sector, period, summary } = study.data;
+---
+
+<a href={`/etudes-de-cas/${study.id}/`} class="block h-full rounded-xl border border-line bg-surface p-6 shadow-card transition-colors hover:border-watch">
+  <Heading class="text-xl font-semibold">{title}</Heading>
+  <p class="mt-1 text-sm text-muted">{sector}, {formatPeriod(period.start, period.end)}</p>
+  <p class="mt-4 leading-relaxed text-muted">{summary}</p>
+</a>

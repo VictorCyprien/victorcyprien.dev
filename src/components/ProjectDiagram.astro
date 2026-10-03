@@ -1,0 +1,206 @@
+---
+// The architecture of each featured project, drawn from its case study and nothing more.
+// A project without a diagram here renders nothing.
+// No <title> in the drawings: browsers show it as a tooltip over the hover effect, so aria-label names them.
+// Hovering a brick with a mouse lights it, what it links to and the wires between, and shows its role
+// (data-role) under the drawing. data-links lists the bricks it links to; data-for lists the bricks a
+// wire lights for; a shared line is cut at each junction so the lit path stops where it should.
+// Touch screens get the still drawing.
+interface Props {
+  id: string;
+  caption?: string;
+  class?: string;
+}
+const { id, caption, class: className } = Astro.props;
+const drawn = ['contrapp', 'aura'];
+---
+
+{drawn.includes(id) && (
+  <figure class={className} data-diagram={id}>
+    {id === 'contrapp' && (
+      <svg viewBox="0 -9 340 410" role="img" aria-label="Le montage de Contrapp" aria-describedby="diagram-contrapp-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
+        <desc id="diagram-contrapp-desc">L'application web des CFA est en React, construite avec Vite. Elle appelle une API en Python avec FastAPI, qui s'appuie sur une base Supabase. L'API passe par Stripe pour les paiements et par DocuSign pour faire signer les contrats à l'entreprise et à l'alternant. L'interface, l'API, la base et la surveillance, avec Grafana, Prometheus et Loki, tournent sur un même serveur VPS Linux, dans des conteneurs Docker.</desc>
+
+        <g data-id="users" data-links="interface" data-role="L'équipe du CFA y a créé ses contrats d'alternance et les a envoyés en signature.">
+          <rect class="node" x="10" y="8" width="180" height="44" rx="10" />
+          <text class="role" x="24" y="27">Utilisateurs</text>
+          <text class="tech" x="24" y="43">équipes des CFA</text>
+        </g>
+
+        <g data-id="vps" data-links="interface api db watch" data-role="Tout tourne sur un même serveur, dans des conteneurs Docker&nbsp;: le montage le plus simple pour une équipe qui découvrait le cloud.">
+          <rect class="frame" x="4" y="68" width="332" height="256" rx="14" />
+          <text class="role" x="18" y="300">Serveur VPS</text>
+          <text class="tech" x="18" y="316">Linux, Docker</text>
+        </g>
+
+        <path class="wire" data-for="users interface" d="M100 52 V84" />
+        <g data-id="interface" data-links="users api vps" data-role="L'application web des CFA, en React avec Vite.">
+          <rect class="node" x="18" y="84" width="170" height="44" rx="10" />
+          <text class="role" x="32" y="103">Interface</text>
+          <text class="tech" x="32" y="119">React, Vite</text>
+        </g>
+
+        <g data-id="watch" data-links="vps" data-role="En place dès la première mise en ligne&nbsp;: erreurs, lenteurs et ressources du serveur sont visibles avant le premier incident.">
+          <rect class="watch" x="202" y="84" width="128" height="58" rx="10" />
+          <text class="role" x="216" y="103">Surveillance</text>
+          <text class="tech" x="216" y="119">Grafana,</text>
+          <text class="tech" x="216" y="133">Prometheus, Loki</text>
+        </g>
+
+        <path class="wire" data-for="interface api vps" d="M100 128 V154" />
+        <g data-id="api" data-links="interface db stripe docusign vps" data-role="Reprise point par point&nbsp;: la route reçoit la requête, un service porte la logique métier, l'accès aux données est regroupé.">
+          <rect class="node" x="18" y="154" width="170" height="44" rx="10" />
+          <text class="role" x="32" y="173">API</text>
+          <text class="tech" x="32" y="189">Python, FastAPI</text>
+        </g>
+
+        <path class="wire" data-for="api db vps" d="M100 198 V224" />
+        <g data-id="db" data-links="api vps" data-role="Supabase apporte l'authentification, le stockage de fichiers et les règles d'accès par ligne.">
+          <rect class="node" x="18" y="224" width="170" height="44" rx="10" />
+          <text class="role" x="32" y="243">Base de données</text>
+          <text class="tech" x="32" y="259">Supabase, PostgreSQL</text>
+        </g>
+
+        <path class="wire" data-for="api stripe" d="M188 168 H200 V340" />
+        <path class="wire" data-for="api docusign" d="M188 184 H289 V340" />
+        <g data-id="stripe" data-links="api" data-role="Facturation au contrat, par paliers, avec un tarif adapté à la taille de chaque CFA.">
+          <rect class="node" x="150" y="340" width="90" height="44" rx="10" />
+          <text class="role" x="164" y="359">Paiements</text>
+          <text class="tech" x="164" y="375">Stripe</text>
+        </g>
+        <g data-id="docusign" data-links="api" data-role="L'entreprise et l'alternant signent le contrat en ligne, via DocuSign.">
+          <rect class="node" x="250" y="340" width="86" height="44" rx="10" />
+          <text class="role" x="264" y="359">Signature</text>
+          <text class="tech" x="264" y="375">DocuSign</text>
+        </g>
+      </svg>
+    )}
+    {id === 'aura' && (
+      <svg viewBox="0 0 340 410" role="img" aria-label="Le montage d'AURA" aria-describedby="diagram-aura-desc" class="diagram mx-auto block h-auto w-full max-w-[360px]">
+        <desc id="diagram-aura-desc">Une marque qui prend AURA en marque blanche reçoit sa propre application mobile en Flutter, adaptée à son image, et le grand public a son application. Ces applications appellent trois API en Python avec FastAPI, une par moteur&nbsp;: nutrition, fitness et communauté. BeAble2 héberge sur Railway ces API et le back-office en Next.js de chaque marque. Dans l'organisation Supabase de BeAble2, chaque marque a sa propre base, qui lui appartient, et la base du grand public appartient à BeAble2. Sentry et les métriques de Railway assurent la surveillance.</desc>
+
+        <g data-id="brands" data-links="nutrition fitness communaute" data-role="Une marque qui prend AURA en marque blanche reçoit sa version de l'application mobile, adaptée à son image.">
+          <rect class="node" x="22" y="4" width="160" height="44" rx="10" />
+          <rect class="node" x="16" y="10" width="160" height="44" rx="10" />
+          <rect class="node" x="10" y="16" width="160" height="44" rx="10" />
+          <text class="role" x="24" y="35">Apps des marques</text>
+          <text class="tech" x="24" y="51">Flutter</text>
+        </g>
+        <g data-id="public" data-links="nutrition fitness communaute" data-role="L'application du grand public, sur Android et iOS.">
+          <rect class="node" x="194" y="16" width="136" height="44" rx="10" />
+          <text class="role" x="208" y="35">App grand public</text>
+          <text class="tech" x="208" y="51">Flutter</text>
+        </g>
+
+        <g data-id="railway" data-links="nutrition fitness communaute backoffice watch" data-role="Un push déploie, toute l'équipe peut mettre en ligne, un clic ramène la version précédente.">
+          <rect class="frame" x="4" y="80" width="332" height="154" rx="14" />
+          <text class="role" x="18" y="206">Hébergement</text>
+          <text class="tech" x="18" y="222">Railway</text>
+        </g>
+
+        <path class="wire" data-for="brands nutrition fitness communaute" d="M90 60 V70" />
+        <path class="wire" data-for="public nutrition fitness communaute" d="M262 60 V70" />
+        <path class="wire" data-for="brands public nutrition" d="M68 70 H90" />
+        <path class="wire" data-for="brands public nutrition fitness communaute" d="M90 70 H262" />
+        <path class="wire" data-for="brands public communaute" d="M262 70 H272" />
+        <path class="wire" data-for="brands public nutrition" d="M68 70 V92" />
+        <path class="wire" data-for="brands public fitness" d="M170 70 V92" />
+        <path class="wire" data-for="brands public communaute" d="M272 70 V92" />
+        <g data-id="nutrition" data-links="brands public backoffice bases public-base supabase railway" data-role="Un des trois moteurs&nbsp;: une API à part, déployée comme un service séparé. Un particulier peut n'utiliser que celui-ci.">
+          <rect class="node" x="18" y="92" width="100" height="44" rx="10" />
+          <text class="role" x="32" y="111">Nutrition</text>
+          <text class="tech" x="32" y="127">FastAPI</text>
+        </g>
+        <g data-id="fitness" data-links="brands public backoffice bases public-base supabase railway" data-role="Un des trois moteurs&nbsp;: une API à part, déployée comme un service séparé.">
+          <rect class="node" x="120" y="92" width="100" height="44" rx="10" />
+          <text class="role" x="134" y="111">Fitness</text>
+          <text class="tech" x="134" y="127">FastAPI</text>
+        </g>
+        <g data-id="communaute" data-links="brands public backoffice bases public-base supabase railway" data-role="Un des trois moteurs&nbsp;: une API à part, déployée comme un service séparé.">
+          <rect class="node" x="222" y="92" width="110" height="44" rx="10" />
+          <text class="role" x="236" y="111">Communauté</text>
+          <text class="tech" x="236" y="127">FastAPI</text>
+        </g>
+
+        <path class="wire" data-for="nutrition backoffice supabase bases public-base" d="M68 136 V148" />
+        <path class="wire" data-for="fitness backoffice supabase bases public-base" d="M170 136 V148" />
+        <path class="wire" data-for="communaute backoffice supabase bases public-base" d="M272 136 V148" />
+        <path class="wire" data-for="nutrition backoffice supabase bases public-base" d="M68 148 H120" />
+        <path class="wire" data-for="nutrition fitness communaute backoffice supabase bases public-base" d="M120 148 H250" />
+        <path class="wire" data-for="communaute backoffice supabase bases public-base" d="M250 148 H272" />
+        <path class="wire" data-for="backoffice nutrition fitness communaute" d="M250 148 V166" />
+        <path class="wire" data-for="supabase bases public-base nutrition fitness communaute" d="M120 148 V250" />
+        <g data-id="backoffice" data-links="nutrition fitness communaute railway" data-role="Un back-office par marque, hébergé chez nous&nbsp;: la marque n'a rien à gérer.">
+          <rect class="node" x="184" y="166" width="144" height="44" rx="10" />
+          <rect class="node" x="178" y="172" width="144" height="44" rx="10" />
+          <rect class="node" x="172" y="178" width="144" height="44" rx="10" />
+          <text class="role" x="186" y="197">Back-offices</text>
+          <text class="tech" x="186" y="213">Next.js</text>
+        </g>
+
+        <g data-id="supabase" data-links="bases public-base nutrition fitness communaute" data-role="Supabase gère les sauvegardes, les mises à jour et la disponibilité des bases.">
+          <rect class="frame" x="4" y="250" width="192" height="154" rx="14" />
+          <text class="role" x="18" y="392">Supabase cloud</text>
+        </g>
+        <g data-id="bases" data-links="supabase nutrition fitness communaute" data-role="Une base par marque, dans notre organisation Supabase. Elle appartient à la marque, et ses données restent à part.">
+          <rect class="node" x="30" y="262" width="160" height="44" rx="10" />
+          <rect class="node" x="24" y="268" width="160" height="44" rx="10" />
+          <rect class="node" x="18" y="274" width="160" height="44" rx="10" />
+          <text class="role" x="32" y="293">Bases des marques</text>
+          <text class="tech" x="32" y="309">à chaque marque</text>
+        </g>
+        <g data-id="public-base" data-links="supabase nutrition fitness communaute" data-role="La base du grand public, qui appartient à BeAble2.">
+          <rect class="node" x="18" y="328" width="160" height="44" rx="10" />
+          <text class="role" x="32" y="347">Base grand public</text>
+          <text class="tech" x="32" y="363">à BeAble2</text>
+        </g>
+
+        <path class="watch-wire" data-for="watch railway" d="M300 262 V234" />
+        <g data-id="watch" data-links="railway" data-role="Sentry remonte les erreurs, Railway fournit les métriques. Tant que ça suffit, on n'ajoute rien de plus.">
+          <rect class="watch" x="202" y="262" width="134" height="58" rx="10" />
+          <text class="role" x="214" y="281">Surveillance</text>
+          <text class="tech" x="214" y="297">Sentry,</text>
+          <text class="tech" x="214" y="311">métriques Railway</text>
+        </g>
+      </svg>
+    )}
+    <p class="diagram-note mx-auto mt-4 min-h-[4.875em] max-w-[34em] text-center text-sm leading-relaxed text-muted" aria-hidden="true" data-diagram-note>Passez la souris sur une brique pour voir son rôle.</p>
+    {caption && <figcaption class="mt-4 text-center text-sm text-muted">{caption}</figcaption>}
+  </figure>
+)}
+
+<script>
+  for (const figure of document.querySelectorAll<HTMLElement>('figure[data-diagram]')) {
+    const svg = figure.querySelector('svg');
+    const note = figure.querySelector<HTMLElement>('[data-diagram-note]');
+    if (!svg || !note) continue;
+    const hint = note.textContent ?? '';
+    const bricks = [...svg.querySelectorAll<SVGGElement>('[data-id]')];
+    const wires = [...svg.querySelectorAll<SVGPathElement>('[data-for]')];
+
+    const trace = (brick: SVGGElement | null) => {
+      const id = brick?.dataset.id ?? '';
+      const near = new Set(brick?.dataset.links?.split(' ') ?? []);
+      svg.classList.toggle('tracing', brick !== null);
+      for (const other of bricks) {
+        other.classList.toggle('is-hot', other === brick);
+        other.classList.toggle('is-lit', near.has(other.dataset.id ?? ''));
+      }
+      for (const wire of wires) wire.classList.toggle('is-lit', id !== '' && (wire.dataset.for ?? '').split(' ').includes(id));
+      if (!brick) {
+        note.textContent = hint;
+        return;
+      }
+      const name = document.createElement('strong');
+      name.className = 'font-medium text-text';
+      name.textContent = `${brick.querySelector('.role')?.textContent ?? ''}.`;
+      note.replaceChildren(name, ` ${brick.dataset.role ?? ''}`);
+    };
+
+    // Only a mouse or a pen traces: a tap on a touch screen leaves the drawing still.
+    for (const brick of bricks) {
+      brick.addEventListener('pointerenter', (event) => { if (event.pointerType !== 'touch') trace(brick); });
+      brick.addEventListener('pointerleave', (event) => { if (event.pointerType !== 'touch') trace(null); });
+    }
+  }
+</script>

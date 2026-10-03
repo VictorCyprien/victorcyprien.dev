@@ -1,0 +1,32 @@
+- id: beable2
+  start: "2025-05"
+  end: null
+  role: Associé
+  org: BeAble2
+  place: À distance
+  summary: Agence IA. J'y porte le back-end et l'infrastructure d'AURA, une plateforme de coaching sport et nutrition.
+  url: https://beable2.ai/fr/
+- id: freelance
+  start: "2023-10"
+  end: null
+  role: Développeur freelance, back-end et DevOps
+  place: Toulouse, à distance
+  summary: Missions pour des PME et des startups
+- id: beeguard
+  start: "2021-09"
+  end: "2023-09"
+  role: Développeur back-end, en alternance
+  org: Beeguard
+  place: Labège
+  summary: J'ai conçu, testé, déployé et maintenu des services back-end, dont une API de gestion des utilisateurs et du stockage S3. J'ai aussi refait l'architecture des notifications par SMS.
+  stack: [Python, Flask, Faust, Kafka, Docker]
+  url: https://www.beeguard.fr/
+- id: kipsoft
+  start: "2019-05"
+  end: "2019-06"
+  role: Stagiaire développeur
+  org: Kipsoft
+  place: Labège
+  summary: Un plugin PHP sur mesure pour le site « Ma liste à moi ».
+  stack: [PHP]
+  url: https://www.kipsoft.fr/
