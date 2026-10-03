@@ -15,3 +15,4 @@ Site vitrine statique de Victor Cyprien (freelance back-end et DevOps). Astro 7,
 - `.gitignore` refuse tout par défaut : un nouveau fichier ou dossier à la racine doit y être autorisé explicitement. `docs/superpowers/` (specs et plans) ne se commite jamais.
 - Tests Playwright : le serveur de prévisualisation tourne avec `--ignore-lock`, sinon Astro le passe en arrière-plan quand il détecte un agent IA.
 - Jamais de push sans l'accord de Victor.
+- Déploiement : lire la section « Déploiement » du README avant de toucher au workflow ou à Hostinger. La production et la préproduction partagent la branche `deploy`, qui ne se force jamais.

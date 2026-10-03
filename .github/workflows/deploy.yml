@@ -50,6 +50,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # A page or folder named preview in the site would land on top of the preview.
+          if [ -e dist/preview ]; then echo "::error::dist/preview would overwrite the preview: rename that page or folder."; exit 1; fi
           git clone --quiet --branch deploy "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" out
           cd out
           git config user.name "github-actions[bot]"
