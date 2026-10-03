@@ -1,9 +1,11 @@
 import type { APIRoute } from 'astro';
-import { getCareer, getDiplomas, getPrinciples, getPublishedCaseStudies, getSite, getStackTiers } from '../lib/content';
+import { getCareer, getCaseStudyNames, getDiplomas, getPrinciples, getPublishedCaseStudies, getServices, getSite, getStackTiers } from '../lib/content';
 import { formatPeriod } from '../lib/format';
 
 export const GET: APIRoute = async ({ site: siteUrl }) => {
   const site = await getSite();
+  const services = await getServices();
+  const names = await getCaseStudyNames();
   const principles = await getPrinciples();
   const studies = await getPublishedCaseStudies();
   const tiers = await getStackTiers();
@@ -17,6 +19,14 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     `> ${site.headline} ${site.lead}`,
     '',
     `${site.jobTitle}, basé à ${site.location}.`,
+    '',
+    '## Ce que je fais',
+    '',
+    ...services.map(({ data }) => {
+      const proof = data.proof.filter((ref) => names.has(ref.id)).map((ref) => `[${names.get(ref.id)}](${url(`/etudes-de-cas/${ref.id}/`)})`);
+      const label = proof.length > 1 ? 'Exemples' : 'Exemple';
+      return `- ${data.title} : ${data.text}${proof.length > 0 ? ` ${label} : ${proof.join(', ')}.` : ''}`;
+    }),
     '',
     '## Comment je travaille',
     '',

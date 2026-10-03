@@ -40,7 +40,8 @@ jobs:
         if: github.ref_name != 'main'
         run: |
           printf '\n# Preview only\n<IfModule mod_headers.c>\n  Header set X-Robots-Tag "noindex, nofollow"\n</IfModule>\n' >> dist/.htaccess
-          printf '\nRewriteCond %%{HTTP_HOST} !^preview\\.victorcyprien\\.dev$ [NC]\nRewriteRule ^ - [F]\n' >> dist/.htaccess
+          # The host lock goes first, so no redirect answers for another host before it.
+          { printf '# Preview only: the files answer on the preview host alone.\nRewriteEngine On\nRewriteCond %%{HTTP_HOST} !^preview\\.victorcyprien\\.dev$ [NC]\nRewriteRule ^ - [F]\n\n'; cat dist/.htaccess; } > dist/.htaccess.tmp && mv dist/.htaccess.tmp dist/.htaccess
       - name: Publish the built site
         if: github.ref_name == 'main' || github.ref_name == 'develop'
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0

@@ -11,7 +11,7 @@ const studies = await getPublishedCaseStudies();
 <BaseLayout title="Études de cas back-end et DevOps, Victor Cyprien" description="Des projets back-end et DevOps menés jusqu'en production, en détail : le contexte, les décisions prises et leurs raisons, le résultat." jsonLd={caseStudiesGraph(Astro.site!)}>
   <section class="mx-auto max-w-6xl px-6 py-16 md:px-12">
     <h1 class="mb-3 text-4xl font-semibold tracking-tight">Études de cas</h1>
-    <p class="mb-10 max-w-[40em] text-muted">Des projets back-end et DevOps menés jusqu'en production, en détail&nbsp;: le contexte, les décisions prises et leurs raisons, le résultat. Chaque étude dit aussi ses fausses pistes, et ce que je ferais autrement aujourd'hui.</p>
+    <p class="mb-10 max-w-[40em] text-muted">Des projets back-end et DevOps menés jusqu'en production, en détail&nbsp;: le contexte, les décisions prises et leurs raisons, le résultat. Chaque étude dit aussi ses fausses pistes, et ce que je ferais différemment aujourd'hui.</p>
     {studies.length === 0 ? (
       <p class="text-muted">Aucune étude de cas publiée pour le moment. Les projets sont décrits sur la <a href="/#projets" class="link">page d'accueil</a>.</p>
     ) : (

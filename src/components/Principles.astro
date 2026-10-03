@@ -1,14 +1,12 @@
 ---
-import { getPrinciples, getPublishedCaseStudies, getPublishedProjects } from '../lib/content';
+import { getCaseStudyNames, getPrinciples, getPublishedCaseStudies } from '../lib/content';
 
 const principles = await getPrinciples();
 const studies = await getPublishedCaseStudies();
-const projects = await getPublishedProjects();
-// A study is named after its project, "AURA" rather than its full title.
-const nameOf = (study: (typeof studies)[number]) => projects.find((project) => project.data.caseStudy?.id === study.id)?.data.name ?? study.data.title;
+const names = await getCaseStudyNames();
 // The case studies that show a principle at work, in the case study order.
 const appliedIn = (principleId: string) =>
-  studies.filter((study) => study.data.principles.some((ref) => ref.id === principleId)).map((study) => ({ href: `/etudes-de-cas/${study.id}/`, name: nameOf(study) }));
+  studies.filter((study) => study.data.principles.some((ref) => ref.id === principleId)).map((study) => ({ href: `/etudes-de-cas/${study.id}/`, name: names.get(study.id)! }));
 ---
 
 <!-- A full-width surface band sets the method apart from the proof that follows. -->

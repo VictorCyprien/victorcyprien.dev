@@ -23,6 +23,21 @@ export async function getPublishedProjects() {
   return projects.sort((a, b) => a.data.order - b.data.order);
 }
 
+/** Each published case study's short name, "AURA" rather than its full title, taken from its project. */
+export async function getCaseStudyNames(): Promise<Map<string, string>> {
+  const projects = await getPublishedProjects();
+  return new Map(
+    (await getPublishedCaseStudies()).map((study) => [
+      study.id,
+      projects.find((project) => project.data.caseStudy?.id === study.id)?.data.name ?? study.data.title,
+    ]),
+  );
+}
+
+export async function getServices() {
+  return (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+}
+
 export async function getPrinciples() {
   return (await getCollection('principles')).sort((a, b) => a.data.order - b.data.order);
 }

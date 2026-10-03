@@ -2,7 +2,7 @@
 title: "AURA : le back-end et l'infrastructure d'une plateforme de coaching"
 summary: "Plateforme de coaching sport et nutrition, en marque blanche et grand public. J'en porte le back-end et l'infrastructure : trois API FastAPI, Railway, Supabase."
 brief:
-  need: "BeAble2 voulait une plateforme de coaching sport et nutrition, pour le grand public et pour des marques qui la prennent en marque blanche."
+  need: "BeAble2 voulait une plateforme de coaching sport et nutrition, pour le grand public et pour des marques qui la prendraient en marque blanche."
   work: "Je porte le back-end et l'infrastructure : trois API, l'hébergement chez Railway et Supabase, la surveillance et les tests de charge."
   result: "L'application est en production, en bêta fermée, et les tests de charge valident la prochaine étape de croissance."
 sector: Sport et nutrition, B2C et B2B2C
@@ -15,7 +15,7 @@ draft: false
 
 ## Contexte
 
-AURA est une plateforme de coaching sport et nutrition portée par BeAble2. Pour le grand public, c'est une application mobile, sur Android et iOS. Les marques la prennent en marque blanche : chacune reçoit sa version de l'application mobile et du back-office, adaptée à son image. Le projet est sous NDA : cette étude montre l'architecture et les décisions, pas les clients ni leurs données.
+AURA est une plateforme de coaching sport et nutrition portée par BeAble2. Pour le grand public, c'est une application mobile, sur Android et iOS. Les marques peuvent la prendre en marque blanche : chacune reçoit sa version de l'application mobile et du back-office, adaptée à son image. Le projet est sous NDA : cette étude montre l'architecture et les décisions, pas les clients ni leurs données.
 
 ## Mon rôle
 

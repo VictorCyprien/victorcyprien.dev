@@ -7,6 +7,7 @@ test('llms.txt sums up the site and lists every published case study', async ({ 
   const text = await response.text();
   expect(text).toContain('# Victor Cyprien');
   expect(text).toContain('Cadrer par écrit avant de coder');
+  expect(text).toContain('## Ce que je fais');
   expect(text).toContain('contact@victorcyprien.dev');
   for (const path of (await allPages(page)).filter((p) => p.startsWith('/etudes-de-cas/') && p !== '/etudes-de-cas/')) {
     expect(text, path).toContain(path);

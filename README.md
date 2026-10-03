@@ -20,6 +20,7 @@ Tout le contenu est dans des fichiers texte. Aucun code à toucher.
 | Contenu | Fichier |
 |---|---|
 | Nom, titre, accroche, à propos, liens, adresse du bouton d'appel | `src/data/site.yaml` |
+| Les services de « Ce que je fais » | `src/data/services.yaml` |
 | Les principes de « Comment je décide » | `src/data/principes.yaml` |
 | Le parcours | `src/data/parcours.yaml` |
 | La stack | `src/data/stack.yaml` |
